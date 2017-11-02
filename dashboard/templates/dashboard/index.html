@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <script src="{% static 'dashboard/javascript/d3.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'dashboard/style/style.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <title>The Brexit Dashboard</title>
+</head>
+
+<body>
+  <header>
+    <a href="javascript:void(0)" onclick="openNav()"><div id="menu_icon" class="menu_icon">
+      <div id="stripe"></div>
+      <div id="stripe"></div>
+      <div id="stripe"></div>
+    </div></a>
+    <h1 class="title"><a href="{% url 'dashboard:index' %}">The Brexit Dashboard</a></h1>
+  </header>
+  <nav id="navigation">
+    <!-- <a class="nav-link" href="javascript:void(0)" onclick="closeNav()" id="close_menu"><</a> -->
+    <a class="nav-link" href="#" id="loader_story">The Story</a>
+    <a class="nav-link" href="#" id="loader_inflation">Inflation</a>
+    <a class="nav-link" href="#" id="loader_investment">Investment</a>
+    <a class="nav-link" href="#" id="loader_trade">Trade</a>
+    <a class="nav-link" href="#" id="loader_growth">Growth</a>
+    <a class="nav-link" href="#" id="loader_employment">Employment</a>
+    <a class="nav-link" href="#" id="loader_debt">Debt</a>
+
+  </nav>
+  <section class="container" id="container"></section>
+  <footer></footer>
+  <script src="{% static 'dashboard/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+  <script>
+    function openNav() {
+      if (document.getElementById("navigation").style.width == "") {
+        document.getElementById("navigation").style.width = "25%";
+        document.getElementById("menu_icon").style["background-color"] = "rgb(255, 0, 0)";
+        document.getElementById("container").style.width = "75%";
+    } else {
+        document.getElementById("navigation").style.width = "";
+        document.getElementById("container").style.width = "100%";
+        document.getElementById("menu_icon").style["background-color"] = "#1f3057"
+    }
+  }
+    $(document).ready(function() {
+      $("#loader_growth").on("click", function() {
+        $("#container").load("{% url 'dashboard:growth' %}");
+      });
+    });
+
+    $(document).ready(function() {
+      $("#loader_inflation").on("click", function() {
+        $("#container").load("{% url 'dashboard:inflation' %}");
+      });
+    });
+
+    $(document).ready(function() {
+      $("#loader_debt").on("click", function() {
+        $("#container").load("{% url 'dashboard:debt' %}");
+      });
+    });
+  </script>
+</body>
+
+</html>

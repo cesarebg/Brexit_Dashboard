@@ -1,0 +1,289 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(245, 249, 250);
+}
+
+/* Main visualisation */
+
+#vis_inflation, #vis_investment, #vis_trade, #vis_growth, #vis_debt {
+  display: inline-block;
+  background: white;
+  margin: 350px 70px 0px 100px;
+  /*border-style: solid;
+  border-width: 1px;
+  border-color: rgb(226, 226, 226);*/
+  z-index: 1;
+}
+
+/* HEADER MAIN PAGE */
+
+header {
+  background-color: #1f3057;
+  box-shadow: 0px 0px 5px 0px #000000;
+}
+
+div.menu_icon {
+  display: inline-block;
+  margin: 15px;
+  float: left;
+  border-style: solid;
+  border-color: #E0E0E0;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+}
+
+div.menu_icon #stripe {
+  margin: 3px 0;
+  width: 18px;
+  height: 3px;
+  background-color: white;
+}
+
+/*div.menu_icon:hover {
+  display: inline-block;
+  margin: 15px;
+  float: left;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  background-color: rgb(255, 0, 0);
+}*/
+
+header h1 {
+  font-size: 22px;
+  font-family: 'Merriweather';
+  font-style: black;
+  font-weight: 1000;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  display: inline-block;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+}
+
+/* NAVIGATION BAR */
+
+nav {
+  width: 0;
+  height: auto;
+  float: left;
+  background-color: #2569a1;
+  max-width: 225px;
+  transition: 0.5s;
+  overflow-x: hidden;
+  z-index: 1;
+}
+
+nav a {
+  display: block;
+  color: white;
+  text-align: left;
+  padding: 15px;
+  text-decoration: none;
+  font-family: 'Merriweather';
+  transition: 0.1s;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  background-color: rgb(255, 0, 0);
+  transition: 0.1s;
+}
+
+nav #close_menu {
+  display: block;
+  color: white;
+  text-align: right;
+  padding: 15px 15px 15px 15px;
+  text-decoration: none;
+  font-family: 'Merriweather';
+  transition: 0.1s;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  background: #a7c6eb;
+  margin-left: 90%;
+
+}
+
+nav #close_menu:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+/* FORMS */
+
+.form-signin {
+  max-width: 550px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+
+/* MAIN SECTION */
+
+section {
+  transition: width .5s;
+  float: right;
+  width: 75%;
+}
+
+.inflation_header {}
+
+.article_title {
+  width: 640px;
+  font-size: 32px;
+  font-family: 'Merriweather';
+  font-style: black;
+  font-weight: 1000;
+  padding: 5px 20px 5px 0px;
+  margin: 20px 0px 20px 30px;
+  color: black;
+  display: block;
+  border-top: 5px solid black;
+  background: white;
+}
+
+div #front_image {
+  width: 640px;
+  height: 426px;
+  margin: 0 0px 0px 30px;
+  position: absolute;
+  background-image: url("/static/dashboard/img/Carney_medium.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+
+div #front_image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(to bottom, #002f4b, rgb(255, 0, 0));
+  opacity: .6;
+}
+
+article p {
+  width: 640px;
+  font-size: 16px;
+  font-family: 'Merriweather';
+  font-style: black;
+  padding: 5px 20px 5px 0px;
+  margin: 20px 0px 20px 30px;
+  color: black;
+  border-top: 5px solid black;
+  background: white;
+  line-height: 200%;
+}
+
+/* FOOTER */
+
+footer {
+  clear: both;
+  height: 150px;
+  margin-bottom: 0;
+  font-size: 22px;
+  font-family: 'Merriweather';
+  font-style: black;
+  font-weight: 1000;
+  background-color: #1f3057;
+  ;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+/* VISUALISATION STYLE */
+
+.bar {
+  fill: steelblue;
+}
+
+/*.line {
+  fill: none;
+  stroke: url(#line-gradient);
+  stroke-width: 2px;
+}*/
+
+.line {
+  fill: none;
+  stroke: blue;
+  stroke-width: 2px;
+}
+
+.line_services {
+  fill: none;
+  stroke: red;
+  stroke-width: 2px;
+}
+
+.line_production {
+  fill: none;
+  stroke: orange;
+  stroke-width: 2px;
+}
+
+.line_manufacturing {
+  fill: none;
+  stroke: green;
+  stroke-width: 2px;
+}
+
+.line_construction {
+  fill: none;
+  stroke: black;
+  stroke-width: 2px;
+}
+
+.tooltip {
+  position: absolute;
+}
+
+.tooltip p {
+  background-color: white;
+  border: black 1px solid;
+  padding: 15px;
+  font-family: 'Merriweather';
+  font-size: 14px;
+}
+
+.grid line {
+  stroke: lightgrey;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
+}
+
+text {
+  font-family: 'Merriweather';
+  font-size: 12px;
+}
