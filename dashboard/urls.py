@@ -11,9 +11,11 @@ urlpatterns = [
     # data from first indicator
     url(r'^data/growth/$', views.growth_data, name='growth_data'),
     # second indicator
-    url(r'^indicators/debt/$', views.debt, name='debt'),
-    # third indicator
     url(r'^indicators/inflation/$', views.inflation, name='inflation'),
-    # fourth indicator
+    # data from second indicator
+    url(r'^data/inflation/$', views.inflation_data, name='inflation_data'),
+    # third indicator
     url(r'^indicators/trade/$', views.trade, name='trade'),
-]
+    # fourth indicator
+    url(r'^indicators/debt/$', views.debt, name='debt'),
+    ]

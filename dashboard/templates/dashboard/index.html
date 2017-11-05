@@ -7,6 +7,7 @@
   <script src="{% static 'dashboard/javascript/d3.js' %}"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'dashboard/style/style.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
   <title>The Brexit Dashboard</title>
 </head>
 
@@ -21,12 +22,11 @@
   </header>
   <nav id="navigation">
     <!-- <a class="nav-link" href="javascript:void(0)" onclick="closeNav()" id="close_menu"><</a> -->
-    <a class="nav-link" href="#" id="loader_story">The Story</a>
+    <a class="nav-link" href="#" id="loader_story">UK economy</a>
+    <a class="nav-link" href="#" id="loader_growth">Growth</a>
     <a class="nav-link" href="#" id="loader_inflation">Inflation</a>
     <a class="nav-link" href="#" id="loader_investment">Investment</a>
     <a class="nav-link" href="#" id="loader_trade">Trade</a>
-    <a class="nav-link" href="#" id="loader_growth">Growth</a>
-    <a class="nav-link" href="#" id="loader_employment">Employment</a>
     <a class="nav-link" href="#" id="loader_debt">Debt</a>
 
   </nav>
@@ -37,7 +37,7 @@
     function openNav() {
       if (document.getElementById("navigation").style.width == "") {
         document.getElementById("navigation").style.width = "25%";
-        document.getElementById("menu_icon").style["background-color"] = "rgb(255, 0, 0)";
+        document.getElementById("menu_icon").style["background-color"] = "rgb(251, 15, 0)";
         document.getElementById("container").style.width = "75%";
     } else {
         document.getElementById("navigation").style.width = "";

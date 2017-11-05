@@ -4,24 +4,48 @@
 
 <head>
   <meta charset="utf-8">
-  <script src="{% static 'dashboard/javascript/d3.js' %}"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'dashboard/style/style.css' %}">
+  <script src="{% static 'dashboard/javascript/d3.js' %}"></script>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
   <title></title>
 </head>
 
 <body>
   <div class="inflation_header">
     <h2 class="article_title">Uncertainty hurts UK's consumers</h2>
-    <div id="front_image"></div>
+    <img src="/static/dashboard/img/tenner_medium.jpg" id="front_image_inflation"></div>
     <div id="vis_inflation"></div>
+  </div>
+  <div>
+    <!-- Botton -->
+    <!-- <form method="post" action="/indicators/growth/" id="indicator_form_2008">
+      {% csrf_token %} -->
+      <!-- <button id="Financial_crisis" name="years" value="243" type="botton">Performance of UK economy after 2008 crisis</button>
+    </form> -->
+    <!-- Dropdown -->
+    <form method="post" action="/indicators/inflation/" id="indicator_form_2016">
+      {% csrf_token %}
+      <br>
+      <select type="text" name="years" id="select_dropdown">
+        <option value="24">2008</option>
+        <option value="120">2016</option>
+      </select>
+      <br>
+      <!-- Botton -->
+      <!-- <button id="Brexit_vote" name="years" value="211" type="botton">Growth since Brexit vote</button> -->
+      <!-- Dropdown -->
+      <button id="Brexit_vote" type="botton">Growth since Brexit vote</button>
+    </form>
   </div>
   <article>
     <p>Hello World!</p>
   </article>
 </body>
-
+<script src="{% static 'dashboard/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <script>
   var inflation = {{ inflation_json | safe }}
+  console.log(inflation)
 
   var margin = {
     top: 50,
@@ -33,14 +57,14 @@
   var width = 500;
   var height = 400;
 
-  var svg_gdp = d3.select('#vis_inflation')
+  var svg = d3.select('#vis_inflation')
     .append('svg')
     .attr('width', width)
     .attr('height', height)
     .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-  svg_gdp.append("linearGradient")
+  svg.append("linearGradient")
     .attr("id", "line-gradient")
     .attr("gradientUnits", "userSpaceOnUse")
     .attr("x1", 0).attr("y1", "0%")
@@ -77,7 +101,6 @@
   var dateParse = d3.timeParse('%Y %b');
   var tooltipFormat = d3.timeFormat('%Y');
 
-
   var x = d3.scaleTime()
     .range([0, width]);
 
@@ -90,34 +113,36 @@
   var x_axis = d3.axisBottom(x)
   var y_axis = d3.axisLeft(y)
 
-  svg_gdp.append('g')
+  // x label
+  svg.append('g')
     .attr('transform', 'translate(0,' + height + ')')
     .attr('class', 'x axis');
 
-  // Labels
-  svg_gdp.append("text")
-    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top) + ")")
+  svg.append("text")
+    .attr("id", "tags")
+    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
     .style("text-anchor", "middle")
-    .text("Year");
-
-  svg_gdp.append('g')
-    .attr('class', 'y axis')
+    .text("Years");
 
   // y label
-  svg_gdp.append("text")
+  svg.append('g')
+    .attr('class', 'y axis')
+
+  svg.append("text")
+    .attr("id", "tags")
     .attr("transform", "rotate(-90)")
     .attr("y", 10 - margin.left)
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Inflation %");
+    .text("Year-to-Year inflation %");
 
-  svg_gdp.append("text")
+  svg.append("text")
     .attr("x", (width / 2))
     .attr("y", 0 - (margin.top / 2))
     .attr("text-anchor", "middle")
     .style("font-size", "18px")
-    .text("Prices spiked after the Brexit referendum");
+    .text("Inflation returns to the UK economy");
 
   function make_x_gridlines() {
     return d3.axisBottom(x)
@@ -130,7 +155,7 @@
   }
 
   // add the X gridlines
-  svg_gdp.append("g")
+  svg.append("g")
     .attr("class", "grid")
     .attr("transform", "translate(0," + height + ")")
     .call(make_x_gridlines()
@@ -138,17 +163,19 @@
       .tickFormat("")
     );
   // add the Y gridlines
-  svg_gdp.append("g")
+  svg.append("g")
     .attr("class", "grid")
     .call(make_y_gridlines()
       .tickSize(-width)
       .tickFormat("")
     );
 
-  // function expenditure_pounds() {
-
   x.domain(d3.extent(inflation, function(d) {
     return dateParse(d.date);
+  }));
+
+  y.domain(d3.extent(inflation, function(d) {
+    return parseFloat(d.value);
   }));
 
   var line = d3.line()
@@ -160,7 +187,7 @@
       return y(d.value);
     });
 
-  var lines = svg_gdp.selectAll('.line')
+  var lines = svg.selectAll('.line')
     .remove()
     .exit()
     .data([inflation]);
@@ -171,10 +198,13 @@
     .append('path')
     .attr('class', 'line')
     .attr('fill', 'none')
-    // .attr('stroke', 'steelblue')
     .attr('d', line);
 
-  var points = svg_gdp.selectAll('.point')
+  svg.selectAll('.line')
+    .transition()
+      .duration(1000)
+
+  var points = svg.selectAll('.point')
     .remove()
     .exit()
     .data(inflation);
@@ -196,7 +226,7 @@
     .on('mousemove', mouseMove)
     .on('mouseout', mouseOut);
 
-  svg_gdp.select('.x.axis')
+  svg.select('.x.axis')
     .call(x_axis)
     .selectAll('text')
     .attr('transform', 'rotate(30)')
@@ -204,7 +234,7 @@
     .attr('x', '0')
     .style("text-anchor", "start");
 
-  svg_gdp.select('.y.axis')
+  svg.select('.y.axis')
     .call(y_axis)
 
   function mouseOver(d) {
@@ -236,6 +266,322 @@
       .style('display', 'none');
 
   }
+
+  $(document).on('submit', '#indicator_form_2016', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: "/data/inflation/",
+      type: "POST", // or "get"
+      data: {
+        years: $('#select_dropdown').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function inflation_graph(inflation) {
+
+            svg.selectAll('#tags')
+              .remove()
+
+            svg.append("text")
+              .attr("id", "tags")
+              .attr("transform", "rotate(-90)")
+              .attr("y", 10 - margin.left)
+              .attr("x", 0 - (height / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .text("Monthly annual rate inflation %")
+
+            svg.append("text")
+              .attr("id", "tags")
+              .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+              .style("text-anchor", "middle")
+              .text("Quarters");
+
+        var dateParse = d3.timeParse('%Y %b');
+        var tooltipFormat = d3.timeFormat('%Y %b');
+
+
+        x.domain(d3.extent(inflation, function(d) {
+          return dateParse(d.date);
+        }));
+
+        y.domain(d3.extent(inflation, function(d) {
+          return parseFloat(d.alcohol);
+        }));
+
+        y.domain(d3.extent(inflation, function(d) {
+          return parseFloat(d.alcohol);
+        }));
+
+        var line = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.cpih);
+          });
+
+        var line_food = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.food);
+          });
+
+        var line_alcohol = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.alcohol);
+          });
+
+        var line_clothing = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.clothing);
+          });
+
+        var line_housing = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.housing);
+          });
+
+        var lines = svg.selectAll('.line')
+          .remove()
+          .exit()
+          .data([inflation]);
+
+        var lines = svg.selectAll('.line_cpih')
+          .remove()
+          .exit()
+          .data([inflation]);
+
+        var lines_s = svg.selectAll('.line_food')
+          .remove()
+          .exit()
+          .data([inflation]);
+
+        var lines_p = svg.selectAll('.line_alcohol')
+          .remove()
+          .exit()
+          .data([inflation]);
+
+        var lines_m = svg.selectAll('.line_clothing')
+          .remove()
+          .exit()
+          .data([inflation]);
+
+        var lines_c = svg.selectAll('.line_housing')
+          .remove()
+          .exit()
+          .data([inflation]);
+
+        lines
+          .enter()
+          .append('path')
+          .attr('class', 'line_cpih')
+          .attr('fill', 'none')
+          .attr('d', line);
+
+        lines_s
+          .enter()
+          .append('path')
+          .attr('class', 'line_food')
+          .attr('fill', 'none')
+          .attr('d', line_food);
+
+        lines_p
+          .enter()
+          .append('path')
+          .attr('class', 'line_alcohol')
+          .attr('fill', 'none')
+          .attr('d', line_alcohol);
+
+        lines_m
+          .enter()
+          .append('path')
+          .attr('class', 'line_clothing')
+          .attr('fill', 'none')
+          .attr('d', line_clothing);
+
+        lines_c
+          .enter()
+          .append('path')
+          .attr('class', 'line_housing')
+          .attr('fill', 'none')
+          .attr('d', line_housing);
+
+        var points = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(inflation);
+
+        var points_s = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(inflation);
+
+        var points_p = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(inflation);
+
+        var points_m = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(inflation);
+
+        var points_c = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(inflation);
+
+        points
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 3)
+          .attr('cx', function(inflation) {
+            return x(dateParse(inflation.date));
+          })
+          .attr('cy', function(inflation) {
+            return y(inflation.cpih);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_s
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 3)
+          .attr('cx', function(inflation) {
+            return x(dateParse(inflation.date));
+          })
+          .attr('cy', function(inflation) {
+            return y(inflation.food);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_p
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 3)
+          .attr('cx', function(inflation) {
+            return x(dateParse(inflation.date));
+          })
+          .attr('cy', function(inflation) {
+            return y(inflation.alcohol);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_m
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 3)
+          .attr('cx', function(inflation) {
+            return x(dateParse(inflation.date));
+          })
+          .attr('cy', function(inflation) {
+            return y(inflation.clothing);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_c
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 3)
+          .attr('cx', function(inflation) {
+            return x(dateParse(inflation.date));
+          })
+          .attr('cy', function(inflation) {
+            return y(inflation.housing);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        svg.select('.x.axis')
+          .call(x_axis)
+          .selectAll('text')
+          .attr('transform', 'rotate(30)')
+          .attr('y', '10')
+          .attr('x', '0')
+          .style("text-anchor", "start");
+
+        svg.select('.y.axis')
+          .call(y_axis)
+
+        function mouseOver(d) {
+          var date = dateParse(d.date);
+          var displayDate = tooltipFormat(date)
+          var cpih_function = d.cpih;
+          var food_cpih = d.food;
+          var alcohol_cpih = d.alcohol;
+          var clothing_cpih = d.clothing;
+          var housing_cpih = d.housing;
+
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', null)
+            .html('<p><strong id="cpih">Inflation:</strong> ' + cpih_function + '% in ' + displayDate + '<br><strong id="food">food:</strong> ' + food_cpih + '% in ' + displayDate +
+              '<br><strong id="alcohol">alcohol:</strong> ' + alcohol_cpih + '% in ' + displayDate + '<br><strong id="clothing">clothing:</strong> ' + clothing_cpih + '% in ' + displayDate +
+              '<br><strong id="housing">housing:</strong> ' + housing_cpih + '% in ' + displayDate);
+        }
+
+        function mouseMove(d) {
+          tooltip
+            .style('top', (d3.event.pageY - 20) + "px")
+            .style('left', (d3.event.pageX + 20) + "px");
+        }
+
+        function mouseOut(d) {
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', 'none');
+
+        }
+      }
+    });
+  });
 </script>
 
 </html>

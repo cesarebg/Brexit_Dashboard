@@ -32,7 +32,7 @@ body {
 /* HEADER MAIN PAGE */
 
 header {
-  background-color: #1f3057;
+  background-color: rgb(10, 35, 66);
   box-shadow: 0px 0px 5px 0px #000000;
 }
 
@@ -63,12 +63,12 @@ div.menu_icon #stripe {
   border-width: 1px;
   border-radius: 5px;
   padding: 5px 10px 5px 10px;
-  background-color: rgb(255, 0, 0);
+  background-color: rgb(251, 15, 0);
 }*/
 
 header h1 {
   font-size: 22px;
-  font-family: 'Merriweather';
+  font-family: 'Roboto Mono';
   font-style: black;
   font-weight: 1000;
   padding: 20px;
@@ -88,7 +88,7 @@ nav {
   width: 0;
   height: auto;
   float: left;
-  background-color: #2569a1;
+  background-color: rgb(1, 73, 144);
   max-width: 225px;
   transition: 0.5s;
   overflow-x: hidden;
@@ -101,7 +101,7 @@ nav a {
   text-align: left;
   padding: 15px;
   text-decoration: none;
-  font-family: 'Merriweather';
+  font-family: 'Roboto Mono';
   transition: 0.1s;
   overflow: hidden;
   white-space: nowrap;
@@ -118,7 +118,7 @@ nav #close_menu {
   text-align: right;
   padding: 15px 15px 15px 15px;
   text-decoration: none;
-  font-family: 'Merriweather';
+  font-family: 'Roboto Mono';
   transition: 0.1s;
   overflow: hidden;
   white-space: nowrap;
@@ -156,7 +156,7 @@ section {
 .article_title {
   width: 640px;
   font-size: 32px;
-  font-family: 'Merriweather';
+  font-family: 'Roboto Mono';
   font-style: black;
   font-weight: 1000;
   padding: 5px 20px 5px 0px;
@@ -167,32 +167,34 @@ section {
   background: white;
 }
 
-div #front_image {
+#front_image_growth {
   width: 640px;
   height: 426px;
   margin: 0 0px 0px 30px;
   position: absolute;
-  background-image: url("/static/dashboard/img/Carney_medium.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
   z-index: -1;
 }
 
-div #front_image::after {
-  content: '';
+#front_image_inflation {
+  width: 640px;
+  height: 426px;
+  margin: 0 0px 0px 30px;
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: linear-gradient(to bottom, #002f4b, rgb(255, 0, 0));
-  opacity: .6;
+  z-index: -1;
+}
+
+#front_image_debt {
+  width: 640px;
+  height: 426px;
+  margin: 0 0px 0px 30px;
+  position: absolute;
+  z-index: -1;
 }
 
 article p {
   width: 640px;
   font-size: 16px;
-  font-family: 'Merriweather';
+  font-family: 'Roboto Mono';
   font-style: black;
   padding: 5px 20px 5px 0px;
   margin: 20px 0px 20px 30px;
@@ -209,10 +211,10 @@ footer {
   height: 150px;
   margin-bottom: 0;
   font-size: 22px;
-  font-family: 'Merriweather';
+  font-family: 'Roboto Mono';
   font-style: black;
   font-weight: 1000;
-  background-color: #1f3057;
+  background-color: rgb(10, 35, 66);
   ;
   padding: 20px;
   text-align: center;
@@ -231,31 +233,31 @@ footer {
   stroke-width: 2px;
 }*/
 
-.line {
+.line, .line_cpih {
   fill: none;
   stroke: blue;
   stroke-width: 2px;
 }
 
-.line_services {
+.line_services, .line_food {
   fill: none;
   stroke: red;
   stroke-width: 2px;
 }
 
-.line_production {
+.line_production, .line_alcohol{
   fill: none;
   stroke: orange;
   stroke-width: 2px;
 }
 
-.line_manufacturing {
+.line_manufacturing, .line_clothing {
   fill: none;
   stroke: green;
   stroke-width: 2px;
 }
 
-.line_construction {
+.line_construction, .line_housing {
   fill: none;
   stroke: black;
   stroke-width: 2px;
@@ -269,8 +271,28 @@ footer {
   background-color: white;
   border: black 1px solid;
   padding: 15px;
-  font-family: 'Merriweather';
+  font-family: 'Roboto Mono';
   font-size: 14px;
+}
+
+#gdp, #cpih {
+  color:blue;
+}
+
+#food, #services {
+  color:orange;
+}
+
+#production, #alcohol {
+  color:red;
+}
+
+#manufacturing, #clothing {
+  color:green;
+}
+
+#construction, #housing {
+  color:black;
 }
 
 .grid line {
@@ -284,6 +306,6 @@ footer {
 }
 
 text {
-  font-family: 'Merriweather';
+  font-family: 'Roboto Mono';
   font-size: 12px;
 }

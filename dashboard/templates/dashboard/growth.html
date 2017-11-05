@@ -7,66 +7,65 @@
   <script src="{% static 'dashboard/javascript/d3.js' %}"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'dashboard/style/style.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
   <title></title>
 </head>
 
 <body>
   <div class="inflation_header">
-    <h2 class="article_title">Brexit hurts economic prospect</h2>
-    <div id="front_image"></div>
+    <h2 class="article_title">Brexit slowdowns economic outlook</h2>
+    <img src="/static/dashboard/img/carney_medium.jpg" id="front_image_growth"></div>
     <div id="vis_growth"></div>
   </div>
   <div>
-    <form method="post" action="/indicators/growth/" id="indicator_form_2008">
-      {% csrf_token %}
-      <!-- <br>
-      <select type="text" name="years" id="select_dropdown">
-        <option value="211">2008</option>
-        <option value="243">2016</option>
-      </select>
-      <br> -->
-      <button id="Financial_crisis" name="years" value="243" type="botton">Performance of UK economy after 2008 crisis</button>
-    </form>
+    <!-- Botton -->
+    <!-- <form method="post" action="/indicators/growth/" id="indicator_form_2008">
+      {% csrf_token %} -->
+      <!-- <button id="Financial_crisis" name="years" value="243" type="botton">Performance of UK economy after 2008 crisis</button>
+    </form> -->
+    <!-- Dropdown -->
     <form method="post" action="/indicators/growth/" id="indicator_form_2016">
       {% csrf_token %}
-      <!-- <br>
+      <br>
       <select type="text" name="years" id="select_dropdown">
         <option value="211">2008</option>
         <option value="243">2016</option>
       </select>
-      <br> -->
-      <button id="Brexit_vote" name="years" value="211" type="botton">Growth since Brexit vote</button>
+      <br>
+      <!-- Botton -->
+      <!-- <button id="Brexit_vote" name="years" value="211" type="botton">Growth since Brexit vote</button> -->
+      <!-- Dropdown -->
+      <button id="Brexit_vote" type="botton">Growth since Brexit vote</button>
     </form>
-    <div>
+  </div>
       <article>
         <p>The UK economy couldn’t keep up the momentum it experienced after the Brexit vote. After the referendum, retail sales gave an extra impulse to growth in the second half of 2016. However, inflation, tightening of credit conditions and uncertainty
           about Brexit crippled household spending, showing the vulnerabilities of an economy still in recovery.<br/><br/> In the third and fourth quarter of 2016, the UK economy reported a quarterly expansion of 0.5% and 0.7% respectively, beating expectations.
           But fears of a Brexit backlash returned in the first months of this year, when the economy grew only 0.2% in January-March, and 0.3% in April-June. Despite the optimism of the “Leave” campaign after the Brexit vote, growth in the UK slowed down
-          to the lowest rate among G7 countries in the first quarter of 2017.<br/><br/> In annual terms:<br/><br/> "GDP growth in volume terms increased by 1.7% between Quarter 2 2016 and Quarter 2 2017, a slowing down when compared with the 2.0% growth seen between
-          Quarter 1 2016 and Quarter 1 2017 (ONS, 2017)."<br/><br/> The IMF downgraded the economic outlook of the United Kingdom, confirming that the economic activity “slowed more than anticipated in the first half of 2017” despite an increase in the labour
-          participation rates and decreasing unemployment. The IMF expects an expansion of the UK economy of 1.7% in 2017, a downgrade of 0.3 percentage points compared to April’s forecast.<br/><br/> However, this forecast is still very optimistic, since the
-          UK economy has to grow at least 0.6% in the third and fourth quarter, to reach 1.7% in 2017:<br/><br/> "We think that neither the hard or soft data support such a pickup in activity, meaning that IMF’s forecasts remain excessively optimistic unless
-          the data get revised up (Barclays, 2017)."<br/><br/> Last September, retail sales were below expectations, with a fall of 0.8% (Barclays, 2017). All sectors showed slowdown except online sales, the only segment with a positive number, reaching an
-          increase of 2.3% month to month, according to the ONS (2017) latest report.<br/><br/> Services is the most crucial sector of the UK economy, since it contributes 80% to the Gross Domestic Product (GDP), without substantial trade on services the UK
-          economy may experience a significant decline in other segments of the economy such as industrial production and construction have shown a trend below expectations:<br/><br/> "The services industries are the only positive contributor to output GDP
-          growth in Quarter 2 2017, at 0.4 percentage points, while production and construction both fell and together detracted around 0.1 percentage points from the 0.3% UK GDP quarterly growth (ONS, 2017)."<br/><br/> However, household expenditure has continuously
-          decreased since the Brexit vote. In the third quarter of 2016, just after the referendum, this component that contributes around 60% to the economy and vital to retail services (OCED, 2017), spiked 0.8% when compared with the previous term.
-          In the fourth quarter decreased to 0.7%, and in 2017, slowed to 0.4% in the first trimester, to just 0.1% in the following term.<br/><br/> "The depreciation of sterling seen in 2016 and particularly following the outcome of the EU referendum would
-          increase the prices producers pay for imported goods (ONS, 2017)."<br/><br/> Food and alcoholic beverages experienced a spike of 3.1% in September when compared to the same month of 2016, the highest increase since October 2013. However, the main
-          contribution to inflation came from the rise in housing and household services –such as water and fuels–, followed by transport.<br/><br/> The slowdown in household spending is also related to a tightening of credit both credit card and other unsecured
-          loans. According to the Bank of England, lenders reported that the availability of this type of credit decreased in the third quarter, and it is expected to fall even more in the last trimester of 2017.<br/><br/> Less household spending is related
-          to a tightening of credit both credit card and other unsecured loans – used for household spending–. According to the Bank of England, lenders reported that the availability of this type of credit has decreased in the third quarter, and it is
-          expected to fall even more in the last trimester of 2017.<br/><br/> Lenders said they expect less appetite for risk and concerns over the economic outlook in the coming months (Barclays, 2017, Bank of England, 2017). The survey cited both factors
-          as the main reasons to tight the credit conditions to households at a time when the UK government is in a critical phase of the Brexit negotiations.<br/><br/> Credit was one of the factors that helped the economy to gain momentum after the Brexit
-          vote by allowing consumer spending. However, the Bank of England warned that this trend was not feasible in the long term. The central bank warned about the dangers of depending on a growing amount of debt to fuel the economy (Bank of England,
-          2017).<br/><br/>Despite the cut in the growth forecast, the United Kingdom is one of the most resilient markets among developed countries. There is still a robust business-friendly environment in the UK. Also, unemployment has declined thanks to an expansion
-          of the job market driven in part by immigration from the EU; the Bank of England has supported the economy with low-interest rates and public finances have shown moderate improvement by reducing the deficit to 3% of GDP (OECD, 2017).<br/><br/>
+          to the lowest rate among G7 countries in the first quarter of 2017.<br/><br/> In annual terms:<br/><br/> "GDP growth in volume terms increased by 1.7% between Quarter 2 2016 and Quarter 2 2017, a slowing down when compared with the 2.0% growth
+          seen between Quarter 1 2016 and Quarter 1 2017 (ONS, 2017)."<br/><br/> The IMF downgraded the economic outlook of the United Kingdom, confirming that the economic activity “slowed more than anticipated in the first half of 2017” despite an increase
+          in the labour participation rates and decreasing unemployment. The IMF expects an expansion of the UK economy of 1.7% in 2017, a downgrade of 0.3 percentage points compared to April’s forecast.<br/><br/> However, this forecast is still very
+          optimistic, since the UK economy has to grow at least 0.6% in the third and fourth quarter, to reach 1.7% in 2017:<br/><br/> "We think that neither the hard or soft data support such a pickup in activity, meaning that IMF’s forecasts remain
+          excessively optimistic unless the data get revised up (Barclays, 2017)."<br/><br/> Last September, retail sales were below expectations, with a fall of 0.8% (Barclays, 2017). All sectors showed slowdown except online sales, the only segment
+          with a positive number, reaching an increase of 2.3% month to month, according to the ONS (2017) latest report.<br/><br/> Services is the most crucial sector of the UK economy, since it contributes 80% to the Gross Domestic Product (GDP), without
+          substantial trade on services the UK economy may experience a significant decline in other segments of the economy such as industrial production and construction have shown a trend below expectations:<br/><br/> "The services industries are the
+          only positive contributor to output GDP growth in Quarter 2 2017, at 0.4 percentage points, while production and construction both fell and together detracted around 0.1 percentage points from the 0.3% UK GDP quarterly growth (ONS, 2017)."<br/><br/>          However, household expenditure has continuously decreased since the Brexit vote. In the third quarter of 2016, just after the referendum, this component that contributes around 60% to the economy and vital to retail services (OCED, 2017), spiked
+          0.8% when compared with the previous term. In the fourth quarter decreased to 0.7%, and in 2017, slowed to 0.4% in the first trimester, to just 0.1% in the following term.<br/><br/> "The depreciation of sterling seen in 2016 and particularly
+          following the outcome of the EU referendum would increase the prices producers pay for imported goods (ONS, 2017)."<br/><br/> Food and alcoholic beverages experienced a spike of 3.1% in September when compared to the same month of 2016, the
+          highest increase since October 2013. However, the main contribution to inflation came from the rise in housing and household services –such as water and fuels–, followed by transport.<br/><br/> The slowdown in household spending is also related
+          to a tightening of credit both credit card and other unsecured loans. According to the Bank of England, lenders reported that the availability of this type of credit decreased in the third quarter, and it is expected to fall even more in the
+          last trimester of 2017.<br/><br/> Less household spending is related to a tightening of credit both credit card and other unsecured loans – used for household spending–. According to the Bank of England, lenders reported that the availability
+          of this type of credit has decreased in the third quarter, and it is expected to fall even more in the last trimester of 2017.<br/><br/> Lenders said they expect less appetite for risk and concerns over the economic outlook in the coming months
+          (Barclays, 2017, Bank of England, 2017). The survey cited both factors as the main reasons to tight the credit conditions to households at a time when the UK government is in a critical phase of the Brexit negotiations.<br/><br/> Credit was
+          one of the factors that helped the economy to gain momentum after the Brexit vote by allowing consumer spending. However, the Bank of England warned that this trend was not feasible in the long term. The central bank warned about the dangers
+          of depending on a growing amount of debt to fuel the economy (Bank of England, 2017).
+          <br/><br/>Despite the cut in the growth forecast, the United Kingdom is one of the most resilient markets among developed countries. There is still a robust business-friendly environment in the UK. Also, unemployment has declined thanks to an
+          expansion of the job market driven in part by immigration from the EU; the Bank of England has supported the economy with low-interest rates and public finances have shown moderate improvement by reducing the deficit to 3% of GDP (OECD, 2017).<br/><br/>
         </p>
       </article>
 </body>
 <script src="{% static 'dashboard/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <script>
-
   var growth = {{ growth_json | safe }}
   console.log(growth)
 
@@ -121,9 +120,8 @@
   width = width - margin.left - margin.right;
   height = height - margin.top - margin.bottom;
 
-  var dateParse = d3.timeParse('%Y %b');
-  var tooltipFormat = d3.timeFormat('%Y %b');
-
+  var dateParse = d3.timeParse('%Y');
+  var tooltipFormat = d3.timeFormat('%Y');
 
   var x = d3.scaleTime()
     .range([0, width]);
@@ -143,30 +141,31 @@
     .attr('class', 'x axis');
 
   svg.append("text")
+    .attr("id", "tags")
     .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
     .style("text-anchor", "middle")
-    .text("Quarters");
+    .text("Years");
 
   // y label
   svg.append('g')
     .attr('class', 'y axis')
 
-
   svg.append("text")
+    .attr("id", "tags")
     .attr("transform", "rotate(-90)")
     .attr("y", 10 - margin.left)
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Growth Q-to-Q %");
+    // .text("Growth Q-to-Q %");
+    .text("Year-to-Year Growth %");
 
   svg.append("text")
     .attr("x", (width / 2))
     .attr("y", 0 - (margin.top / 2))
     .attr("text-anchor", "middle")
     .style("font-size", "18px")
-    .text("Most industries feel pressure after Brexit vote");
-
+    .text("Brexit + uncertainty = sluggish growth");
 
   function make_x_gridlines() {
     return d3.axisBottom(x)
@@ -194,682 +193,793 @@
       .tickFormat("")
     );
 
-    x.domain(d3.extent(growth, function(d) {
-      return dateParse(d.date);
-    }));
+  x.domain(d3.extent(growth, function(d) {
+    return dateParse(d.date);
+  }));
 
-    y.domain(d3.extent(growth, function(d) {
-      return parseFloat(d.value);
-    }));
+  y.domain(d3.extent(growth, function(d) {
+    return parseFloat(d.value);
+  }));
 
-    var line = d3.line()
-      .curve(d3.curveCatmullRom)
-      .x(function(d) {
-        return x(dateParse(d.date));
-      })
-      .y(function(d) {
-        return y(d.value);
-      });
+  var line = d3.line()
+    .curve(d3.curveCatmullRom)
+    .x(function(d) {
+      return x(dateParse(d.date));
+    })
+    .y(function(d) {
+      return y(d.value);
+    });
 
-    var lines = svg.selectAll('.line')
-      .remove()
-      .exit()
-      .data([growth]);
-    console.log(lines)
+  var lines = svg.selectAll('.line')
+    .remove()
+    .exit()
+    .data([growth]);
+  console.log(lines)
 
-    lines
-      .enter()
-      .append('path')
-      .attr('class', 'line')
-      .attr('fill', 'none')
-      // .attr('stroke', 'steelblue')
-      .attr('d', line);
+  lines
+    .enter()
+    .append('path')
+    .attr('class', 'line')
+    .attr('fill', 'none')
+    .attr('d', line);
 
-    var points = svg.selectAll('.point')
-      .remove()
-      .exit()
-      .data(growth);
+  svg.selectAll('.line')
+    .transition()
+      .duration(1000)
 
-    points
-      .enter()
-      .append('circle')
-      .attr('class', 'point')
-      .attr('r', 3)
-      .attr('cx', function(growth) {
-        return x(dateParse(growth.date));
-      })
-      .attr('cy', function(growth) {
-        return y(growth.value);
-      })
-      .attr('fill', 'black')
-      .attr('opacity', 1)
-      .on('mouseover', mouseOver)
-      .on('mousemove', mouseMove)
-      .on('mouseout', mouseOut);
+  var points = svg.selectAll('.point')
+    .remove()
+    .exit()
+    .data(growth);
 
-    svg.select('.x.axis')
-      .call(x_axis)
-      .selectAll('text')
-      .attr('transform', 'rotate(30)')
-      .attr('y', '10')
-      .attr('x', '0')
-      .style("text-anchor", "start");
+  points
+    .enter()
+    .append('circle')
+    .attr('class', 'point')
+    .attr('r', 3)
+    .attr('cx', function(growth) {
+      return x(dateParse(growth.date));
+    })
+    .attr('cy', function(growth) {
+      return y(growth.value);
+    })
+    .attr('fill', 'black')
+    .attr('opacity', 1)
+    .on('mouseover', mouseOver)
+    .on('mousemove', mouseMove)
+    .on('mouseout', mouseOut);
 
-    svg.select('.y.axis')
-      .call(y_axis)
+  svg.select('.x.axis')
+    .call(x_axis)
+    .selectAll('text')
+    .attr('transform', 'rotate(30)')
+    .attr('y', '10')
+    .attr('x', '0')
+    .style("text-anchor", "start");
 
-    function mouseOver(d) {
-      var date = dateParse(d.date);
-      var displayDate = tooltipFormat(date)
-      var value_function = d.value;
+  svg.select('.y.axis')
+    .call(y_axis)
 
-      d3.select(this)
-        .transition()
-        .style('opacity', 1);
+  function mouseOver(d) {
+    var date = dateParse(d.date);
+    var displayDate = tooltipFormat(date)
+    var value_function = d.value;
 
-      tooltip
-        .style('display', null)
-        .html('<p>UK growth was ' + value_function + ' in ' + displayDate + '</p>');
-    }
+    d3.select(this)
+      .transition()
+      .style('opacity', 1);
 
-    function mouseMove(d) {
-      tooltip
-        .style('top', (d3.event.pageY - 20) + "px")
-        .style('left', (d3.event.pageX + 20) + "px");
-    }
+    tooltip
+      .style('display', null)
+      .html('<p>UK growth was ' + value_function + ' in ' + displayDate + '</p>');
+  }
 
-    function mouseOut(d) {
-      d3.select(this)
-        .transition()
-        .style('opacity', 1);
+  function mouseMove(d) {
+    tooltip
+      .style('top', (d3.event.pageY - 20) + "px")
+      .style('left', (d3.event.pageX + 20) + "px");
+  }
 
-      tooltip
-        .style('display', 'none');
+  function mouseOut(d) {
+    d3.select(this)
+      .transition()
+      .style('opacity', 1);
 
-    }
+    tooltip
+      .style('display', 'none');
 
-    $(document).on('submit', '#indicator_form_2008', function(e) {
-      e.preventDefault();
+  }
 
-      $.ajax({
-        url: "/data/growth/",
-        type: "POST", // or "get"
-        data: {
-          years: $('#Brexit_vote').val(),
-          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-        },
-        success: function growth_graph(growth) {
+  $(document).on('submit', '#indicator_form_2016', function(e) {
+    e.preventDefault();
 
-          x.domain(d3.extent(growth, function(d) {
-            return dateParse(d.date);
-          }));
+    $.ajax({
+      url: "/data/growth/",
+      type: "POST", // or "get"
+      data: {
+        years: $('#select_dropdown').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function growth_graph(growth) {
 
-          y.domain(d3.extent(growth, function(d) {
-            return parseFloat(d.construction);
-          }));
+        function years_or_quarter() {
+          var nameValue = document.getElementById("select_dropdown").value
+          console.log(nameValue)
+          if (nameValue == 211) {
 
-          var line = d3.line()
-            .curve(d3.curveCatmullRom)
-            .x(function(d) {
-              return x(dateParse(d.date));
-            })
-            .y(function(d) {
-              return y(d.value);
-            });
+            svg.selectAll('#tags')
+              .remove()
 
-          var line_services = d3.line()
-            .curve(d3.curveCatmullRom)
-            .x(function(d) {
-              return x(dateParse(d.date));
-            })
-            .y(function(d) {
-              return y(d.services);
-            });
+            svg.append("text")
+              .attr("id", "tags")
+              .attr("transform", "rotate(-90)")
+              .attr("y", 10 - margin.left)
+              .attr("x", 0 - (height / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              // .text("Growth Q-to-Q %");
+              .text("Year-to-Year Growth %")
 
-          var line_production = d3.line()
-            .curve(d3.curveCatmullRom)
-            .x(function(d) {
-              return x(dateParse(d.date));
-            })
-            .y(function(d) {
-              return y(d.production);
-            });
+            svg.append("text")
+              .attr("id", "tags")
+              .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+              .style("text-anchor", "middle")
+              .text("Years");
 
-          var line_manufacturing = d3.line()
-            .curve(d3.curveCatmullRom)
-            .x(function(d) {
-              return x(dateParse(d.date));
-            })
-            .y(function(d) {
-              return y(d.manufacturing);
-            });
+          } else {
 
-          var line_construction = d3.line()
-            .curve(d3.curveCatmullRom)
-            .x(function(d) {
-              return x(dateParse(d.date));
-            })
-            .y(function(d) {
-              return y(d.construction);
-            });
+            svg.selectAll('#tags')
+              .remove()
 
-          var lines = svg.selectAll('.line')
-            .remove()
-            .exit()
-            .data([growth]);
+            svg.append("text")
+              .attr("id", "tags")
+              .attr("transform", "rotate(-90)")
+              .attr("y", 10 - margin.left)
+              .attr("x", 0 - (height / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              // .text("Growth Q-to-Q %");
+              .text("Quarter-to-Quarter Growth %")
 
-          var lines_s = svg.selectAll('.line_services')
-            .remove()
-            .exit()
-            .data([growth]);
-
-          var lines_p = svg.selectAll('.line_production')
-            .remove()
-            .exit()
-            .data([growth]);
-
-          var lines_m = svg.selectAll('.line_manufacturing')
-            .remove()
-            .exit()
-            .data([growth]);
-            console.log(lines_m)
-
-          var lines_c = svg.selectAll('.line_construction')
-            .remove()
-            .exit()
-            .data([growth]);
-            console.log(lines_c)
-
-          lines
-            .enter()
-            .append('path')
-            .attr('class', 'line')
-            .attr("id", "blueLine") //Toggle
-            .attr('fill', 'none')
-            .attr('d', line);
-
-          lines_s
-            .enter()
-            .append('path')
-            .attr('class', 'line_services')
-            .attr('fill', 'none')
-            .attr('d', line_services);
-
-          lines_p
-            .enter()
-            .append('path')
-            .attr('class', 'line_production')
-            .attr('fill', 'none')
-            .attr('d', line_production);
-
-          lines_m
-            .enter()
-            .append('path')
-            .attr('class', 'line_manufacturing')
-            .attr('fill', 'none')
-            .attr('d', line_manufacturing);
-
-          lines_c
-            .enter()
-            .append('path')
-            .attr('class', 'line_construction')
-            .attr('fill', 'none')
-            .attr('d', line_construction);
-
-          var points = svg.selectAll('.point')
-            .remove()
-            .exit()
-            .data(growth);
-
-          var points_s = svg.selectAll('.point')
-            .remove()
-            .exit()
-            .data(growth);
-
-          var points_p = svg.selectAll('.point')
-            .remove()
-            .exit()
-            .data(growth);
-
-          var points_m = svg.selectAll('.point')
-            .remove()
-            .exit()
-            .data(growth);
-
-          var points_c = svg.selectAll('.point')
-            .remove()
-            .exit()
-            .data(growth);
-
-          points
-            .enter()
-            .append('circle')
-            .attr('class', 'point')
-            .attr('r', 3)
-            .attr('cx', function(growth) {
-              return x(dateParse(growth.date));
-            })
-            .attr('cy', function(growth) {
-              return y(growth.value);
-            })
-            .attr('fill', 'black')
-            .attr('opacity', 1)
-            .on('mouseover', mouseOver)
-            .on('mousemove', mouseMove)
-            .on('mouseout', mouseOut);
-
-          points_s
-            .enter()
-            .append('circle')
-            .attr('class', 'point')
-            .attr('r', 3)
-            .attr('cx', function(growth) {
-              return x(dateParse(growth.date));
-            })
-            .attr('cy', function(growth) {
-              return y(growth.services);
-            })
-            .attr('fill', 'black')
-            .attr('opacity', 1)
-            .on('mouseover', mouseOver)
-            .on('mousemove', mouseMove)
-            .on('mouseout', mouseOut);
-
-          points_p
-            .enter()
-            .append('circle')
-            .attr('class', 'point')
-            .attr('r', 3)
-            .attr('cx', function(growth) {
-              return x(dateParse(growth.date));
-            })
-            .attr('cy', function(growth) {
-              return y(growth.production);
-            })
-            .attr('fill', 'black')
-            .attr('opacity', 1)
-            .on('mouseover', mouseOver)
-            .on('mousemove', mouseMove)
-            .on('mouseout', mouseOut);
-
-          points_m
-            .enter()
-            .append('circle')
-            .attr('class', 'point')
-            .attr('r', 3)
-            .attr('cx', function(growth) {
-              return x(dateParse(growth.date));
-            })
-            .attr('cy', function(growth) {
-              return y(growth.manufacturing);
-            })
-            .attr('fill', 'black')
-            .attr('opacity', 1)
-            .on('mouseover', mouseOver)
-            .on('mousemove', mouseMove)
-            .on('mouseout', mouseOut);
-
-          points_c
-            .enter()
-            .append('circle')
-            .attr('class', 'point')
-            .attr('r', 3)
-            .attr('cx', function(growth) {
-              return x(dateParse(growth.date));
-            })
-            .attr('cy', function(growth) {
-              return y(growth.construction);
-            })
-            .attr('fill', 'black')
-            .attr('opacity', 1)
-            .on('mouseover', mouseOver)
-            .on('mousemove', mouseMove)
-            .on('mouseout', mouseOut);
-
-          // svg.append("text")
-          //   .remove()
-          //   .exit()
-          //   .attr("transform", "translate("+(width+3)+","+y(growth[0].construction)+")")
-          //   .attr("dy", ".35em")
-          //   .attr("text-anchor", "start")
-          //   .style("fill", "black")
-          //   .text("Construction");
-
-          svg.select('.x.axis')
-            .call(x_axis)
-            .selectAll('text')
-            .attr('transform', 'rotate(30)')
-            .attr('y', '10')
-            .attr('x', '0')
-            .style("text-anchor", "start");
-
-          svg.select('.y.axis')
-            .call(y_axis)
-
-          function mouseOver(d) {
-            var date = dateParse(d.date);
-            var displayDate = tooltipFormat(date)
-            var value_function = d.value;
-
-            d3.select(this)
-              .transition()
-              .style('opacity', 1);
-
-            tooltip
-              .style('display', null)
-              .html('<p>UK growth was ' + value_function + ' in ' + displayDate + '</p>');
-          }
-
-          function mouseMove(d) {
-            tooltip
-              .style('top', (d3.event.pageY - 20) + "px")
-              .style('left', (d3.event.pageX + 20) + "px");
-          }
-
-          function mouseOut(d) {
-            d3.select(this)
-              .transition()
-              .style('opacity', 1);
-
-            tooltip
-              .style('display', 'none');
+            svg.append("text")
+              .attr("id", "tags")
+              .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+              .style("text-anchor", "middle")
+              .text("Quarters");
 
           }
         }
-      });
-    });
+        years_or_quarter()
 
-    $(document).on('submit', '#indicator_form_2016', function(e) {
-      e.preventDefault();
+        var dateParse = d3.timeParse('%Y %b');
+        var tooltipFormat = d3.timeFormat('%Y %b');
 
-      $.ajax({
-        url: "/data/growth/",
-        type: "POST", // or "get"
-        data: {
-          years: $('#Financial_crisis').val(),
-          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-        },
-        success: function growth_graph(growth) {
 
-          x.domain(d3.extent(growth, function(d) {
-            return dateParse(d.date);
-          }));
+        x.domain(d3.extent(growth, function(d) {
+          return dateParse(d.date);
+        }));
 
-          y.domain(d3.extent(growth, function(d) {
-            return parseFloat(d.construction);
-          }));
+        y.domain(d3.extent(growth, function(d) {
+          return parseFloat(d.construction);
+        }));
 
-          var line = d3.line()
-            .curve(d3.curveCatmullRom)
-            .x(function(d) {
-              return x(dateParse(d.date));
-            })
-            .y(function(d) {
-              return y(d.value);
-            });
+        var line = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.value);
+          });
 
-          var line_services = d3.line()
-            .curve(d3.curveCatmullRom)
-            .x(function(d) {
-              return x(dateParse(d.date));
-            })
-            .y(function(d) {
-              return y(d.services);
-            });
+        var line_services = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.services);
+          });
 
-          var line_production = d3.line()
-            .curve(d3.curveCatmullRom)
-            .x(function(d) {
-              return x(dateParse(d.date));
-            })
-            .y(function(d) {
-              return y(d.production);
-            });
+        var line_production = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.production);
+          });
 
-          var line_manufacturing = d3.line()
-            .curve(d3.curveCatmullRom)
-            .x(function(d) {
-              return x(dateParse(d.date));
-            })
-            .y(function(d) {
-              return y(d.manufacturing);
-            });
+        var line_manufacturing = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.manufacturing);
+          });
 
-          var line_construction = d3.line()
-            .curve(d3.curveCatmullRom)
-            .x(function(d) {
-              return x(dateParse(d.date));
-            })
-            .y(function(d) {
-              return y(d.construction);
-            });
+        var line_construction = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.construction);
+          });
 
-          var lines = svg.selectAll('.line')
-            .remove()
-            .exit()
-            .data([growth]);
+        var lines = svg.selectAll('.line')
+          .remove()
+          .exit()
+          .data([growth]);
 
-          var lines_s = svg.selectAll('.line_services')
-            .remove()
-            .exit()
-            .data([growth]);
+        var lines_s = svg.selectAll('.line_services')
+          .remove()
+          .exit()
+          .data([growth]);
 
-          var lines_p = svg.selectAll('.line_production')
-            .remove()
-            .exit()
-            .data([growth]);
+        var lines_p = svg.selectAll('.line_production')
+          .remove()
+          .exit()
+          .data([growth]);
 
-          var lines_m = svg.selectAll('.line_manufacturing')
-            .remove()
-            .exit()
-            .data([growth]);
-            console.log(lines_m)
+        var lines_m = svg.selectAll('.line_manufacturing')
+          .remove()
+          .exit()
+          .data([growth]);
+        console.log(lines_m)
 
-          var lines_c = svg.selectAll('.line_construction')
-            .remove()
-            .exit()
-            .data([growth]);
-            console.log(lines_c)
+        var lines_c = svg.selectAll('.line_construction')
+          .remove()
+          .exit()
+          .data([growth]);
+        console.log(lines_c)
 
-          lines
-            .enter()
-            .append('path')
-            .attr('class', 'line')
-            .attr("id", "blueLine") //Toggle
-            .attr('fill', 'none')
-            .attr('d', line);
+        lines
+          .enter()
+          .append('path')
+          .attr('class', 'line')
+          .attr("id", "blueLine") //Toggle
+          .attr('fill', 'none')
+          .attr('d', line);
 
-          lines_s
-            .enter()
-            .append('path')
-            .attr('class', 'line_services')
-            .attr('fill', 'none')
-            .attr('d', line_services);
+        lines_s
+          .enter()
+          .append('path')
+          .attr('class', 'line_services')
+          .attr('fill', 'none')
+          .attr('d', line_services);
 
-          lines_p
-            .enter()
-            .append('path')
-            .attr('class', 'line_production')
-            .attr('fill', 'none')
-            .attr('d', line_production);
+        lines_p
+          .enter()
+          .append('path')
+          .attr('class', 'line_production')
+          .attr('fill', 'none')
+          .attr('d', line_production);
 
-          lines_m
-            .enter()
-            .append('path')
-            .attr('class', 'line_manufacturing')
-            .attr('fill', 'none')
-            .attr('d', line_manufacturing);
+        lines_m
+          .enter()
+          .append('path')
+          .attr('class', 'line_manufacturing')
+          .attr('fill', 'none')
+          .attr('d', line_manufacturing);
 
-          lines_c
-            .enter()
-            .append('path')
-            .attr('class', 'line_construction')
-            .attr('fill', 'none')
-            .attr('d', line_construction);
+        lines_c
+          .enter()
+          .append('path')
+          .attr('class', 'line_construction')
+          .attr('fill', 'none')
+          .attr('d', line_construction);
 
-          var points = svg.selectAll('.point')
-            .remove()
-            .exit()
-            .data(growth);
+        var points = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(growth);
 
-          var points_s = svg.selectAll('.point')
-            .remove()
-            .exit()
-            .data(growth);
+        var points_s = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(growth);
 
-          var points_p = svg.selectAll('.point')
-            .remove()
-            .exit()
-            .data(growth);
+        var points_p = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(growth);
 
-          var points_m = svg.selectAll('.point')
-            .remove()
-            .exit()
-            .data(growth);
+        var points_m = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(growth);
 
-          var points_c = svg.selectAll('.point')
-            .remove()
-            .exit()
-            .data(growth);
+        var points_c = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(growth);
 
-          points
-            .enter()
-            .append('circle')
-            .attr('class', 'point')
-            .attr('r', 3)
-            .attr('cx', function(growth) {
-              return x(dateParse(growth.date));
-            })
-            .attr('cy', function(growth) {
-              return y(growth.value);
-            })
-            .attr('fill', 'black')
-            .attr('opacity', 1)
-            .on('mouseover', mouseOver)
-            .on('mousemove', mouseMove)
-            .on('mouseout', mouseOut);
+        points
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 3)
+          .attr('cx', function(growth) {
+            return x(dateParse(growth.date));
+          })
+          .attr('cy', function(growth) {
+            return y(growth.value);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
 
-          points_s
-            .enter()
-            .append('circle')
-            .attr('class', 'point')
-            .attr('r', 3)
-            .attr('cx', function(growth) {
-              return x(dateParse(growth.date));
-            })
-            .attr('cy', function(growth) {
-              return y(growth.services);
-            })
-            .attr('fill', 'black')
-            .attr('opacity', 1)
-            .on('mouseover', mouseOver)
-            .on('mousemove', mouseMove)
-            .on('mouseout', mouseOut);
+        points_s
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 3)
+          .attr('cx', function(growth) {
+            return x(dateParse(growth.date));
+          })
+          .attr('cy', function(growth) {
+            return y(growth.services);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
 
-          points_p
-            .enter()
-            .append('circle')
-            .attr('class', 'point')
-            .attr('r', 3)
-            .attr('cx', function(growth) {
-              return x(dateParse(growth.date));
-            })
-            .attr('cy', function(growth) {
-              return y(growth.production);
-            })
-            .attr('fill', 'black')
-            .attr('opacity', 1)
-            .on('mouseover', mouseOver)
-            .on('mousemove', mouseMove)
-            .on('mouseout', mouseOut);
+        points_p
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 3)
+          .attr('cx', function(growth) {
+            return x(dateParse(growth.date));
+          })
+          .attr('cy', function(growth) {
+            return y(growth.production);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
 
-          points_m
-            .enter()
-            .append('circle')
-            .attr('class', 'point')
-            .attr('r', 3)
-            .attr('cx', function(growth) {
-              return x(dateParse(growth.date));
-            })
-            .attr('cy', function(growth) {
-              return y(growth.manufacturing);
-            })
-            .attr('fill', 'black')
-            .attr('opacity', 1)
-            .on('mouseover', mouseOver)
-            .on('mousemove', mouseMove)
-            .on('mouseout', mouseOut);
+        points_m
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 3)
+          .attr('cx', function(growth) {
+            return x(dateParse(growth.date));
+          })
+          .attr('cy', function(growth) {
+            return y(growth.manufacturing);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
 
-          points_c
-            .enter()
-            .append('circle')
-            .attr('class', 'point')
-            .attr('r', 3)
-            .attr('cx', function(growth) {
-              return x(dateParse(growth.date));
-            })
-            .attr('cy', function(growth) {
-              return y(growth.construction);
-            })
-            .attr('fill', 'black')
-            .attr('opacity', 1)
-            .on('mouseover', mouseOver)
-            .on('mousemove', mouseMove)
-            .on('mouseout', mouseOut);
+        points_c
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 3)
+          .attr('cx', function(growth) {
+            return x(dateParse(growth.date));
+          })
+          .attr('cy', function(growth) {
+            return y(growth.construction);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
 
-          // svg.append("text")
-          //   .attr("transform", "translate("+(width+3)+","+y(growth[0].construction)+")")
-          //   .attr("dy", ".35em")
-          //   .attr("text-anchor", "start")
-          //   .style("fill", "black")
-          //   .text("Construction");
+        svg.select('.x.axis')
+          .call(x_axis)
+          .selectAll('text')
+          .attr('transform', 'rotate(30)')
+          .attr('y', '10')
+          .attr('x', '0')
+          .style("text-anchor", "start");
 
-          svg.select('.x.axis')
-            .call(x_axis)
-            .selectAll('text')
-            .attr('transform', 'rotate(30)')
-            .attr('y', '10')
-            .attr('x', '0')
-            .style("text-anchor", "start");
+        svg.select('.y.axis')
+          .call(y_axis)
 
-          svg.select('.y.axis')
-            .call(y_axis)
+        function mouseOver(d) {
+          var date = dateParse(d.date);
+          var displayDate = tooltipFormat(date)
+          var value_function = d.value;
+          var services_value = d.services;
+          var production_value = d.production;
+          var manufacturing_value = d.manufacturing;
+          var construction_value = d.construction;
 
-          function mouseOver(d) {
-            var date = dateParse(d.date);
-            var displayDate = tooltipFormat(date)
-            var value_function = d.value;
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
 
-            d3.select(this)
-              .transition()
-              .style('opacity', 1);
-
-            tooltip
-              .style('display', null)
-              .html('<p>UK growth was ' + value_function + ' in ' + displayDate + '</p>');
-          }
-
-          function mouseMove(d) {
-            tooltip
-              .style('top', (d3.event.pageY - 20) + "px")
-              .style('left', (d3.event.pageX + 20) + "px");
-          }
-
-          function mouseOut(d) {
-            d3.select(this)
-              .transition()
-              .style('opacity', 1);
-
-            tooltip
-              .style('display', 'none');
-
-          }
+          tooltip
+            .style('display', null)
+            .html('<p><strong id="gdp">GDP:</strong> ' + value_function + '% in ' + displayDate + '<br><strong id="services">Services:</strong> ' + services_value + '% in ' + displayDate +
+              '<br><strong id="production">Production:</strong> ' + production_value + '% in ' + displayDate + '<br><strong id="manufacturing">Manufacturing:</strong> ' + manufacturing_value + '% in ' + displayDate +
+              '<br><strong id="construction">Construction:</strong> ' + construction_value + '% in ' + displayDate);
         }
-      });
+
+        function mouseMove(d) {
+          tooltip
+            .style('top', (d3.event.pageY - 20) + "px")
+            .style('left', (d3.event.pageX + 20) + "px");
+        }
+
+        function mouseOut(d) {
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', 'none');
+
+        }
+      }
     });
+  });
 
+  // $(document).on('submit', '#indicator_form_2008', function(e) {
+  //   e.preventDefault();
+  //
+  //   $.ajax({
+  //     url: "/data/growth/",
+  //     type: "POST", // or "get"
+  //     data: {
+  //       years: $('#Brexit_vote').val(),
+  //       csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+  //     },
+  //     success: function growth_graph(growth) {
+  //
+  //       x.domain(d3.extent(growth, function(d) {
+  //         return dateParse(d.date);
+  //       }));
+  //
+  //       y.domain(d3.extent(growth, function(d) {
+  //         return parseFloat(d.construction);
+  //       }));
+  //
+  //       var line = d3.line()
+  //         .curve(d3.curveCatmullRom)
+  //         .x(function(d) {
+  //           return x(dateParse(d.date));
+  //         })
+  //         .y(function(d) {
+  //           return y(d.value);
+  //         });
+  //
+  //       var line_services = d3.line()
+  //         .curve(d3.curveCatmullRom)
+  //         .x(function(d) {
+  //           return x(dateParse(d.date));
+  //         })
+  //         .y(function(d) {
+  //           return y(d.services);
+  //         });
+  //
+  //       var line_production = d3.line()
+  //         .curve(d3.curveCatmullRom)
+  //         .x(function(d) {
+  //           return x(dateParse(d.date));
+  //         })
+  //         .y(function(d) {
+  //           return y(d.production);
+  //         });
+  //
+  //       var line_manufacturing = d3.line()
+  //         .curve(d3.curveCatmullRom)
+  //         .x(function(d) {
+  //           return x(dateParse(d.date));
+  //         })
+  //         .y(function(d) {
+  //           return y(d.manufacturing);
+  //         });
+  //
+  //       var line_construction = d3.line()
+  //         .curve(d3.curveCatmullRom)
+  //         .x(function(d) {
+  //           return x(dateParse(d.date));
+  //         })
+  //         .y(function(d) {
+  //           return y(d.construction);
+  //         });
+  //
+  //       var lines = svg.selectAll('.line')
+  //         .remove()
+  //         .exit()
+  //         .data([growth]);
+  //
+  //       var lines_s = svg.selectAll('.line_services')
+  //         .remove()
+  //         .exit()
+  //         .data([growth]);
+  //
+  //       var lines_p = svg.selectAll('.line_production')
+  //         .remove()
+  //         .exit()
+  //         .data([growth]);
+  //
+  //       var lines_m = svg.selectAll('.line_manufacturing')
+  //         .remove()
+  //         .exit()
+  //         .data([growth]);
+  //       console.log(lines_m)
+  //
+  //       var lines_c = svg.selectAll('.line_construction')
+  //         .remove()
+  //         .exit()
+  //         .data([growth]);
+  //       console.log(lines_c)
+  //
+  //       lines
+  //         .enter()
+  //         .append('path')
+  //         .attr('class', 'line')
+  //         .attr("id", "blueLine") //Toggle
+  //         .attr('fill', 'none')
+  //         .attr('d', line);
+  //
+  //       lines_s
+  //         .enter()
+  //         .append('path')
+  //         .attr('class', 'line_services')
+  //         .attr('fill', 'none')
+  //         .attr('d', line_services);
+  //
+  //       lines_p
+  //         .enter()
+  //         .append('path')
+  //         .attr('class', 'line_production')
+  //         .attr('fill', 'none')
+  //         .attr('d', line_production);
+  //
+  //       lines_m
+  //         .enter()
+  //         .append('path')
+  //         .attr('class', 'line_manufacturing')
+  //         .attr('fill', 'none')
+  //         .attr('d', line_manufacturing);
+  //
+  //       lines_c
+  //         .enter()
+  //         .append('path')
+  //         .attr('class', 'line_construction')
+  //         .attr('fill', 'none')
+  //         .attr('d', line_construction);
+  //
+  //       var points = svg.selectAll('.point')
+  //         .remove()
+  //         .exit()
+  //         .data(growth);
+  //
+  //       var points_s = svg.selectAll('.point')
+  //         .remove()
+  //         .exit()
+  //         .data(growth);
+  //
+  //       var points_p = svg.selectAll('.point')
+  //         .remove()
+  //         .exit()
+  //         .data(growth);
+  //
+  //       var points_m = svg.selectAll('.point')
+  //         .remove()
+  //         .exit()
+  //         .data(growth);
+  //
+  //       var points_c = svg.selectAll('.point')
+  //         .remove()
+  //         .exit()
+  //         .data(growth);
+  //
+  //       points
+  //         .enter()
+  //         .append('circle')
+  //         .attr('class', 'point')
+  //         .attr('r', 3)
+  //         .attr('cx', function(growth) {
+  //           return x(dateParse(growth.date));
+  //         })
+  //         .attr('cy', function(growth) {
+  //           return y(growth.value);
+  //         })
+  //         .attr('fill', 'black')
+  //         .attr('opacity', 1)
+  //         .on('mouseover', mouseOver)
+  //         .on('mousemove', mouseMove)
+  //         .on('mouseout', mouseOut);
+  //
+  //       points_s
+  //         .enter()
+  //         .append('circle')
+  //         .attr('class', 'point')
+  //         .attr('r', 3)
+  //         .attr('cx', function(growth) {
+  //           return x(dateParse(growth.date));
+  //         })
+  //         .attr('cy', function(growth) {
+  //           return y(growth.services);
+  //         })
+  //         .attr('fill', 'black')
+  //         .attr('opacity', 1)
+  //         .on('mouseover', mouseOver)
+  //         .on('mousemove', mouseMove)
+  //         .on('mouseout', mouseOut);
+  //
+  //       points_p
+  //         .enter()
+  //         .append('circle')
+  //         .attr('class', 'point')
+  //         .attr('r', 3)
+  //         .attr('cx', function(growth) {
+  //           return x(dateParse(growth.date));
+  //         })
+  //         .attr('cy', function(growth) {
+  //           return y(growth.production);
+  //         })
+  //         .attr('fill', 'black')
+  //         .attr('opacity', 1)
+  //         .on('mouseover', mouseOver)
+  //         .on('mousemove', mouseMove)
+  //         .on('mouseout', mouseOut);
+  //
+  //       points_m
+  //         .enter()
+  //         .append('circle')
+  //         .attr('class', 'point')
+  //         .attr('r', 3)
+  //         .attr('cx', function(growth) {
+  //           return x(dateParse(growth.date));
+  //         })
+  //         .attr('cy', function(growth) {
+  //           return y(growth.manufacturing);
+  //         })
+  //         .attr('fill', 'black')
+  //         .attr('opacity', 1)
+  //         .on('mouseover', mouseOver)
+  //         .on('mousemove', mouseMove)
+  //         .on('mouseout', mouseOut);
+  //
+  //       points_c
+  //         .enter()
+  //         .append('circle')
+  //         .attr('class', 'point')
+  //         .attr('r', 3)
+  //         .attr('cx', function(growth) {
+  //           return x(dateParse(growth.date));
+  //         })
+  //         .attr('cy', function(growth) {
+  //           return y(growth.construction);
+  //         })
+  //         .attr('fill', 'black')
+  //         .attr('opacity', 1)
+  //         .on('mouseover', mouseOver)
+  //         .on('mousemove', mouseMove)
+  //         .on('mouseout', mouseOut);
+  //
+  //       // svg.append("text")
+  //       //   .attr("transform", "translate("+(width+3)+","+y(growth[0].construction)+")")
+  //       //   .attr("dy", ".35em")
+  //       //   .attr("text-anchor", "start")
+  //       //   .style("fill", "black")
+  //       //   .text("Construction")
+  //       //   .exit()
+  //       //   .remove();
+  //       //
+  //       // svg.append("text")
+  //       //   .attr("transform", "translate("+(width+3)+","+y(growth[0].production)+")")
+  //       //   .attr("dy", ".35em")
+  //       //   .attr("text-anchor", "start")
+  //       //   .style("fill", "Orange")
+  //       //   .text("Production")
+  //       //   .exit()
+  //       //   .remove();
+  //
+  //
+  //       svg.select('.x.axis')
+  //         .call(x_axis)
+  //         .selectAll('text')
+  //         .attr('transform', 'rotate(30)')
+  //         .attr('y', '10')
+  //         .attr('x', '0')
+  //         .style("text-anchor", "start");
+  //
+  //       svg.select('.y.axis')
+  //         .call(y_axis)
+  //
+  //       function mouseOver(d) {
+  //         var date = dateParse(d.date);
+  //         var displayDate = tooltipFormat(date)
+  //         var value_function = d.value;
+  //
+  //         d3.select(this)
+  //           .transition()
+  //           .style('opacity', 1);
+  //
+  //         tooltip
+  //           .style('display', null)
+  //           .html('<p>UK growth was ' + value_function + ' in ' + displayDate + '</p>');
+  //       }
+  //
+  //       function mouseMove(d) {
+  //         tooltip
+  //           .style('top', (d3.event.pageY - 20) + "px")
+  //           .style('left', (d3.event.pageX + 20) + "px");
+  //       }
+  //
+  //       function mouseOut(d) {
+  //         d3.select(this)
+  //           .transition()
+  //           .style('opacity', 1);
+  //
+  //         tooltip
+  //           .style('display', 'none');
+  //
+  //       }
+  //     }
+  //   });
+  // });
 
-
+  // function years_or_quarter() {
+  //   var nameValue = document.getElementById("select_dropdown").value
+  //   console.log(nameValue)
+  //   if (nameValue == 211) {
+  //
+  //     svg.selectAll('#tags')
+  //       .remove()
+  //
+  //     svg.append("text")
+  //       .attr("id", "tags")
+  //       .attr("transform", "rotate(-90)")
+  //       .attr("y", 10 - margin.left)
+  //       .attr("x", 0 - (height / 2))
+  //       .attr("dy", "1em")
+  //       .style("text-anchor", "middle")
+  //       // .text("Growth Q-to-Q %");
+  //       .text("Year-to-Year Growth %")
+  //
+  //     svg.append("text")
+  //       .attr("id", "tags")
+  //       .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+  //       .style("text-anchor", "middle")
+  //       .text("Years");
+  //
+  //   } else {
+  //
+  //     svg.selectAll('#tags')
+  //       .remove()
+  //
+  //     svg.append("text")
+  //       .attr("id", "tags")
+  //       .attr("transform", "rotate(-90)")
+  //       .attr("y", 10 - margin.left)
+  //       .attr("x", 0 - (height / 2))
+  //       .attr("dy", "1em")
+  //       .style("text-anchor", "middle")
+  //       // .text("Growth Q-to-Q %");
+  //       .text("Quarter-to-Quarter Growth %")
+  //
+  //     svg.append("text")
+  //       .attr("id", "tags")
+  //       .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+  //       .style("text-anchor", "middle")
+  //       .text("Quarters");
+  //
+  //   }
+  // }
+  // years_or_quarter()
 </script>
 
 </html>
