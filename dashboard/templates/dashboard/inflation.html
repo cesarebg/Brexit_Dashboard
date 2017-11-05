@@ -15,16 +15,12 @@
   <div class="inflation_header">
     <h2 class="article_title">Inflation and real income drop put pressure on consumers</h2>
     <img src="/static/dashboard/img/tenner_medium.jpg" id="front_image_inflation"></div>
-    <div id="vis_inflation"></div>
+  <div id="vis_inflation"></div>
   </div>
   <div>
-    <!-- Botton -->
-    <!-- <form method="post" action="/indicators/growth/" id="indicator_form_2008">
-      {% csrf_token %} -->
-      <!-- <button id="Financial_crisis" name="years" value="243" type="botton">Performance of UK economy after 2008 crisis</button>
-    </form> -->
+
     <!-- Dropdown -->
-    <form method="post" action="/indicators/inflation/" id="indicator_form_2016">
+    <form method="post" action="/indicators/inflation/" id="indicator_form_inflation">
       {% csrf_token %}
       <br>
       <select type="text" name="years" id="select_dropdown">
@@ -35,7 +31,12 @@
       <!-- Botton -->
       <!-- <button id="Brexit_vote" name="years" value="211" type="botton">Growth since Brexit vote</button> -->
       <!-- Dropdown -->
-      <button id="Brexit_vote" type="botton">Inflation</button>
+      <button class="indicator_botton" id="inflation_button" type="botton">Inflation</button>
+    </form>
+    <!-- Botton -->
+    <form method="post" action="/indicators/inflation/" id="indicator_form_income">
+      {% csrf_token %}
+      <button class="indicator_botton" id="income_button" name="years" value="120" type="botton">Real Income</button>
     </form>
   </div>
   <article>
@@ -141,7 +142,7 @@
     .attr("y", 0 - (margin.top / 2))
     .attr("text-anchor", "middle")
     .style("font-size", "18px")
-    .text("Inflation returns to the UK economy");
+    .text("Inflation spiked in most components");
 
   function make_x_gridlines() {
     return d3.axisBottom(x)
@@ -201,7 +202,7 @@
 
   svg.selectAll('.line')
     .transition()
-      .duration(1000)
+    .duration(1000)
 
   var points = svg.selectAll('.point')
     .remove()
@@ -266,7 +267,8 @@
 
   }
 
-  $(document).on('submit', '#indicator_form_2016', function(e) {
+  // INFLATION MONTHLY
+  $(document).on('submit', '#indicator_form_inflation', function(e) {
     e.preventDefault();
 
     $.ajax({
@@ -278,23 +280,23 @@
       },
       success: function inflation_graph(inflation) {
 
-            svg.selectAll('#tags')
-              .remove()
+        svg.selectAll('#tags')
+          .remove()
 
-            svg.append("text")
-              .attr("id", "tags")
-              .attr("transform", "rotate(-90)")
-              .attr("y", 10 - margin.left)
-              .attr("x", 0 - (height / 2))
-              .attr("dy", "1em")
-              .style("text-anchor", "middle")
-              .text("Monthly annual rate inflation %")
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 10 - margin.left)
+          .attr("x", 0 - (height / 2))
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .text("Monthly annual rate inflation %")
 
-            svg.append("text")
-              .attr("id", "tags")
-              .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
-              .style("text-anchor", "middle")
-              .text("Quarters");
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+          .style("text-anchor", "middle")
+          .text("Months");
 
         var dateParse = d3.timeParse('%Y %b');
         var tooltipFormat = d3.timeFormat('%Y %b');
@@ -305,17 +307,27 @@
         }));
 
         y.domain(d3.extent(
-             [].concat(inflation.map(function(d) {
-                      return parseFloat(d.food);
-                  }), inflation.map(function (d) {
-                      return parseFloat(d.alcohol);
-                  }), inflation.map(function (d) {
-                      return parseFloat(d.clothing);
-                  }), inflation.map(function (d) {
-                      return parseFloat(d.cpih);
-                  }), inflation.map(function (d) {
-                      return parseFloat(d.housing);
-                  }))));
+          [].concat(inflation.map(function(d) {
+            return parseFloat(d.food);
+          }), inflation.map(function(d) {
+            return parseFloat(d.alcohol);
+          }), inflation.map(function(d) {
+            return parseFloat(d.clothing);
+          }), inflation.map(function(d) {
+            return parseFloat(d.cpih);
+          }), inflation.map(function(d) {
+            return parseFloat(d.housing);
+          }), inflation.map(function(d) {
+            return parseFloat(d.furniture);
+          }), inflation.map(function(d) {
+            return parseFloat(d.health);
+          }), inflation.map(function(d) {
+            return parseFloat(d.transport);
+          }), inflation.map(function(d) {
+            return parseFloat(d.communication);
+          }), inflation.map(function(d) {
+            return parseFloat(d.recreation);
+          }))));
 
         // y.domain(d3.extent(inflation, function(d) {
         //   return parseFloat(d.alcohol);
@@ -366,10 +378,56 @@
             return y(d.housing);
           });
 
+        var line_furniture = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.furniture);
+          });
+
+        var line_health = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.health);
+          });
+
+        var line_transport = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.transport);
+          });
+
+        var line_communication = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.communication);
+          });
+
+        var line_recreation = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.recreation);
+          });
+
         var lines = svg.selectAll('.line')
           .remove()
           .exit()
           .data([inflation]);
+        console.log(lines)
 
         var lines = svg.selectAll('.line_cpih')
           .remove()
@@ -392,6 +450,31 @@
           .data([inflation]);
 
         var lines_c = svg.selectAll('.line_housing')
+          .remove()
+          .exit()
+          .data([inflation]);
+
+        var lines_f = svg.selectAll('.line_furniture')
+          .remove()
+          .exit()
+          .data([inflation]);
+
+        var lines_h = svg.selectAll('.line_health')
+          .remove()
+          .exit()
+          .data([inflation]);
+
+        var lines_t = svg.selectAll('.line_transport')
+          .remove()
+          .exit()
+          .data([inflation]);
+
+        var lines_com = svg.selectAll('.line_communication')
+          .remove()
+          .exit()
+          .data([inflation]);
+
+        var lines_r = svg.selectAll('.line_recreation')
           .remove()
           .exit()
           .data([inflation]);
@@ -431,6 +514,41 @@
           .attr('fill', 'none')
           .attr('d', line_housing);
 
+        lines_f
+          .enter()
+          .append('path')
+          .attr('class', 'line_furniture')
+          .attr('fill', 'none')
+          .attr('d', line_furniture);
+
+        lines_h
+          .enter()
+          .append('path')
+          .attr('class', 'line_health')
+          .attr('fill', 'none')
+          .attr('d', line_health);
+
+        lines_t
+          .enter()
+          .append('path')
+          .attr('class', 'line_transport')
+          .attr('fill', 'none')
+          .attr('d', line_transport);
+
+        lines_com
+          .enter()
+          .append('path')
+          .attr('class', 'line_communication')
+          .attr('fill', 'none')
+          .attr('d', line_communication);
+
+        lines_r
+          .enter()
+          .append('path')
+          .attr('class', 'line_recreation')
+          .attr('fill', 'none')
+          .attr('d', line_recreation);
+
         var points = svg.selectAll('.point')
           .remove()
           .exit()
@@ -452,6 +570,31 @@
           .data(inflation);
 
         var points_c = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(inflation);
+
+        var points_f = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(inflation);
+
+        var points_h = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(inflation);
+
+        var points_t = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(inflation);
+
+        var points_com = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(inflation);
+
+        var points_r = svg.selectAll('.point')
           .remove()
           .exit()
           .data(inflation);
@@ -541,6 +684,91 @@
           .on('mousemove', mouseMove)
           .on('mouseout', mouseOut);
 
+        points_f
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 2.5)
+          .attr('cx', function(inflation) {
+            return x(dateParse(inflation.date));
+          })
+          .attr('cy', function(inflation) {
+            return y(inflation.furniture);
+          })
+          .attr('fill', 'purple')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_h
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 2.5)
+          .attr('cx', function(inflation) {
+            return x(dateParse(inflation.date));
+          })
+          .attr('cy', function(inflation) {
+            return y(inflation.health);
+          })
+          .attr('fill', 'yellow')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_t
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 2.5)
+          .attr('cx', function(inflation) {
+            return x(dateParse(inflation.date));
+          })
+          .attr('cy', function(inflation) {
+            return y(inflation.transport);
+          })
+          .attr('fill', 'brown')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_com
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 2.5)
+          .attr('cx', function(inflation) {
+            return x(dateParse(inflation.date));
+          })
+          .attr('cy', function(inflation) {
+            return y(inflation.communication);
+          })
+          .attr('fill', 'grey')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_r
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 2.5)
+          .attr('cx', function(inflation) {
+            return x(dateParse(inflation.date));
+          })
+          .attr('cy', function(inflation) {
+            return y(inflation.recreation);
+          })
+          .attr('fill', 'gold')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
         svg.select('.x.axis')
           .call(x_axis)
           .selectAll('text')
@@ -560,6 +788,11 @@
           var alcohol_cpih = d.alcohol;
           var clothing_cpih = d.clothing;
           var housing_cpih = d.housing;
+          var furniture_cpih = d.furniture;
+          var health_cpih = d.health;
+          var transport_cpih = d.transport;
+          var communication_cpih = d.communication;
+          var recreation_cpih = d.recreation;
 
           d3.select(this)
             .transition()
@@ -569,7 +802,12 @@
             .style('display', null)
             .html('<p><strong id="cpih">Inflation:</strong> ' + cpih_function + '% in ' + displayDate + '<br><strong id="food">food:</strong> ' + food_cpih + '% in ' + displayDate +
               '<br><strong id="alcohol">alcohol:</strong> ' + alcohol_cpih + '% in ' + displayDate + '<br><strong id="clothing">clothing:</strong> ' + clothing_cpih + '% in ' + displayDate +
-              '<br><strong id="housing">housing:</strong> ' + housing_cpih + '% in ' + displayDate);
+              '<br><strong id="housing">housing:</strong> ' + housing_cpih + '% in ' + displayDate +
+              '<br><strong id="furniture">furniture:</strong> ' + furniture_cpih + '% in ' + displayDate +
+              '<br><strong id="health">health:</strong> ' + health_cpih + '% in ' + displayDate +
+              '<br><strong id="transport">transport:</strong> ' + transport_cpih + '% in ' + displayDate +
+              '<br><strong id="communication">communication:</strong> ' + communication_cpih + '% in ' + displayDate +
+              '<br><strong id="recreation">recreation:</strong> ' + recreation_cpih + '% in ' + displayDate);
         }
 
         function mouseMove(d) {
@@ -590,6 +828,374 @@
       }
     });
   });
+
+  // REAL INCOME
+  // $(document).on('submit', '#indicator_form_income', function(e) {
+  //   e.preventDefault();
+  //
+  //   $.ajax({
+  //     url: "/data/inflation/",
+  //     type: "POST", // or "get"
+  //     data: {
+  //       years: $('#select_dropdown').val(),
+  //       csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+  //     },
+  //     success: function inflation_graph(inflation) {
+  //
+  //       svg.selectAll('#tags')
+  //         .remove()
+  //
+  //       svg.append("text")
+  //         .attr("id", "tags")
+  //         .attr("transform", "rotate(-90)")
+  //         .attr("y", 10 - margin.left)
+  //         .attr("x", 0 - (height / 2))
+  //         .attr("dy", "1em")
+  //         .style("text-anchor", "middle")
+  //         .text("Monthly annual rate inflation %")
+  //
+  //       svg.append("text")
+  //         .attr("id", "tags")
+  //         .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+  //         .style("text-anchor", "middle")
+  //         .text("Months");
+  //
+  //       var dateParse = d3.timeParse('%Y %b');
+  //       var tooltipFormat = d3.timeFormat('%Y %b');
+  //
+  //
+  //       x.domain(d3.extent(inflation, function(d) {
+  //         return dateParse(d.date);
+  //       }));
+  //
+  //       y.domain(d3.extent(
+  //         [].concat(inflation.map(function(d) {
+  //           return parseFloat(d.food);
+  //         }), inflation.map(function(d) {
+  //           return parseFloat(d.alcohol);
+  //         }), inflation.map(function(d) {
+  //           return parseFloat(d.clothing);
+  //         }), inflation.map(function(d) {
+  //           return parseFloat(d.cpih);
+  //         }), inflation.map(function(d) {
+  //           return parseFloat(d.housing);
+  //         }), inflation.map(function(d) {
+  //           return parseFloat(d.furniture);
+  //         }))));
+  //
+  //       // y.domain(d3.extent(inflation, function(d) {
+  //       //   return parseFloat(d.alcohol);
+  //       // }));
+  //
+  //       var line = d3.line()
+  //         .curve(d3.curveCatmullRom)
+  //         .x(function(d) {
+  //           return x(dateParse(d.date));
+  //         })
+  //         .y(function(d) {
+  //           return y(d.cpih);
+  //         });
+  //
+  //       var line_food = d3.line()
+  //         .curve(d3.curveCatmullRom)
+  //         .x(function(d) {
+  //           return x(dateParse(d.date));
+  //         })
+  //         .y(function(d) {
+  //           return y(d.food);
+  //         });
+  //
+  //       var line_alcohol = d3.line()
+  //         .curve(d3.curveCatmullRom)
+  //         .x(function(d) {
+  //           return x(dateParse(d.date));
+  //         })
+  //         .y(function(d) {
+  //           return y(d.alcohol);
+  //         });
+  //
+  //       var line_clothing = d3.line()
+  //         .curve(d3.curveCatmullRom)
+  //         .x(function(d) {
+  //           return x(dateParse(d.date));
+  //         })
+  //         .y(function(d) {
+  //           return y(d.clothing);
+  //         });
+  //
+  //       var line_housing = d3.line()
+  //         .curve(d3.curveCatmullRom)
+  //         .x(function(d) {
+  //           return x(dateParse(d.date));
+  //         })
+  //         .y(function(d) {
+  //           return y(d.housing);
+  //         });
+  //
+  //       var line_furniture = d3.line()
+  //         .curve(d3.curveCatmullRom)
+  //         .x(function(d) {
+  //           return x(dateParse(d.date));
+  //         })
+  //         .y(function(d) {
+  //           return y(d.furniture);
+  //         });
+  //
+  //       var lines = svg.selectAll('.line')
+  //         .remove()
+  //         .exit()
+  //         .data([inflation]);
+  //
+  //       var lines = svg.selectAll('.line_cpih')
+  //         .remove()
+  //         .exit()
+  //         .data([inflation]);
+  //
+  //       var lines_s = svg.selectAll('.line_food')
+  //         .remove()
+  //         .exit()
+  //         .data([inflation]);
+  //
+  //       var lines_p = svg.selectAll('.line_alcohol')
+  //         .remove()
+  //         .exit()
+  //         .data([inflation]);
+  //
+  //       var lines_m = svg.selectAll('.line_clothing')
+  //         .remove()
+  //         .exit()
+  //         .data([inflation]);
+  //
+  //       var lines_c = svg.selectAll('.line_housing')
+  //         .remove()
+  //         .exit()
+  //         .data([inflation]);
+  //
+  //       var lines_f = svg.selectAll('.line_furniture')
+  //         .remove()
+  //         .exit()
+  //         .data([inflation]);
+  //
+  //       lines
+  //         .enter()
+  //         .append('path')
+  //         .attr('class', 'line_cpih')
+  //         .attr('fill', 'none')
+  //         .attr('d', line);
+  //
+  //       lines_s
+  //         .enter()
+  //         .append('path')
+  //         .attr('class', 'line_food')
+  //         .attr('fill', 'none')
+  //         .attr('d', line_food);
+  //
+  //       lines_p
+  //         .enter()
+  //         .append('path')
+  //         .attr('class', 'line_alcohol')
+  //         .attr('fill', 'none')
+  //         .attr('d', line_alcohol);
+  //
+  //       lines_m
+  //         .enter()
+  //         .append('path')
+  //         .attr('class', 'line_clothing')
+  //         .attr('fill', 'none')
+  //         .attr('d', line_clothing);
+  //
+  //       lines_c
+  //         .enter()
+  //         .append('path')
+  //         .attr('class', 'line_housing')
+  //         .attr('fill', 'none')
+  //         .attr('d', line_housing);
+  //
+  //       lines_c
+  //         .enter()
+  //         .append('path')
+  //         .attr('class', 'line_furniture')
+  //         .attr('fill', 'none')
+  //         .attr('d', line_furniture);
+  //
+  //       var points = svg.selectAll('.point')
+  //         .remove()
+  //         .exit()
+  //         .data(inflation);
+  //
+  //       var points_s = svg.selectAll('.point')
+  //         .remove()
+  //         .exit()
+  //         .data(inflation);
+  //
+  //       var points_p = svg.selectAll('.point')
+  //         .remove()
+  //         .exit()
+  //         .data(inflation);
+  //
+  //       var points_m = svg.selectAll('.point')
+  //         .remove()
+  //         .exit()
+  //         .data(inflation);
+  //
+  //       var points_c = svg.selectAll('.point')
+  //         .remove()
+  //         .exit()
+  //         .data(inflation);
+  //
+  //       points
+  //         .enter()
+  //         .append('circle')
+  //         .attr('class', 'point')
+  //         .attr('r', 2.5)
+  //         .attr('cx', function(inflation) {
+  //           return x(dateParse(inflation.date));
+  //         })
+  //         .attr('cy', function(inflation) {
+  //           return y(inflation.cpih);
+  //         })
+  //         .attr('fill', 'blue')
+  //         .attr('opacity', 1)
+  //         .on('mouseover', mouseOver)
+  //         .on('mousemove', mouseMove)
+  //         .on('mouseout', mouseOut);
+  //
+  //       points_s
+  //         .enter()
+  //         .append('circle')
+  //         .attr('class', 'point')
+  //         .attr('r', 2.5)
+  //         .attr('cx', function(inflation) {
+  //           return x(dateParse(inflation.date));
+  //         })
+  //         .attr('cy', function(inflation) {
+  //           return y(inflation.food);
+  //         })
+  //         .attr('fill', 'red')
+  //         .attr('opacity', 1)
+  //         .on('mouseover', mouseOver)
+  //         .on('mousemove', mouseMove)
+  //         .on('mouseout', mouseOut);
+  //
+  //       points_p
+  //         .enter()
+  //         .append('circle')
+  //         .attr('class', 'point')
+  //         .attr('r', 2.5)
+  //         .attr('cx', function(inflation) {
+  //           return x(dateParse(inflation.date));
+  //         })
+  //         .attr('cy', function(inflation) {
+  //           return y(inflation.alcohol);
+  //         })
+  //         .attr('fill', 'orange')
+  //         .attr('opacity', 1)
+  //         .on('mouseover', mouseOver)
+  //         .on('mousemove', mouseMove)
+  //         .on('mouseout', mouseOut);
+  //
+  //       points_m
+  //         .enter()
+  //         .append('circle')
+  //         .attr('class', 'point')
+  //         .attr('r', 2.5)
+  //         .attr('cx', function(inflation) {
+  //           return x(dateParse(inflation.date));
+  //         })
+  //         .attr('cy', function(inflation) {
+  //           return y(inflation.clothing);
+  //         })
+  //         .attr('fill', 'green')
+  //         .attr('opacity', 1)
+  //         .on('mouseover', mouseOver)
+  //         .on('mousemove', mouseMove)
+  //         .on('mouseout', mouseOut);
+  //
+  //       points_c
+  //         .enter()
+  //         .append('circle')
+  //         .attr('class', 'point')
+  //         .attr('r', 2.5)
+  //         .attr('cx', function(inflation) {
+  //           return x(dateParse(inflation.date));
+  //         })
+  //         .attr('cy', function(inflation) {
+  //           return y(inflation.housing);
+  //         })
+  //         .attr('fill', 'black')
+  //         .attr('opacity', 1)
+  //         .on('mouseover', mouseOver)
+  //         .on('mousemove', mouseMove)
+  //         .on('mouseout', mouseOut);
+  //
+  //       points_f
+  //         .enter()
+  //         .append('circle')
+  //         .attr('class', 'point')
+  //         .attr('r', 2.5)
+  //         .attr('cx', function(inflation) {
+  //           return x(dateParse(inflation.date));
+  //         })
+  //         .attr('cy', function(inflation) {
+  //           return y(inflation.furniture);
+  //         })
+  //         .attr('fill', 'purple')
+  //         .attr('opacity', 1)
+  //         .on('mouseover', mouseOver)
+  //         .on('mousemove', mouseMove)
+  //         .on('mouseout', mouseOut);
+  //
+  //       svg.select('.x.axis')
+  //         .call(x_axis)
+  //         .selectAll('text')
+  //         .attr('transform', 'rotate(30)')
+  //         .attr('y', '10')
+  //         .attr('x', '0')
+  //         .style("text-anchor", "start");
+  //
+  //       svg.select('.y.axis')
+  //         .call(y_axis)
+  //
+  //       function mouseOver(d) {
+  //         var date = dateParse(d.date);
+  //         var displayDate = tooltipFormat(date)
+  //         var cpih_function = d.cpih;
+  //         var food_cpih = d.food;
+  //         var alcohol_cpih = d.alcohol;
+  //         var clothing_cpih = d.clothing;
+  //         var housing_cpih = d.housing;
+  //         var furniture_cpih = d.furniture;
+  //
+  //         d3.select(this)
+  //           .transition()
+  //           .style('opacity', 1);
+  //
+  //         tooltip
+  //           .style('display', null)
+  //           .html('<p><strong id="cpih">Inflation:</strong> ' + cpih_function + '% in ' + displayDate + '<br><strong id="food">food:</strong> ' + food_cpih + '% in ' + displayDate +
+  //             '<br><strong id="alcohol">alcohol:</strong> ' + alcohol_cpih + '% in ' + displayDate + '<br><strong id="clothing">clothing:</strong> ' + clothing_cpih + '% in ' + displayDate +
+  //             '<br><strong id="housing">housing:</strong> ' + housing_cpih + '% in ' + displayDate +
+  //             '<br><strong id="furniture">furniture:</strong> ' + furniture_cpih + '% in ' + displayDate);
+  //       }
+  //
+  //       function mouseMove(d) {
+  //         tooltip
+  //           .style('top', (d3.event.pageY - 20) + "px")
+  //           .style('left', (d3.event.pageX + 20) + "px");
+  //       }
+  //
+  //       function mouseOut(d) {
+  //         d3.select(this)
+  //           .transition()
+  //           .style('opacity', 1);
+  //
+  //         tooltip
+  //           .style('display', 'none');
+  //
+  //       }
+  //     }
+  //   });
+  // });
 </script>
 
 </html>

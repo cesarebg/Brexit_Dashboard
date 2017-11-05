@@ -198,6 +198,16 @@ def inflation_data(request):
         clothing_json = json.loads(clothing_data.content)
         housing_data = requests.get('https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/l55s/mm23/data')
         housing_json = json.loads(housing_data.content)
+        furniture_data = requests.get('https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/l55t/mm23/data')
+        furniture_json = json.loads(furniture_data.content)
+        health_data = requests.get('https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/l55u/mm23/data')
+        health_json = json.loads(health_data.content)
+        transport_data = requests.get('https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/l55v/mm23/data')
+        transport_json = json.loads(transport_data.content)
+        communication_data = requests.get('https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/l55w/mm23/data')
+        communication_json = json.loads(communication_data.content)
+        recreation_data = requests.get('https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/l55x/mm23/data')
+        recreation_json = json.loads(recreation_data.content)
         growthData = {}
         data_input = 'months'
         date_input = request.POST.get('years')
@@ -223,6 +233,26 @@ def inflation_data(request):
                 cpih_json[data_input][data_m]['housing'] = housing_json[data_input][data_m]['value']
                 cpih_json[data_input][data_m]['alt-date-m'] = housing_json[data_input][data_m]['date']
 
+        for data_m in range(len(furniture_json[data_input])):
+                cpih_json[data_input][data_m]['furniture'] = furniture_json[data_input][data_m]['value']
+                cpih_json[data_input][data_m]['alt-date-m'] = furniture_json[data_input][data_m]['date']
+
+        for data_m in range(len(health_json[data_input])):
+                cpih_json[data_input][data_m]['health'] = health_json[data_input][data_m]['value']
+                cpih_json[data_input][data_m]['alt-date-m'] = health_json[data_input][data_m]['date']
+
+        for data_m in range(len(transport_json[data_input])):
+                cpih_json[data_input][data_m]['transport'] = transport_json[data_input][data_m]['value']
+                cpih_json[data_input][data_m]['alt-date-m'] = transport_json[data_input][data_m]['date']
+
+        for data_m in range(len(communication_json[data_input])):
+                cpih_json[data_input][data_m]['communication'] = communication_json[data_input][data_m]['value']
+                cpih_json[data_input][data_m]['alt-date-m'] = communication_json[data_input][data_m]['date']
+
+        for data_m in range(len(recreation_json[data_input])):
+                cpih_json[data_input][data_m]['recreation'] = recreation_json[data_input][data_m]['value']
+                cpih_json[data_input][data_m]['alt-date-m'] = recreation_json[data_input][data_m]['date']
+
         for data in cpih_json[data_input][input_int:]:
                 growthData['date'] = data['date']
                 growthData['cpih'] = data['cpih']
@@ -230,6 +260,11 @@ def inflation_data(request):
                 growthData['alcohol'] = data['alcohol']
                 growthData['clothing'] = data['clothing']
                 growthData['housing'] = data['housing']
+                growthData['furniture'] = data['furniture']
+                growthData['health'] = data['health']
+                growthData['transport'] = data['transport']
+                growthData['communication'] = data['communication']
+                growthData['recreation'] = data['recreation']
                 # growthData['alt-date'] = data['alt-date']
                 # growthData['alt-date-m'] = data['alt-date-m']
                 # growthData['alt-date-s'] = data['alt-date-s']

@@ -200,7 +200,18 @@ section {
   width: 300px;
 }
 
-#Brexit_vote {
+.indicator_botton:hover {
+  display: inline-block;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+  color: white;
+  padding: 10px;
+  margin: 20px 0px 20px 100px;
+  width: 200px;
+  background-color: rgb(251, 16, 0);
+}
+
+.indicator_botton {
   display: inline-block;
   font-family: 'Roboto Mono';
   font-size: 14px;
@@ -283,6 +294,36 @@ footer {
   stroke-width: 2px;
 }
 
+.line_furniture {
+  fill: none;
+  stroke: purple;
+  stroke-width: 2px;
+}
+
+.line_health {
+  fill: none;
+  stroke: yellow;
+  stroke-width: 2px;
+}
+
+.line_transport {
+  fill: none;
+  stroke: brown;
+  stroke-width: 2px;
+}
+
+.line_communication {
+  fill: none;
+  stroke: grey;
+  stroke-width: 2px;
+}
+
+.line_recreation {
+  fill: none;
+  stroke: gold;
+  stroke-width: 2px;
+}
+
 .tooltip {
   position: absolute;
 }
@@ -300,11 +341,11 @@ footer {
 }
 
 #food, #services {
-  color:orange;
+  color:red;
 }
 
 #production, #alcohol {
-  color:red;
+  color:orange;
 }
 
 #manufacturing, #clothing {
@@ -313,6 +354,26 @@ footer {
 
 #construction, #housing {
   color:black;
+}
+
+#furniture {
+  color:purple;
+}
+
+#health {
+  color:yellow;
+}
+
+#transport {
+  color:brown;
+}
+
+#communication {
+  color:grey;
+}
+
+#recreation {
+  color:gold;
 }
 
 .grid line {
