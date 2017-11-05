@@ -13,7 +13,7 @@
 
 <body>
   <div class="inflation_header">
-    <h2 class="article_title">Uncertainty hurts UK's consumers</h2>
+    <h2 class="article_title">Inflation and real income drop put pressure on consumers</h2>
     <img src="/static/dashboard/img/tenner_medium.jpg" id="front_image_inflation"></div>
     <div id="vis_inflation"></div>
   </div>
@@ -28,14 +28,14 @@
       {% csrf_token %}
       <br>
       <select type="text" name="years" id="select_dropdown">
-        <option value="24">2008</option>
-        <option value="120">2016</option>
+        <option value="24">Since the financial crisis</option>
+        <option value="120">After the Brexit vote</option>
       </select>
       <br>
       <!-- Botton -->
       <!-- <button id="Brexit_vote" name="years" value="211" type="botton">Growth since Brexit vote</button> -->
       <!-- Dropdown -->
-      <button id="Brexit_vote" type="botton">Growth since Brexit vote</button>
+      <button id="Brexit_vote" type="botton">Inflation</button>
     </form>
   </div>
   <article>
@@ -45,7 +45,6 @@
 <script src="{% static 'dashboard/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <script>
   var inflation = {{ inflation_json | safe }}
-  console.log(inflation)
 
   var margin = {
     top: 50,
@@ -213,14 +212,14 @@
     .enter()
     .append('circle')
     .attr('class', 'point')
-    .attr('r', 3)
+    .attr('r', 2.5)
     .attr('cx', function(inflation) {
       return x(dateParse(inflation.date));
     })
     .attr('cy', function(inflation) {
       return y(inflation.value);
     })
-    .attr('fill', 'black')
+    .attr('fill', 'blue')
     .attr('opacity', 1)
     .on('mouseover', mouseOver)
     .on('mousemove', mouseMove)
@@ -305,13 +304,22 @@
           return dateParse(d.date);
         }));
 
-        y.domain(d3.extent(inflation, function(d) {
-          return parseFloat(d.alcohol);
-        }));
+        y.domain(d3.extent(
+             [].concat(inflation.map(function(d) {
+                      return parseFloat(d.food);
+                  }), inflation.map(function (d) {
+                      return parseFloat(d.alcohol);
+                  }), inflation.map(function (d) {
+                      return parseFloat(d.clothing);
+                  }), inflation.map(function (d) {
+                      return parseFloat(d.cpih);
+                  }), inflation.map(function (d) {
+                      return parseFloat(d.housing);
+                  }))));
 
-        y.domain(d3.extent(inflation, function(d) {
-          return parseFloat(d.alcohol);
-        }));
+        // y.domain(d3.extent(inflation, function(d) {
+        //   return parseFloat(d.alcohol);
+        // }));
 
         var line = d3.line()
           .curve(d3.curveCatmullRom)
@@ -452,14 +460,14 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
-          .attr('r', 3)
+          .attr('r', 2.5)
           .attr('cx', function(inflation) {
             return x(dateParse(inflation.date));
           })
           .attr('cy', function(inflation) {
             return y(inflation.cpih);
           })
-          .attr('fill', 'black')
+          .attr('fill', 'blue')
           .attr('opacity', 1)
           .on('mouseover', mouseOver)
           .on('mousemove', mouseMove)
@@ -469,14 +477,14 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
-          .attr('r', 3)
+          .attr('r', 2.5)
           .attr('cx', function(inflation) {
             return x(dateParse(inflation.date));
           })
           .attr('cy', function(inflation) {
             return y(inflation.food);
           })
-          .attr('fill', 'black')
+          .attr('fill', 'red')
           .attr('opacity', 1)
           .on('mouseover', mouseOver)
           .on('mousemove', mouseMove)
@@ -486,14 +494,14 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
-          .attr('r', 3)
+          .attr('r', 2.5)
           .attr('cx', function(inflation) {
             return x(dateParse(inflation.date));
           })
           .attr('cy', function(inflation) {
             return y(inflation.alcohol);
           })
-          .attr('fill', 'black')
+          .attr('fill', 'orange')
           .attr('opacity', 1)
           .on('mouseover', mouseOver)
           .on('mousemove', mouseMove)
@@ -503,14 +511,14 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
-          .attr('r', 3)
+          .attr('r', 2.5)
           .attr('cx', function(inflation) {
             return x(dateParse(inflation.date));
           })
           .attr('cy', function(inflation) {
             return y(inflation.clothing);
           })
-          .attr('fill', 'black')
+          .attr('fill', 'green')
           .attr('opacity', 1)
           .on('mouseover', mouseOver)
           .on('mousemove', mouseMove)
@@ -520,7 +528,7 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
-          .attr('r', 3)
+          .attr('r', 2.5)
           .attr('cx', function(inflation) {
             return x(dateParse(inflation.date));
           })

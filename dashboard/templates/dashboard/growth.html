@@ -13,7 +13,7 @@
 
 <body>
   <div class="inflation_header">
-    <h2 class="article_title">Brexit slowdowns economic outlook</h2>
+    <h2 class="article_title">Brexit slashed the EU, but also harmed UK growth</h2>
     <img src="/static/dashboard/img/carney_medium.jpg" id="front_image_growth"></div>
     <div id="vis_growth"></div>
   </div>
@@ -28,14 +28,14 @@
       {% csrf_token %}
       <br>
       <select type="text" name="years" id="select_dropdown">
-        <option value="211">2008</option>
-        <option value="243">2016</option>
+        <option value="211">Since the financial crisis</option>
+        <option value="243">After the Brexit vote</option>
       </select>
-      <br>
       <!-- Botton -->
       <!-- <button id="Brexit_vote" name="years" value="211" type="botton">Growth since Brexit vote</button> -->
       <!-- Dropdown -->
-      <button id="Brexit_vote" type="botton">Growth since Brexit vote</button>
+      <br>
+      <button id="Brexit_vote" type="botton">Click to obtain data</button>
     </form>
   </div>
       <article>
@@ -243,7 +243,7 @@
     .attr('cy', function(growth) {
       return y(growth.value);
     })
-    .attr('fill', 'black')
+    .attr('fill', 'blue')
     .attr('opacity', 1)
     .on('mouseover', mouseOver)
     .on('mousemove', mouseMove)
@@ -439,7 +439,6 @@
           .enter()
           .append('path')
           .attr('class', 'line')
-          .attr("id", "blueLine") //Toggle
           .attr('fill', 'none')
           .attr('d', line);
 
@@ -500,14 +499,14 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
-          .attr('r', 3)
+          .attr('r', 2.5)
           .attr('cx', function(growth) {
             return x(dateParse(growth.date));
           })
           .attr('cy', function(growth) {
             return y(growth.value);
           })
-          .attr('fill', 'black')
+          .attr('fill', 'blue')
           .attr('opacity', 1)
           .on('mouseover', mouseOver)
           .on('mousemove', mouseMove)
@@ -517,14 +516,14 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
-          .attr('r', 3)
+          .attr('r', 2.5)
           .attr('cx', function(growth) {
             return x(dateParse(growth.date));
           })
           .attr('cy', function(growth) {
             return y(growth.services);
           })
-          .attr('fill', 'black')
+          .attr('fill', 'red')
           .attr('opacity', 1)
           .on('mouseover', mouseOver)
           .on('mousemove', mouseMove)
@@ -534,14 +533,14 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
-          .attr('r', 3)
+          .attr('r', 2.5)
           .attr('cx', function(growth) {
             return x(dateParse(growth.date));
           })
           .attr('cy', function(growth) {
             return y(growth.production);
           })
-          .attr('fill', 'black')
+          .attr('fill', 'orange')
           .attr('opacity', 1)
           .on('mouseover', mouseOver)
           .on('mousemove', mouseMove)
@@ -551,14 +550,14 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
-          .attr('r', 3)
+          .attr('r', 2.5)
           .attr('cx', function(growth) {
             return x(dateParse(growth.date));
           })
           .attr('cy', function(growth) {
             return y(growth.manufacturing);
           })
-          .attr('fill', 'black')
+          .attr('fill', 'green')
           .attr('opacity', 1)
           .on('mouseover', mouseOver)
           .on('mousemove', mouseMove)
@@ -568,7 +567,7 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
-          .attr('r', 3)
+          .attr('r', 2.5)
           .attr('cx', function(growth) {
             return x(dateParse(growth.date));
           })

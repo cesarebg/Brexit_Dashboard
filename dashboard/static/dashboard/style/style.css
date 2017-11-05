@@ -191,6 +191,26 @@ section {
   z-index: -1;
 }
 
+#select_dropdown {
+  display: inline-block;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+  padding: 10px;
+  margin: 20px 0px 20px 100px;
+  width: 300px;
+}
+
+#Brexit_vote {
+  display: inline-block;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+  color: white;
+  padding: 10px;
+  margin: 20px 0px 20px 100px;
+  width: 200px;
+  background-color: rgb(10, 35, 66);
+}
+
 article p {
   width: 640px;
   font-size: 16px;
