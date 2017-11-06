@@ -34,9 +34,9 @@
       <button class="indicator_botton" id="inflation_button" type="botton">Inflation</button>
     </form>
     <!-- Botton -->
-    <form method="post" action="/indicators/inflation/" id="indicator_form_income">
+    <form method="post" action="/data/productivity/" id="productivity">
       {% csrf_token %}
-      <button class="indicator_botton" id="income_button" name="years" value="120" type="botton">Real Income</button>
+      <button class="indicator_botton" id="productivity_button" type="botton">Productivity</button>
     </form>
   </div>
   <article>
@@ -128,6 +128,9 @@
   svg.append('g')
     .attr('class', 'y axis')
 
+  svg.selectAll('#tags')
+    .remove()
+
   svg.append("text")
     .attr("id", "tags")
     .attr("transform", "rotate(-90)")
@@ -139,10 +142,11 @@
 
   svg.append("text")
     .attr("x", (width / 2))
+    .attr("id", "tags")
     .attr("y", 0 - (margin.top / 2))
     .attr("text-anchor", "middle")
     .style("font-size", "18px")
-    .text("Inflation spiked in most components");
+    .text("Inflation spiked after the Brexit vote");
 
   function make_x_gridlines() {
     return d3.axisBottom(x)
@@ -197,6 +201,7 @@
     .enter()
     .append('path')
     .attr('class', 'line')
+    .attr("id", "tags")
     .attr('fill', 'none')
     .attr('d', line);
 
@@ -248,7 +253,7 @@
 
     tooltip
       .style('display', null)
-      .html('<p>UK inflation was ' + value_function + ' in ' + displayDate + '</p>');
+      .html('<p>UK inflation was ' + value_function + ' in ' + displayDate + '<br/>Source: ONS' + '</p>');
   }
 
   function mouseMove(d) {
@@ -282,6 +287,14 @@
 
         svg.selectAll('#tags')
           .remove()
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("x", (width / 2))
+          .attr("y", 0 - (margin.top / 2))
+          .attr("text-anchor", "middle")
+          .style("font-size", "18px")
+          .text("Inflation increased in most components");
 
         svg.append("text")
           .attr("id", "tags")
@@ -423,6 +436,10 @@
             return y(d.recreation);
           });
 
+        // var remove_lines = svg.selectAll('#lines')
+        //   .remove()
+        //   .exit()
+
         var lines = svg.selectAll('.line')
           .remove()
           .exit()
@@ -483,6 +500,7 @@
           .enter()
           .append('path')
           .attr('class', 'line_cpih')
+          .attr("id", "tags")
           .attr('fill', 'none')
           .attr('d', line);
 
@@ -490,6 +508,7 @@
           .enter()
           .append('path')
           .attr('class', 'line_food')
+          .attr("id", "tags")
           .attr('fill', 'none')
           .attr('d', line_food);
 
@@ -497,6 +516,7 @@
           .enter()
           .append('path')
           .attr('class', 'line_alcohol')
+          .attr("id", "tags")
           .attr('fill', 'none')
           .attr('d', line_alcohol);
 
@@ -504,6 +524,7 @@
           .enter()
           .append('path')
           .attr('class', 'line_clothing')
+          .attr("id", "tags")
           .attr('fill', 'none')
           .attr('d', line_clothing);
 
@@ -511,6 +532,7 @@
           .enter()
           .append('path')
           .attr('class', 'line_housing')
+          .attr("id", "tags")
           .attr('fill', 'none')
           .attr('d', line_housing);
 
@@ -518,6 +540,7 @@
           .enter()
           .append('path')
           .attr('class', 'line_furniture')
+          .attr("id", "tags")
           .attr('fill', 'none')
           .attr('d', line_furniture);
 
@@ -525,6 +548,7 @@
           .enter()
           .append('path')
           .attr('class', 'line_health')
+          .attr("id", "tags")
           .attr('fill', 'none')
           .attr('d', line_health);
 
@@ -532,6 +556,7 @@
           .enter()
           .append('path')
           .attr('class', 'line_transport')
+          .attr("id", "tags")
           .attr('fill', 'none')
           .attr('d', line_transport);
 
@@ -539,6 +564,7 @@
           .enter()
           .append('path')
           .attr('class', 'line_communication')
+          .attr("id", "tags")
           .attr('fill', 'none')
           .attr('d', line_communication);
 
@@ -546,6 +572,7 @@
           .enter()
           .append('path')
           .attr('class', 'line_recreation')
+          .attr("id", "tags")
           .attr('fill', 'none')
           .attr('d', line_recreation);
 
@@ -807,7 +834,7 @@
               '<br><strong id="health">health:</strong> ' + health_cpih + '% in ' + displayDate +
               '<br><strong id="transport">transport:</strong> ' + transport_cpih + '% in ' + displayDate +
               '<br><strong id="communication">communication:</strong> ' + communication_cpih + '% in ' + displayDate +
-              '<br><strong id="recreation">recreation:</strong> ' + recreation_cpih + '% in ' + displayDate);
+              '<br><strong id="recreation">recreation:</strong> ' + recreation_cpih + '% in ' + displayDate + '<br/>Source: ONS');
         }
 
         function mouseMove(d) {
@@ -829,373 +856,293 @@
     });
   });
 
-  // REAL INCOME
-  // $(document).on('submit', '#indicator_form_income', function(e) {
-  //   e.preventDefault();
-  //
-  //   $.ajax({
-  //     url: "/data/inflation/",
-  //     type: "POST", // or "get"
-  //     data: {
-  //       years: $('#select_dropdown').val(),
-  //       csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-  //     },
-  //     success: function inflation_graph(inflation) {
-  //
-  //       svg.selectAll('#tags')
-  //         .remove()
-  //
-  //       svg.append("text")
-  //         .attr("id", "tags")
-  //         .attr("transform", "rotate(-90)")
-  //         .attr("y", 10 - margin.left)
-  //         .attr("x", 0 - (height / 2))
-  //         .attr("dy", "1em")
-  //         .style("text-anchor", "middle")
-  //         .text("Monthly annual rate inflation %")
-  //
-  //       svg.append("text")
-  //         .attr("id", "tags")
-  //         .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
-  //         .style("text-anchor", "middle")
-  //         .text("Months");
-  //
-  //       var dateParse = d3.timeParse('%Y %b');
-  //       var tooltipFormat = d3.timeFormat('%Y %b');
-  //
-  //
-  //       x.domain(d3.extent(inflation, function(d) {
-  //         return dateParse(d.date);
-  //       }));
-  //
-  //       y.domain(d3.extent(
-  //         [].concat(inflation.map(function(d) {
-  //           return parseFloat(d.food);
-  //         }), inflation.map(function(d) {
-  //           return parseFloat(d.alcohol);
-  //         }), inflation.map(function(d) {
-  //           return parseFloat(d.clothing);
-  //         }), inflation.map(function(d) {
-  //           return parseFloat(d.cpih);
-  //         }), inflation.map(function(d) {
-  //           return parseFloat(d.housing);
-  //         }), inflation.map(function(d) {
-  //           return parseFloat(d.furniture);
-  //         }))));
-  //
-  //       // y.domain(d3.extent(inflation, function(d) {
-  //       //   return parseFloat(d.alcohol);
-  //       // }));
-  //
-  //       var line = d3.line()
-  //         .curve(d3.curveCatmullRom)
-  //         .x(function(d) {
-  //           return x(dateParse(d.date));
-  //         })
-  //         .y(function(d) {
-  //           return y(d.cpih);
-  //         });
-  //
-  //       var line_food = d3.line()
-  //         .curve(d3.curveCatmullRom)
-  //         .x(function(d) {
-  //           return x(dateParse(d.date));
-  //         })
-  //         .y(function(d) {
-  //           return y(d.food);
-  //         });
-  //
-  //       var line_alcohol = d3.line()
-  //         .curve(d3.curveCatmullRom)
-  //         .x(function(d) {
-  //           return x(dateParse(d.date));
-  //         })
-  //         .y(function(d) {
-  //           return y(d.alcohol);
-  //         });
-  //
-  //       var line_clothing = d3.line()
-  //         .curve(d3.curveCatmullRom)
-  //         .x(function(d) {
-  //           return x(dateParse(d.date));
-  //         })
-  //         .y(function(d) {
-  //           return y(d.clothing);
-  //         });
-  //
-  //       var line_housing = d3.line()
-  //         .curve(d3.curveCatmullRom)
-  //         .x(function(d) {
-  //           return x(dateParse(d.date));
-  //         })
-  //         .y(function(d) {
-  //           return y(d.housing);
-  //         });
-  //
-  //       var line_furniture = d3.line()
-  //         .curve(d3.curveCatmullRom)
-  //         .x(function(d) {
-  //           return x(dateParse(d.date));
-  //         })
-  //         .y(function(d) {
-  //           return y(d.furniture);
-  //         });
-  //
-  //       var lines = svg.selectAll('.line')
-  //         .remove()
-  //         .exit()
-  //         .data([inflation]);
-  //
-  //       var lines = svg.selectAll('.line_cpih')
-  //         .remove()
-  //         .exit()
-  //         .data([inflation]);
-  //
-  //       var lines_s = svg.selectAll('.line_food')
-  //         .remove()
-  //         .exit()
-  //         .data([inflation]);
-  //
-  //       var lines_p = svg.selectAll('.line_alcohol')
-  //         .remove()
-  //         .exit()
-  //         .data([inflation]);
-  //
-  //       var lines_m = svg.selectAll('.line_clothing')
-  //         .remove()
-  //         .exit()
-  //         .data([inflation]);
-  //
-  //       var lines_c = svg.selectAll('.line_housing')
-  //         .remove()
-  //         .exit()
-  //         .data([inflation]);
-  //
-  //       var lines_f = svg.selectAll('.line_furniture')
-  //         .remove()
-  //         .exit()
-  //         .data([inflation]);
-  //
-  //       lines
-  //         .enter()
-  //         .append('path')
-  //         .attr('class', 'line_cpih')
-  //         .attr('fill', 'none')
-  //         .attr('d', line);
-  //
-  //       lines_s
-  //         .enter()
-  //         .append('path')
-  //         .attr('class', 'line_food')
-  //         .attr('fill', 'none')
-  //         .attr('d', line_food);
-  //
-  //       lines_p
-  //         .enter()
-  //         .append('path')
-  //         .attr('class', 'line_alcohol')
-  //         .attr('fill', 'none')
-  //         .attr('d', line_alcohol);
-  //
-  //       lines_m
-  //         .enter()
-  //         .append('path')
-  //         .attr('class', 'line_clothing')
-  //         .attr('fill', 'none')
-  //         .attr('d', line_clothing);
-  //
-  //       lines_c
-  //         .enter()
-  //         .append('path')
-  //         .attr('class', 'line_housing')
-  //         .attr('fill', 'none')
-  //         .attr('d', line_housing);
-  //
-  //       lines_c
-  //         .enter()
-  //         .append('path')
-  //         .attr('class', 'line_furniture')
-  //         .attr('fill', 'none')
-  //         .attr('d', line_furniture);
-  //
-  //       var points = svg.selectAll('.point')
-  //         .remove()
-  //         .exit()
-  //         .data(inflation);
-  //
-  //       var points_s = svg.selectAll('.point')
-  //         .remove()
-  //         .exit()
-  //         .data(inflation);
-  //
-  //       var points_p = svg.selectAll('.point')
-  //         .remove()
-  //         .exit()
-  //         .data(inflation);
-  //
-  //       var points_m = svg.selectAll('.point')
-  //         .remove()
-  //         .exit()
-  //         .data(inflation);
-  //
-  //       var points_c = svg.selectAll('.point')
-  //         .remove()
-  //         .exit()
-  //         .data(inflation);
-  //
-  //       points
-  //         .enter()
-  //         .append('circle')
-  //         .attr('class', 'point')
-  //         .attr('r', 2.5)
-  //         .attr('cx', function(inflation) {
-  //           return x(dateParse(inflation.date));
-  //         })
-  //         .attr('cy', function(inflation) {
-  //           return y(inflation.cpih);
-  //         })
-  //         .attr('fill', 'blue')
-  //         .attr('opacity', 1)
-  //         .on('mouseover', mouseOver)
-  //         .on('mousemove', mouseMove)
-  //         .on('mouseout', mouseOut);
-  //
-  //       points_s
-  //         .enter()
-  //         .append('circle')
-  //         .attr('class', 'point')
-  //         .attr('r', 2.5)
-  //         .attr('cx', function(inflation) {
-  //           return x(dateParse(inflation.date));
-  //         })
-  //         .attr('cy', function(inflation) {
-  //           return y(inflation.food);
-  //         })
-  //         .attr('fill', 'red')
-  //         .attr('opacity', 1)
-  //         .on('mouseover', mouseOver)
-  //         .on('mousemove', mouseMove)
-  //         .on('mouseout', mouseOut);
-  //
-  //       points_p
-  //         .enter()
-  //         .append('circle')
-  //         .attr('class', 'point')
-  //         .attr('r', 2.5)
-  //         .attr('cx', function(inflation) {
-  //           return x(dateParse(inflation.date));
-  //         })
-  //         .attr('cy', function(inflation) {
-  //           return y(inflation.alcohol);
-  //         })
-  //         .attr('fill', 'orange')
-  //         .attr('opacity', 1)
-  //         .on('mouseover', mouseOver)
-  //         .on('mousemove', mouseMove)
-  //         .on('mouseout', mouseOut);
-  //
-  //       points_m
-  //         .enter()
-  //         .append('circle')
-  //         .attr('class', 'point')
-  //         .attr('r', 2.5)
-  //         .attr('cx', function(inflation) {
-  //           return x(dateParse(inflation.date));
-  //         })
-  //         .attr('cy', function(inflation) {
-  //           return y(inflation.clothing);
-  //         })
-  //         .attr('fill', 'green')
-  //         .attr('opacity', 1)
-  //         .on('mouseover', mouseOver)
-  //         .on('mousemove', mouseMove)
-  //         .on('mouseout', mouseOut);
-  //
-  //       points_c
-  //         .enter()
-  //         .append('circle')
-  //         .attr('class', 'point')
-  //         .attr('r', 2.5)
-  //         .attr('cx', function(inflation) {
-  //           return x(dateParse(inflation.date));
-  //         })
-  //         .attr('cy', function(inflation) {
-  //           return y(inflation.housing);
-  //         })
-  //         .attr('fill', 'black')
-  //         .attr('opacity', 1)
-  //         .on('mouseover', mouseOver)
-  //         .on('mousemove', mouseMove)
-  //         .on('mouseout', mouseOut);
-  //
-  //       points_f
-  //         .enter()
-  //         .append('circle')
-  //         .attr('class', 'point')
-  //         .attr('r', 2.5)
-  //         .attr('cx', function(inflation) {
-  //           return x(dateParse(inflation.date));
-  //         })
-  //         .attr('cy', function(inflation) {
-  //           return y(inflation.furniture);
-  //         })
-  //         .attr('fill', 'purple')
-  //         .attr('opacity', 1)
-  //         .on('mouseover', mouseOver)
-  //         .on('mousemove', mouseMove)
-  //         .on('mouseout', mouseOut);
-  //
-  //       svg.select('.x.axis')
-  //         .call(x_axis)
-  //         .selectAll('text')
-  //         .attr('transform', 'rotate(30)')
-  //         .attr('y', '10')
-  //         .attr('x', '0')
-  //         .style("text-anchor", "start");
-  //
-  //       svg.select('.y.axis')
-  //         .call(y_axis)
-  //
-  //       function mouseOver(d) {
-  //         var date = dateParse(d.date);
-  //         var displayDate = tooltipFormat(date)
-  //         var cpih_function = d.cpih;
-  //         var food_cpih = d.food;
-  //         var alcohol_cpih = d.alcohol;
-  //         var clothing_cpih = d.clothing;
-  //         var housing_cpih = d.housing;
-  //         var furniture_cpih = d.furniture;
-  //
-  //         d3.select(this)
-  //           .transition()
-  //           .style('opacity', 1);
-  //
-  //         tooltip
-  //           .style('display', null)
-  //           .html('<p><strong id="cpih">Inflation:</strong> ' + cpih_function + '% in ' + displayDate + '<br><strong id="food">food:</strong> ' + food_cpih + '% in ' + displayDate +
-  //             '<br><strong id="alcohol">alcohol:</strong> ' + alcohol_cpih + '% in ' + displayDate + '<br><strong id="clothing">clothing:</strong> ' + clothing_cpih + '% in ' + displayDate +
-  //             '<br><strong id="housing">housing:</strong> ' + housing_cpih + '% in ' + displayDate +
-  //             '<br><strong id="furniture">furniture:</strong> ' + furniture_cpih + '% in ' + displayDate);
-  //       }
-  //
-  //       function mouseMove(d) {
-  //         tooltip
-  //           .style('top', (d3.event.pageY - 20) + "px")
-  //           .style('left', (d3.event.pageX + 20) + "px");
-  //       }
-  //
-  //       function mouseOut(d) {
-  //         d3.select(this)
-  //           .transition()
-  //           .style('opacity', 1);
-  //
-  //         tooltip
-  //           .style('display', 'none');
-  //
-  //       }
-  //     }
-  //   });
-  // });
+  // PRODUCTIVITY
+  $(document).on('submit', '#productivity', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: "/data/productivity/",
+      type: "POST", // or "get"
+      data: {
+        years: $('#select_dropdown').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function productivity(productivity) {
+
+        svg.selectAll('#tags')
+          .remove()
+
+        svg.append("text")
+          .attr("x", (width / 2))
+          .attr("id", "tags")
+          .attr("y", 0 - (margin.top / 2))
+          .attr("text-anchor", "middle")
+          .style("font-size", "18px")
+          .text("UK's productivity remains stangnant");
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 10 - margin.left)
+          .attr("x", 0 - (height / 2))
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .text("GDP per hour worked")
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+          .style("text-anchor", "middle")
+          .text("Years");
+
+        var dateParse = d3.timeParse('%Y');
+        var tooltipFormat = d3.timeFormat('%Y');
+
+        x.domain(d3.extent(productivity, function(d) {
+          return dateParse(d.date);
+        }));
+
+        y.domain(d3.extent(
+          [].concat(inflation.map(function(d) {
+            return parseFloat(d.UK);
+          }), productivity.map(function(d) {
+            return parseFloat(d.EU);
+          }), productivity.map(function(d) {
+            return parseFloat(d.G7);
+          }), productivity.map(function(d) {
+            return parseFloat(d.OECD);
+          }))));
+
+        var line_UK = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.UK);
+          });
+
+        var line_OECD = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.OECD);
+          });
+
+        var line_EU = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.EU);
+          });
+
+        var line_G7 = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.G7);
+          });
+
+        var lines_s = svg.selectAll('.line_UK')
+          .remove()
+          .exit()
+          .data([productivity]);
+        console.log(lines_s)
+
+        var lines_p = svg.selectAll('.line_OECD')
+          .remove()
+          .exit()
+          .data([productivity]);
+
+        var lines_m = svg.selectAll('.line_EU')
+          .remove()
+          .exit()
+          .data([productivity]);
+
+        var lines_c = svg.selectAll('.line_G7')
+          .remove()
+          .exit()
+          .data([productivity]);
+
+        lines_s
+          .enter()
+          .append('path')
+          .attr('class', 'line_UK')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_UK);
+
+        console.log(lines_s)
+
+        lines_p
+          .enter()
+          .append('path')
+          .attr('class', 'line_OECD')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_OECD);
+
+        lines_m
+          .enter()
+          .append('path')
+          .attr('class', 'line_EU')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_EU);
+
+        lines_c
+          .enter()
+          .append('path')
+          .attr('class', 'line_G7')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_G7);
+
+        var points = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(productivity);
+
+        var points_s = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(productivity);
+
+        var points_p = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(productivity);
+
+        var points_m = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(productivity);
+
+        var points_c = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(productivity);
+
+        points_s
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 2.5)
+          .attr('cx', function(productivity) {
+            return x(dateParse(productivity.date));
+          })
+          .attr('cy', function(productivity) {
+            return y(productivity.UK);
+          })
+          .attr('fill', 'red')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_p
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 2.5)
+          .attr('cx', function(productivity) {
+            return x(dateParse(productivity.date));
+          })
+          .attr('cy', function(productivity) {
+            return y(productivity.OECD);
+          })
+          .attr('fill', 'orange')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_m
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 2.5)
+          .attr('cx', function(productivity) {
+            return x(dateParse(productivity.date));
+          })
+          .attr('cy', function(productivity) {
+            return y(productivity.EU);
+          })
+          .attr('fill', 'green')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_c
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr('r', 2.5)
+          .attr('cx', function(productivity) {
+            return x(dateParse(productivity.date));
+          })
+          .attr('cy', function(productivity) {
+            return y(productivity.G7);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        svg.select('.x.axis')
+          .call(x_axis)
+          .selectAll('text')
+          .attr('transform', 'rotate(30)')
+          .attr('y', '10')
+          .attr('x', '0')
+          .style("text-anchor", "start");
+
+        svg.select('.y.axis')
+          .call(y_axis)
+
+        function mouseOver(d) {
+          var date = dateParse(d.date);
+          var displayDate = tooltipFormat(date)
+          var UK = d.UK;
+          var OECD = d.OECD;
+          var EU = d.EU;
+          var G7 = d.G7;
+
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', null)
+            .html('<p><strong id="UK">UK:</strong> ' + UK + ' in ' + displayDate + '<br><strong id="OECD">OECD:</strong> ' + OECD + ' in ' + displayDate + '<br><strong id="EU">EU:</strong> ' + EU + ' in ' + displayDate + '<br><strong id="G7">G7:</strong> ' + G7 + ' in ' + displayDate + '<br/>Source: OECD');
+        }
+
+        function mouseMove(d) {
+          tooltip
+            .style('top', (d3.event.pageY - 20) + "px")
+            .style('left', (d3.event.pageX + 20) + "px");
+        }
+
+        function mouseOut(d) {
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', 'none');
+
+        }
+      }
+    });
+  });
 </script>
 
 </html>

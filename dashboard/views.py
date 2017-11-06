@@ -273,6 +273,118 @@ def inflation_data(request):
                 parsedData.append(growthData.copy())
     return JsonResponse(parsedData, safe=False)
 
+def productivity(request):
+    parsedData = []
+    if request.method == 'POST':
+        productivity_datasets = {}
+        productivity_data = requests.get('http://stats.oecd.org/SDMX-JSON/data/PDB_LV/GBR+EU28+G-7+OECD.T_GDPHRS.VPVOB/all?startTime=2008&endTime=2016&dimensionAtObservation=allDimensions')
+        productivity_json = json.loads(productivity_data.content)
+        productivity_dict = {}
+        for data in productivity_json['dataSets'][0]['observations']:
+            if data[6] == "0":
+                if data[0] == "0":
+                    productivity_dict['date'] = "2008"
+                    productivity_dict['UK'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "1":
+                    productivity_dict['OECD'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "2":
+                    productivity_dict['EU'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "3":
+                    productivity_dict['G7'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                    parsedData.append(productivity_dict.copy())
+
+        for data in productivity_json['dataSets'][0]['observations']:
+            if data[6] == "1":
+                if data[0] == "0":
+                    productivity_dict['date'] = "2009"
+                    productivity_dict['UK'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "1":
+                    productivity_dict['OECD'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "2":
+                    productivity_dict['EU'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "3":
+                    productivity_dict['G7'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                    parsedData.append(productivity_dict.copy())
+
+        for data in productivity_json['dataSets'][0]['observations']:
+            if data[6] == "2":
+                if data[0] == "0":
+                    productivity_dict['date'] = "2010"
+                    productivity_dict['UK'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "1":
+                    productivity_dict['OECD'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "2":
+                    productivity_dict['EU'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "3":
+                    productivity_dict['G7'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                    parsedData.append(productivity_dict.copy())
+
+        for data in productivity_json['dataSets'][0]['observations']:
+            if data[6] == "3":
+                if data[0] == "0":
+                    productivity_dict['date'] = "2011"
+                    productivity_dict['UK'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "1":
+                    productivity_dict['OECD'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "2":
+                    productivity_dict['EU'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "3":
+                    productivity_dict['G7'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                    parsedData.append(productivity_dict.copy())
+
+        for data in productivity_json['dataSets'][0]['observations']:
+            if data[6] == "4":
+                if data[0] == "0":
+                    productivity_dict['date'] = "2012"
+                    productivity_dict['UK'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "1":
+                    productivity_dict['OECD'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "2":
+                    productivity_dict['EU'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "3":
+                    productivity_dict['G7'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                    parsedData.append(productivity_dict.copy())
+
+        for data in productivity_json['dataSets'][0]['observations']:
+            if data[6] == "5":
+                if data[0] == "0":
+                    productivity_dict['date'] = "2013"
+                    productivity_dict['UK'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "1":
+                    productivity_dict['OECD'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "2":
+                    productivity_dict['EU'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "3":
+                    productivity_dict['G7'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                    parsedData.append(productivity_dict.copy())
+
+        for data in productivity_json['dataSets'][0]['observations']:
+            if data[6] == "6":
+                if data[0] == "0":
+                    productivity_dict['date'] = "2014"
+                    productivity_dict['UK'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "1":
+                    productivity_dict['OECD'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "2":
+                    productivity_dict['EU'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "3":
+                    productivity_dict['G7'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                    parsedData.append(productivity_dict.copy())
+
+        for data in productivity_json['dataSets'][0]['observations']:
+            if data[6] == "7":
+                if data[0] == "0":
+                    productivity_dict['date'] = "2015"
+                    productivity_dict['UK'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "1":
+                    productivity_dict['OECD'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "2":
+                    productivity_dict['EU'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                elif data[0] == "3":
+                    productivity_dict['G7'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
+                    parsedData.append(productivity_dict.copy())
+    return JsonResponse(parsedData, safe=False)
+
 #3
 def debt(request):
     debt_data = requests.get('https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/timeseries/hf6x/pusf/data')
