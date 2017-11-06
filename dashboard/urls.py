@@ -16,6 +16,8 @@ urlpatterns = [
     url(r'^data/inflation/$', views.inflation_data, name='inflation_data'),
 
     url(r'^data/productivity/$', views.productivity, name='productivity'),
+
+    url(r'^data/income/$', views.income, name='income'),
     # third indicator
     url(r'^indicators/trade/$', views.trade, name='trade'),
     # fourth indicator

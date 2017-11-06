@@ -38,6 +38,10 @@
       {% csrf_token %}
       <button class="indicator_botton" id="productivity_button" type="botton">Productivity</button>
     </form>
+    <form method="post" action="/data/income/" id="income">
+      {% csrf_token %}
+      <button class="indicator_botton" id="income_button" type="botton">Real Income</button>
+    </form>
   </div>
   <article>
     <p>Hello World!</p>
@@ -45,7 +49,7 @@
 </body>
 <script src="{% static 'dashboard/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <script>
-  var inflation = {{ inflation_json | safe }}
+  var inflation = {{ inflation_json | safe }}
 
   var margin = {
     top: 50,
@@ -1033,6 +1037,7 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
+          .attr("id", "tags")
           .attr('r', 2.5)
           .attr('cx', function(productivity) {
             return x(dateParse(productivity.date));
@@ -1050,6 +1055,7 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
+          .attr("id", "tags")
           .attr('r', 2.5)
           .attr('cx', function(productivity) {
             return x(dateParse(productivity.date));
@@ -1067,6 +1073,7 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
+          .attr("id", "tags")
           .attr('r', 2.5)
           .attr('cx', function(productivity) {
             return x(dateParse(productivity.date));
@@ -1084,6 +1091,7 @@
           .enter()
           .append('circle')
           .attr('class', 'point')
+          .attr("id", "tags")
           .attr('r', 2.5)
           .attr('cx', function(productivity) {
             return x(dateParse(productivity.date));
@@ -1122,7 +1130,8 @@
 
           tooltip
             .style('display', null)
-            .html('<p><strong id="UK">UK:</strong> ' + UK + ' in ' + displayDate + '<br><strong id="OECD">OECD:</strong> ' + OECD + ' in ' + displayDate + '<br><strong id="EU">EU:</strong> ' + EU + ' in ' + displayDate + '<br><strong id="G7">G7:</strong> ' + G7 + ' in ' + displayDate + '<br/>Source: OECD');
+            .html('<p><strong id="UK">UK:</strong> ' + UK + ' in ' + displayDate + '<br><strong id="OECD">OECD:</strong> ' + OECD + ' in ' + displayDate + '<br><strong id="EU">EU:</strong> ' + EU + ' in ' + displayDate +
+              '<br><strong id="G7">G7:</strong> ' + G7 + ' in ' + displayDate + '<br/>Source: OECD');
         }
 
         function mouseMove(d) {
@@ -1143,6 +1152,292 @@
       }
     });
   });
+
+
+  // INCOME
+  $(document).on('submit', '#income', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: "/data/income/",
+      type: "POST", // or "get"
+      data: {
+        years: $('#select_dropdown').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function income(income) {
+
+        svg.selectAll('#tags')
+          .remove()
+
+        svg.append("text")
+          .attr("x", (width / 2))
+          .attr("id", "tags")
+          .attr("y", 0 - (margin.top / 2))
+          .attr("text-anchor", "middle")
+          .style("font-size", "18px")
+          .text("UK's income declined after Brexit vote");
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 10 - margin.left)
+          .attr("x", 0 - (height / 2))
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .text("Real income % Year-to-Year growth")
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+          .style("text-anchor", "middle")
+          .text("Quarters");
+
+        var dateParse = d3.timeParse('%Y %b');
+        var tooltipFormat = d3.timeFormat('%Y %b');
+
+        x.domain(d3.extent(income, function(d) {
+          return dateParse(d.date);
+        }));
+
+        y.domain(d3.extent(income, function(d) {
+          return parseFloat(d.growth);
+        }));
+
+        var line_income = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.growth);
+          });
+
+        var lines_s = svg.selectAll('.line_income')
+          .remove()
+          .exit()
+          .data([income]);
+        console.log(lines_s)
+
+        lines_s
+          .enter()
+          .append('path')
+          .attr('class', 'line_income')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_income);
+
+        console.log(lines_s)
+
+
+        var points = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(income);
+
+        var points_s = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(income);
+
+        points_s
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr("id", "tags")
+          .attr('r', 2.5)
+          .attr('cx', function(income) {
+            return x(dateParse(income.date));
+          })
+          .attr('cy', function(income) {
+            return y(income.growth);
+          })
+          .attr('fill', 'red')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        svg.select('.x.axis')
+          .call(x_axis)
+          .selectAll('text')
+          .attr('transform', 'rotate(30)')
+          .attr('y', '10')
+          .attr('x', '0')
+          .style("text-anchor", "start");
+
+        svg.select('.y.axis')
+          .call(y_axis)
+
+        function mouseOver(d) {
+          var date = dateParse(d.date);
+          var displayDate = tooltipFormat(date)
+          var income_growth = d.growth;
+
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', null)
+            .html('<p><strong id="Real income growth">UK:</strong> ' + income_growth + ' in ' + displayDate + '<br>Source: ONS');
+        }
+
+        function mouseMove(d) {
+          tooltip
+            .style('top', (d3.event.pageY - 20) + "px")
+            .style('left', (d3.event.pageX + 20) + "px");
+        }
+
+        function mouseOut(d) {
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', 'none');
+
+        }
+      }
+
+    });
+  });
+
+
+
+  // success: function income(income) {
+  //
+  //   console.log(income)
+  //
+  //   svg.selectAll('#tags')
+  //     .remove()
+  //
+  //   svg.append("text")
+  //     .attr("x", (width / 2))
+  //     .attr("id", "tags")
+  //     .attr("y", 0 - (margin.top / 2))
+  //     .attr("text-anchor", "middle")
+  //     .style("font-size", "18px")
+  //     .text("UK's income decreased since Brexit vote");
+  //
+  //   svg.append("text")
+  //     .attr("id", "tags")
+  //     .attr("transform", "rotate(-90)")
+  //     .attr("y", 10 - margin.left)
+  //     .attr("x", 0 - (height / 2))
+  //     .attr("dy", "1em")
+  //     .style("text-anchor", "middle")
+  //     .text("Real income per capita Y-on-Y % change")
+  //
+  //   svg.append("text")
+  //     .attr("id", "tags")
+  //     .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+  //     .style("text-anchor", "middle")
+  //     .text("Quarters");
+  //
+  //   var dateParse = d3.timeParse('%Y %b');
+  //   var tooltipFormat = d3.timeFormat('%Y %b');
+  //
+  //   x.domain(d3.extent(income, function(d) {
+  //     return dateParse(d.date);
+  //   }));
+  //
+  //   y.domain(d3.extent(income, function(d) {
+  //     return d['Growth Rate'];
+  //     }));
+  //
+  //   var income = d3.line()
+  //     .curve(d3.curveCatmullRom)
+  //     .x(function(d) {
+  //       return x(dateParse(d.date));
+  //     })
+  //     .y(function(d) {
+  //       return y(d['Growth Rate']);
+  //     });
+  //
+  //   var lines_s = svg.selectAll('.income')
+  //     .remove()
+  //     .exit()
+  //     .data([income]);
+  //
+  //   lines_s
+  //     .enter()
+  //     .append('path')
+  //     .attr('class', 'income')
+  //     .attr("id", "tags")
+  //     .attr('fill', 'none')
+  //     .attr('d', income);
+  //   console.log(lines_s)
+  //
+  //   var points = svg.selectAll('.point')
+  //     .remove()
+  //     .exit()
+  //     .data(income);
+  //
+  //   var points_s = svg.selectAll('.point')
+  //     .remove()
+  //     .exit()
+  //     .data(income);
+  //
+  //   points_s
+  //     .enter()
+  //     .append('circle')
+  //     .attr('class', 'point')
+  //     .attr("id", "tags")
+  //     .attr('r', 2.5)
+  //     .attr('cx', function(income) {
+  //       return x(dateParse(income.date));
+  //     })
+  //     .attr('cy', function(income) {
+  //       return y(income['Growth Rate']);
+  //     })
+  //     .attr('fill', 'red')
+  //     .attr('opacity', 1)
+  //     .on('mouseover', mouseOver)
+  //     .on('mousemove', mouseMove)
+  //     .on('mouseout', mouseOut);
+  //
+  //   svg.select('.x.axis')
+  //     .call(x_axis)
+  //     .selectAll('text')
+  //     .attr('transform', 'rotate(30)')
+  //     .attr('y', '10')
+  //     .attr('x', '0')
+  //     .style("text-anchor", "start");
+  //
+  //   svg.select('.y.axis')
+  //     .call(y_axis)
+  //
+  //   function mouseOver(d) {
+  //     var date = dateParse(d.date);
+  //     var displayDate = tooltipFormat(date)
+  //     var income = d['Growth Rate'];
+  //
+  //     d3.select(this)
+  //       .transition()
+  //       .style('opacity', 1);
+  //
+  //     tooltip
+  //       .style('display', null)
+  //       .html('<p><strong id="UK">UK:</strong> ' + income + ' in ' + displayDate + '<br>Source: ONS');
+  //   }
+  //
+  //   function mouseMove(d) {
+  //     tooltip
+  //       .style('top', (d3.event.pageY - 20) + "px")
+  //       .style('left', (d3.event.pageX + 20) + "px");
+  //   }
+  //
+  //   function mouseOut(d) {
+  //     d3.select(this)
+  //       .transition()
+  //       .style('opacity', 1);
+  //
+  //     tooltip
+  //       .style('display', 'none');
+  //
+  //   }
+  // }
 </script>
 
 </html>

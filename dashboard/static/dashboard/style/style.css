@@ -270,7 +270,7 @@ footer {
   stroke-width: 2px;
 }
 
-.line_services, .line_food, .line_UK {
+.line_services, .line_food, .line_UK, .line_income {
   fill: none;
   stroke: red;
   stroke-width: 2px;

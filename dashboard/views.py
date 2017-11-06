@@ -6,6 +6,7 @@ from .models import Choice, Question
 from django.urls import reverse
 import requests
 import json
+import pandas as pd
 
 
 # def growth(request):
@@ -384,6 +385,37 @@ def productivity(request):
                     productivity_dict['G7'] = str(round(productivity_json['dataSets'][0]['observations'][data][0], 1))
                     parsedData.append(productivity_dict.copy())
     return JsonResponse(parsedData, safe=False)
+
+def income(request):
+    parsedData = []
+    income_datasets = {}
+    income_data = requests.get('https://www.ons.gov.uk/economy/grossdomesticproductgdp/timeseries/crsf/ukea/data')
+    income_json = json.loads(income_data.content)
+    growthData = {}
+    data_input = 'quarters'
+    # year_input_int = 48
+    year_input_int = 76
+    # date_input = request.POST.get('years')
+    # input_int = int(date_input)
+    # year_input_int = int(year_input)
+    for data in income_json[data_input][year_input_int:]:
+        if data['date'][5:7] == 'Q1':
+            data['date'] = (data['date'][0:4] + ' ' + 'Mar')
+        elif data['date'][5:7] == 'Q2':
+            data['date'] = (data['date'][0:4] + ' ' + 'Jun')
+        elif data['date'][5:7] == 'Q3':
+            data['date'] = (data['date'][0:4] + ' ' + 'Sep')
+        elif data['date'][5:7] == 'Q4':
+            data['date'] = (data['date'][0:4] + ' ' + 'Dec')
+        growthData['date'] = data['date']
+        growthData['value'] = int(data['value'])
+        parsedData.append(growthData.copy())
+
+    pandas_data = pd.DataFrame(parsedData)
+    pandas_data['growth'] = ((pandas_data['value'].pct_change(4))*100).round(1)
+    json_income = pandas_data.to_json(orient='records')
+    final_json = json.loads(json_income)
+    return JsonResponse(final_json[4:], safe=False)
 
 #3
 def debt(request):
