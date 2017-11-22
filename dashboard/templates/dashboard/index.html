@@ -22,7 +22,7 @@
   </header>
   <nav id="navigation">
     <!-- <a class="nav-link" href="javascript:void(0)" onclick="closeNav()" id="close_menu"><</a> -->
-    <a class="nav-link" href="#" id="loader_story">UK economy</a>
+    <a class="nav-link" href="#" id="loader_story">UK Economy</a>
     <a class="nav-link" href="#" id="loader_growth">Growth</a>
     <a class="nav-link" href="#" id="loader_inflation">Inflation</a>
     <a class="nav-link" href="#" id="loader_confidence">Confidence</a>
@@ -46,6 +46,12 @@
     }
   }
     $(document).ready(function() {
+      $("#loader_story").on("click", function() {
+        $("#container").load("{% url 'dashboard:UK_economy' %}");
+      });
+    });
+
+    $(document).ready(function() {
       $("#loader_growth").on("click", function() {
         $("#container").load("{% url 'dashboard:growth' %}");
       });
@@ -54,6 +60,18 @@
     $(document).ready(function() {
       $("#loader_inflation").on("click", function() {
         $("#container").load("{% url 'dashboard:inflation' %}");
+      });
+    });
+
+    $(document).ready(function() {
+      $("#loader_confidence").on("click", function() {
+        $("#container").load("{% url 'dashboard:confidence' %}");
+      });
+    });
+
+    $(document).ready(function() {
+      $("#loader_trade").on("click", function() {
+        $("#container").load("{% url 'dashboard:trade' %}");
       });
     });
 

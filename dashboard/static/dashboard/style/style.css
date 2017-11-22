@@ -19,7 +19,7 @@ body {
 
 /* Main visualisation */
 
-#vis_inflation, #vis_investment, #vis_trade, #vis_growth, #vis_debt {
+#vis_inflation, #vis_investment, #vis_trade, #vis_growth, #vis_debt, #vis_confidence, #vis_trade {
   display: inline-block;
   background: white;
   margin: 350px 70px 0px 100px;
@@ -151,7 +151,9 @@ section {
   width: 75%;
 }
 
-.inflation_header {}
+.inflation_header {
+
+}
 
 .article_title {
   width: 640px;
@@ -167,23 +169,7 @@ section {
   background: white;
 }
 
-#front_image_growth {
-  width: 640px;
-  height: 426px;
-  margin: 0 0px 0px 30px;
-  position: absolute;
-  z-index: -1;
-}
-
-#front_image_inflation {
-  width: 640px;
-  height: 426px;
-  margin: 0 0px 0px 30px;
-  position: absolute;
-  z-index: -1;
-}
-
-#front_image_debt {
+#front_image_inflation, #front_image_confidence, #front_image_debt, #front_image_growth {
   width: 640px;
   height: 426px;
   margin: 0 0px 0px 30px;
@@ -200,13 +186,31 @@ section {
   width: 300px;
 }
 
+form {
+  width: 200px;
+  margin: 20px 25px 20px 35px;
+}
+
+#auto_text {
+  position: absolute;
+  width: 350px;
+  margin: 20px 10px 10px 320px;
+  font-size: 14px;
+  font-family: 'Roboto Mono';
+  font-style: black;
+  color: black;
+  border-top: 5px solid black;
+  background: white;
+  line-height: 150%;
+}
+
 .indicator_botton:hover {
   display: inline-block;
   font-family: 'Roboto Mono';
   font-size: 14px;
   color: white;
   padding: 10px;
-  margin: 20px 0px 20px 100px;
+  margin: 20px 25px 20px 35px;
   width: 200px;
   background-color: rgb(251, 16, 0);
 }
@@ -217,7 +221,7 @@ section {
   font-size: 14px;
   color: white;
   padding: 10px;
-  margin: 20px 0px 20px 100px;
+  margin: 20px 25px 20px 35px;
   width: 200px;
   background-color: rgb(10, 35, 66);
 }
@@ -233,6 +237,25 @@ article p {
   border-top: 5px solid black;
   background: white;
   line-height: 200%;
+}
+
+#article_growth {
+  width: 640px;
+  font-size: 16px;
+  font-family: 'Roboto Mono';
+  font-style: black;
+  padding: 5px 20px 5px 0px;
+  margin: 100px 0px 20px 30px;
+  color: black;
+  border-top: 5px solid black;
+  background: white;
+  line-height: 200%;
+}
+
+.article_sub {
+  font-weight: 2000;
+  font-size: 18px;
+  text-decoration: underline;
 }
 
 /* FOOTER */
@@ -264,37 +287,55 @@ footer {
   stroke-width: 2px;
 }*/
 
-.line, .line_cpih {
+.line {
+  fill: none;
+  stroke: url(#line-gradient);
+  stroke-width: 2px;
+}
+
+.line_business {
+  fill: none;
+  stroke: url(#line-gradient-business);
+  stroke-width: 2px;
+}
+
+.line_gdp, .line_cpih, .line_United_Kingdom, .line_balance {
   fill: none;
   stroke: blue;
   stroke-width: 2px;
 }
 
-.line_services, .line_food, .line_UK, .line_income {
+.line_services, .line_food, .line_UK, .line_Denmark, .line_exports {
   fill: none;
   stroke: red;
   stroke-width: 2px;
 }
 
-.line_production, .line_alcohol, .line_OECD{
+.line_income {
+  fill: none;
+  stroke: url(#line-gradient-inflation);
+  stroke-width: 2px;
+}
+
+.line_production, .line_alcohol, .line_OECD, .line_Finland, .line_imports {
   fill: none;
   stroke: orange;
   stroke-width: 2px;
 }
 
-.line_manufacturing, .line_clothing, .line_EU {
+.line_manufacturing, .line_clothing, .line_EU, .line_Luxembourg {
   fill: none;
   stroke: green;
   stroke-width: 2px;
 }
 
-.line_construction, .line_housing, .line_G7 {
+.line_construction, .line_housing, .line_G7, .line_Netherlands {
   fill: none;
   stroke: black;
   stroke-width: 2px;
 }
 
-.line_furniture {
+.line_furniture, .line_Sweden {
   fill: none;
   stroke: purple;
   stroke-width: 2px;
@@ -336,27 +377,27 @@ footer {
   font-size: 14px;
 }
 
-#gdp, #cpih {
+#gdp, #cpih, #United_Kingdom, #balance {
   color:blue;
 }
 
-#food, #services, #UK {
+#food, #services, #UK, #Denmark, #exports {
   color:red;
 }
 
-#production, #alcohol, #OECD {
+#production, #alcohol, #OECD, #Finland, #imports {
   color:orange;
 }
 
-#manufacturing, #clothing, #EU {
+#manufacturing, #clothing, #EU, #Luxembourg {
   color:green;
 }
 
-#construction, #housing, #G7 {
+#construction, #housing, #G7, #Netherlands, #business {
   color:black;
 }
 
-#furniture {
+#furniture, #Sweden {
   color:purple;
 }
 
@@ -390,3 +431,31 @@ text {
   font-family: 'Roboto Mono';
   font-size: 12px;
 }
+
+/*Bar Chart*/
+
+.bar {
+  fill: rgb(1, 73, 144);
+}
+
+.bar:hover {
+  fill: rgb(251, 16, 0);
+}
+
+/*Bar Chart*/
+
+/*.bar--positive {
+  fill: steelblue;
+}
+.bar--negative {
+  fill: darkorange;
+}
+.axis text {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}*/

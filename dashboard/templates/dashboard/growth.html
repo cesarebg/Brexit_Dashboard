@@ -8,15 +8,16 @@
   <link rel="stylesheet" type="text/css" href="{% static 'dashboard/style/style.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
-  <title></title>
+  <title>Growth | The Brexit Dashboard</title>
 </head>
 
 <body>
   <div class="inflation_header">
-    <h2 class="article_title">Brexit slashed the EU, but also harmed UK growth</h2>
-    <img src="/static/dashboard/img/Carney_medium.jpg" id="front_image_growth"></div>
+    <h2 class="article_title">Brexit slashed relation with EU, but also UK’s recovery</h2>
+    <img src="/static/dashboard/img/tenner_medium.jpg" id="front_image_growth"></div>
     <div id="vis_growth"></div>
   </div>
+  <div id="auto_text"></div>
   <div>
     <!-- Botton -->
     <!-- <form method="post" action="/indicators/growth/" id="indicator_form_2008">
@@ -26,41 +27,46 @@
     <!-- Dropdown -->
     <form method="post" action="/indicators/growth/" id="indicator_form_2016">
       {% csrf_token %}
-      <br>
-      <select type="text" name="years" id="select_dropdown">
+      <!-- <select type="text" name="years" id="select_dropdown">
         <option value="211">Since the financial crisis</option>
         <option value="243">After the Brexit vote</option>
-      </select>
+      </select> -->
       <!-- Botton -->
       <!-- <button id="Brexit_vote" name="years" value="211" type="botton">Growth since Brexit vote</button> -->
       <!-- Dropdown -->
-      <br>
-      <button class="indicator_botton" type="botton">Growth</button>
+      <button class="indicator_botton" type="botton">Growth by components</button>
     </form>
   </div>
       <article>
-        <p>The UK economy couldn’t keep up the momentum it experienced after the Brexit vote. After the referendum, retail sales gave an extra impulse to growth in the second half of 2016. However, inflation, tightening of credit conditions and uncertainty
-          about Brexit crippled household spending, showing the vulnerabilities of an economy still in recovery.<br/><br/> In the third and fourth quarter of 2016, the UK economy reported a quarterly expansion of 0.5% and 0.7% respectively, beating expectations.
-          But fears of a Brexit backlash returned in the first months of this year, when the economy grew only 0.2% in January-March, and 0.3% in April-June. Despite the optimism of the “Leave” campaign after the Brexit vote, growth in the UK slowed down
-          to the lowest rate among G7 countries in the first quarter of 2017.<br/><br/> In annual terms:<br/><br/> "GDP growth in volume terms increased by 1.7% between Quarter 2 2016 and Quarter 2 2017, a slowing down when compared with the 2.0% growth
-          seen between Quarter 1 2016 and Quarter 1 2017 (ONS, 2017)."<br/><br/> The IMF downgraded the economic outlook of the United Kingdom, confirming that the economic activity “slowed more than anticipated in the first half of 2017” despite an increase
-          in the labour participation rates and decreasing unemployment. The IMF expects an expansion of the UK economy of 1.7% in 2017, a downgrade of 0.3 percentage points compared to April’s forecast.<br/><br/> However, this forecast is still very
-          optimistic, since the UK economy has to grow at least 0.6% in the third and fourth quarter, to reach 1.7% in 2017:<br/><br/> "We think that neither the hard or soft data support such a pickup in activity, meaning that IMF’s forecasts remain
-          excessively optimistic unless the data get revised up (Barclays, 2017)."<br/><br/> Last September, retail sales were below expectations, with a fall of 0.8% (Barclays, 2017). All sectors showed slowdown except online sales, the only segment
-          with a positive number, reaching an increase of 2.3% month to month, according to the ONS (2017) latest report.<br/><br/> Services is the most crucial sector of the UK economy, since it contributes 80% to the Gross Domestic Product (GDP), without
-          substantial trade on services the UK economy may experience a significant decline in other segments of the economy such as industrial production and construction have shown a trend below expectations:<br/><br/> "The services industries are the
-          only positive contributor to output GDP growth in Quarter 2 2017, at 0.4 percentage points, while production and construction both fell and together detracted around 0.1 percentage points from the 0.3% UK GDP quarterly growth (ONS, 2017)."<br/><br/>          However, household expenditure has continuously decreased since the Brexit vote. In the third quarter of 2016, just after the referendum, this component that contributes around 60% to the economy and vital to retail services (OCED, 2017), spiked
-          0.8% when compared with the previous term. In the fourth quarter decreased to 0.7%, and in 2017, slowed to 0.4% in the first trimester, to just 0.1% in the following term.<br/><br/> "The depreciation of sterling seen in 2016 and particularly
-          following the outcome of the EU referendum would increase the prices producers pay for imported goods (ONS, 2017)."<br/><br/> Food and alcoholic beverages experienced a spike of 3.1% in September when compared to the same month of 2016, the
-          highest increase since October 2013. However, the main contribution to inflation came from the rise in housing and household services –such as water and fuels–, followed by transport.<br/><br/> The slowdown in household spending is also related
-          to a tightening of credit both credit card and other unsecured loans. According to the Bank of England, lenders reported that the availability of this type of credit decreased in the third quarter, and it is expected to fall even more in the
-          last trimester of 2017.<br/><br/> Less household spending is related to a tightening of credit both credit card and other unsecured loans – used for household spending–. According to the Bank of England, lenders reported that the availability
-          of this type of credit has decreased in the third quarter, and it is expected to fall even more in the last trimester of 2017.<br/><br/> Lenders said they expect less appetite for risk and concerns over the economic outlook in the coming months
-          (Barclays, 2017, Bank of England, 2017). The survey cited both factors as the main reasons to tight the credit conditions to households at a time when the UK government is in a critical phase of the Brexit negotiations.<br/><br/> Credit was
-          one of the factors that helped the economy to gain momentum after the Brexit vote by allowing consumer spending. However, the Bank of England warned that this trend was not feasible in the long term. The central bank warned about the dangers
-          of depending on a growing amount of debt to fuel the economy (Bank of England, 2017).
-          <br/><br/>Despite the cut in the growth forecast, the United Kingdom is one of the most resilient markets among developed countries. There is still a robust business-friendly environment in the UK. Also, unemployment has declined thanks to an
-          expansion of the job market driven in part by immigration from the EU; the Bank of England has supported the economy with low-interest rates and public finances have shown moderate improvement by reducing the deficit to 3% of GDP (OECD, 2017).<br/><br/>
+        <p id="article_growth">The UK economy couldn’t keep up the momentum it experienced after the Brexit vote. Retail sales gave an extra impulse to growth in the second half of 2016. However, inflation and uncertainty about Brexit crippled household spending, showing the vulnerabilities of an economy still in recovery.<br><br>
+In the third and fourth quarter of 2016, the UK economy reported a quarterly expansion of 0.5% and 0.7% respectively, beating expectations. But fears of a Brexit backlash returned in the first months of this year, when the economy grew only 0.2% in January-March, and 0.3% in April-June. Despite the optimism of the “Leave” campaign after the Brexit vote, growth in the UK slowed down to the lowest rate among G7 countries in the first quarter of 2017.<br><br>
+According to the ONS, in annual terms: “GDP growth in volume terms increased by 1.7% between Quarter 2 2016 and Quarter 2 2017, a slowing down when compared with the 2.0% growth seen between Quarter 1 2016 and Quarter 1 2017”.<br><br>
+The UK economy recovered ground in the third quarter of this year. The ONS informed that the UK economy expanded 0.4% in the third trimester.<br><br>
+Still, the IMF has downgraded the economic outlook of the United Kingdom last October, confirming that the economic activity “slowed more than anticipated in the first half of 2017” despite an increase in the labour participation rates and decreasing unemployment. The IMF expects an expansion of the UK economy of 1.7% in 2017, a downgrade of 0.3 percentage points compared to April’s forecast.<br><br>
+The IMF expects an expansion of the UK economy below the average of other advanced economies in 2017. The growth of high-income countries is expected to be 2.6% in 2017. Countries in the Euro Area are expected to grow 2.1% this year, while the United States 2.2%. The risk is that the UK is lagging behind other world economies, after a period of slow recovery following the financial crisis of 2008.<br><br>
+Even the 1.7% forecast for the UK in 2017 is very optimistic, since the UK economy has to grow at least 0.6% in the third and fourth quarter, to reach 1.7% in 2017, according to Barclays.<br><br>
+“We think that neither the hard or soft data support such a pickup in activity, meaning that IMF’s forecasts remain excessively optimistic unless the data get revised up”, according to report by Barclays.<br><br>
+Last September, retail sales were below expectations, with a fall of 0.8%, according to the same report by Barclays. All sectors showed slowdown except online sales, the only segment with a positive number, reaching an increase of 2.3% month to month, said the ONS in their latest report.<br><br>
+“From the different channels that the Brexit vote has affected the UK economy, the fall of private consumption, triggered the slowdown that has happened since early 2017”, according to information provided by the OECD. The organization said in their latest UK Economic Survey that without Brexit, the economy would show better performance.<br><br>
+Services is the most crucial sector of the UK economy, since it contributes 80% to the Gross Domestic Product (GDP), without substantial trade on services the UK economy may experience a significant decline in other segments of the economy such as industrial production and construction have shown a trend below expectations.<br><br>
+“The services industries are the only positive contributor to output GDP growth in Quarter 2 2017, at 0.4 percentage points, while production and construction both fell and together detracted around 0.1 percentage points from the 0.3% UK GDP quarterly growth”, according to the ONS. In the third quarter, services are expected to increase 0.4%, and production a full 1% in the same period.<br><br>
+Services reported a preliminary growth of 0.4% in the third quarter of 2017, while manufacturing “returned to growth” after a weak first half of 2017, increasing 0.1% in July-September. Construction decreased in the second and third quarter of 2017 by 0.5% and 0.7% respectively.<br><br>
+However, household expenditure has continuously decreased since the Brexit vote. In the third quarter of 2016, just after the referendum, this component that contributes around 60% to the economy and vital to retail services –according to the definition by the OECD– spiked 0.8% when compared with the previous term. In the fourth quarter decreased to 0.7%, and in 2017, slowed to 0.4% in the first trimester, to just 0.1% in the following term.<br><br>
+Household spending is decreasing mainly to the sterling depreciation which is increasing consumer prices, primarily housing, food, recreational goods and transport, such as fuel costs. Inflation rose 3% in September, compared to the same month of 2016.<br><br>
+“The depreciation of sterling seen in 2016 and particularly following the outcome of the EU referendum would increase the prices producers pay for imported goods”, according to the ONS.<br><br>
+Food and alcoholic beverages experienced a spike of 3.1% in September when compared to the same month of 2016, the highest increase since October 2013. However, the main contribution to inflation came from the rise in housing and household services –such as water and fuels–, followed by transport.<br><br>
+The slowdown in household spending also keeps a relationship with the increase of debt of credit cards and other unsecured loans. The Bank of England said in their Credit Conditions Survey that lenders reported that availability of unsecured loans decreased in the third quarter, and it is expected to fall even more in the last trimester of 2017.<br><br>
+Although the Bank of England do not expect that increasing debt among consumers can affect in the short-term economic growth by reducing household expenditure, the Financial Policy Committee warned this year that banks might be vulnerable to shocks in case of a recession, according to the latest Inflation Report.<br><br>
+Credit was one of the factors that helped the economy to gain momentum after the Brexit vote by allowing consumer spending. However, the Bank of England warned that this trend was not feasible in the long term. The central bank warned about the dangers of depending on a growing amount of debt to fuel the economy, especially during an economic downturn.<br><br>
+Consumer credit has grown rapidly since 2013, according to S&P Global. Household debt reached 88% of UK’s GDP in the first quarter of 2017, according to the BIS the bank for central banks.<br><br>
+Lenders reported that the availability of unsecured credit has decreased in the third quarter, and it is expected to fall even more in the last trimester of 2017.<br><br>
+Lenders said they expect less appetite for risk and concerns over the economic outlook in the coming months, said Barclays in a report using information from the Credit Conditions Survey from the Bank of England. The survey cited both factors as the main reasons to tight the credit conditions to households at a time when the UK government is in a critical phase of the Brexit negotiations.<br><br>
+Despite the cut in the growth forecast, the United Kingdom is still one of the most resilient markets among developed countries. There is still a robust business-friendly environment in the UK. Also, unemployment has declined thanks to an expansion of the job market driven in part by immigration from the EU; the Bank of England has supported the economy with low-interest rates and public finances have shown moderate improvement by reducing the deficit to 3% of GDP, according to the OECD.<br><br>
+<strong class="article_sub">Brexit, disruptive to growth in no-deal scenario</strong><br><br>
+However, those strengths could be overshadowed by the disruptions caused by Brexit in case the government cannot reach a comprehensive deal with the EU. Some of these disruptions may be far from being solved by policymakers, according to the economist Malcolm Sawyer, academic from the University of Leeds.<br><br>
+The academic said in a telephone interview that the current strengths of the labour market could be affected if there are not enough people to fill positions in the agriculture sector, manufacturing, nursing and other services such as the hotel industry.<br><br>
+“There are could be a lot of disruptions. There is very little that policymakers can do to address that. If you don’t have enough people to work in nursing services it can take up to five years to train more nurses.<br><br>
+“That itself may generate a reduction in economic activity and you cannot deal with this type of problem with macroeconomic policies. What you are doing is reducing supply, if there is not enough people picking the strawberries, that may show in terms of inflation”, he said.<br><br>
         </p>
       </article>
 </body>
@@ -69,11 +75,13 @@
   var growth = {{ growth_json | safe }}
   console.log(growth)
 
+  document.getElementById("auto_text").innerText = growth[9]['text']
+
   var margin = {
     top: 50,
     left: 60,
     right: 30,
-    bottom: 50,
+    bottom: 60,
   };
 
   var width = 500;
@@ -94,15 +102,15 @@
     .selectAll("stop")
     .data([{
         offset: "0%",
-        color: "red"
+        color: "lime"
       },
       {
-        offset: "60%",
-        color: "skyblue"
+        offset: "20%",
+        color: "grey"
       },
       {
         offset: "100%",
-        color: "skyblue"
+        color: "red"
       }
     ])
     .enter().append("stop")
@@ -120,8 +128,8 @@
   width = width - margin.left - margin.right;
   height = height - margin.top - margin.bottom;
 
-  var dateParse = d3.timeParse('%Y');
-  var tooltipFormat = d3.timeFormat('%Y');
+  var dateParse = d3.timeParse('%Y %b');
+  var tooltipFormat = d3.timeFormat('%b %Y');
 
   var x = d3.scaleTime()
     .range([0, width]);
@@ -144,7 +152,7 @@
     .attr("id", "tags")
     .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
     .style("text-anchor", "middle")
-    .text("Years");
+    .text("Quarters");
 
   // y label
   svg.append('g')
@@ -153,12 +161,12 @@
   svg.append("text")
     .attr("id", "tags")
     .attr("transform", "rotate(-90)")
-    .attr("y", 10 - margin.left)
+    .attr("y", 5 - margin.left)
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
     // .text("Growth Q-to-Q %");
-    .text("Year-to-Year Growth %");
+    .text("Quarterly Year-to-Year Growth %");
 
   svg.append("text")
     .attr("x", (width / 2))
@@ -219,6 +227,7 @@
   lines
     .enter()
     .append('path')
+    .attr("id", "tags")
     .attr('class', 'line')
     .attr('fill', 'none')
     .attr('d', line);
@@ -243,7 +252,7 @@
     .attr('cy', function(growth) {
       return y(growth.value);
     })
-    .attr('fill', 'blue')
+    .attr('fill', 'black')
     .attr('opacity', 1)
     .on('mouseover', mouseOver)
     .on('mousemove', mouseMove)
@@ -271,7 +280,7 @@
 
     tooltip
       .style('display', null)
-      .html('<p>UK growth was ' + value_function + ' in ' + displayDate + '</p>');
+      .html('<p>UK growth was ' + value_function + '% in quarter ending ' + displayDate + '<br>Source: ONS</p>');
   }
 
   function mouseMove(d) {
@@ -302,57 +311,27 @@
       },
       success: function growth_graph(growth) {
 
-        function years_or_quarter() {
-          var nameValue = document.getElementById("select_dropdown").value
-          console.log(nameValue)
-          if (nameValue == 211) {
+        svg.selectAll('#tags')
+          .remove()
 
-            svg.selectAll('#tags')
-              .remove()
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 10 - margin.left)
+          .attr("x", 0 - (height / 2))
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          // .text("Growth Q-to-Q %");
+          .text("Quarter-to-Quarter Growth %")
 
-            svg.append("text")
-              .attr("id", "tags")
-              .attr("transform", "rotate(-90)")
-              .attr("y", 10 - margin.left)
-              .attr("x", 0 - (height / 2))
-              .attr("dy", "1em")
-              .style("text-anchor", "middle")
-              // .text("Growth Q-to-Q %");
-              .text("Year-to-Year Growth %")
-
-            svg.append("text")
-              .attr("id", "tags")
-              .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
-              .style("text-anchor", "middle")
-              .text("Years");
-
-          } else {
-
-            svg.selectAll('#tags')
-              .remove()
-
-            svg.append("text")
-              .attr("id", "tags")
-              .attr("transform", "rotate(-90)")
-              .attr("y", 10 - margin.left)
-              .attr("x", 0 - (height / 2))
-              .attr("dy", "1em")
-              .style("text-anchor", "middle")
-              // .text("Growth Q-to-Q %");
-              .text("Quarter-to-Quarter Growth %")
-
-            svg.append("text")
-              .attr("id", "tags")
-              .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
-              .style("text-anchor", "middle")
-              .text("Quarters");
-
-          }
-        }
-        years_or_quarter()
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+          .style("text-anchor", "middle")
+          .text("Quarters");
 
         var dateParse = d3.timeParse('%Y %b');
-        var tooltipFormat = d3.timeFormat('%Y %b');
+        var tooltipFormat = d3.timeFormat('%b %Y');
 
 
         x.domain(d3.extent(growth, function(d) {
@@ -408,7 +387,7 @@
             return y(d.construction);
           });
 
-        var lines = svg.selectAll('.line')
+        var lines = svg.selectAll('.line_gdp')
           .remove()
           .exit()
           .data([growth]);
@@ -438,7 +417,7 @@
         lines
           .enter()
           .append('path')
-          .attr('class', 'line')
+          .attr('class', 'line_gdp')
           .attr('fill', 'none')
           .attr('d', line);
 
@@ -606,9 +585,9 @@
 
           tooltip
             .style('display', null)
-            .html('<p><strong id="gdp">GDP:</strong> ' + value_function + '% in ' + displayDate + '<br><strong id="services">Services:</strong> ' + services_value + '% in ' + displayDate +
-              '<br><strong id="production">Production:</strong> ' + production_value + '% in ' + displayDate + '<br><strong id="manufacturing">Manufacturing:</strong> ' + manufacturing_value + '% in ' + displayDate +
-              '<br><strong id="construction">Construction:</strong> ' + construction_value + '% in ' + displayDate);
+            .html('<p><strong id="gdp">GDP:</strong> ' + value_function + '% in quarter ending ' + displayDate + '<br><strong id="services">Services:</strong> ' + services_value + '% in quarter ending ' + displayDate +
+              '<br><strong id="production">Production:</strong> ' + production_value + '% in quarter ending ' + displayDate + '<br><strong id="manufacturing">Manufacturing:</strong> ' + manufacturing_value + '% in quarter ending ' + displayDate +
+              '<br><strong id="construction">Construction:</strong> ' + construction_value + '% in quarter ending ' + displayDate + '<br>Source: ONS');
         }
 
         function mouseMove(d) {
@@ -629,355 +608,6 @@
     });
   });
 
-  // $(document).on('submit', '#indicator_form_2008', function(e) {
-  //   e.preventDefault();
-  //
-  //   $.ajax({
-  //     url: "/data/growth/",
-  //     type: "POST", // or "get"
-  //     data: {
-  //       years: $('#Brexit_vote').val(),
-  //       csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-  //     },
-  //     success: function growth_graph(growth) {
-  //
-  //       x.domain(d3.extent(growth, function(d) {
-  //         return dateParse(d.date);
-  //       }));
-  //
-  //       y.domain(d3.extent(growth, function(d) {
-  //         return parseFloat(d.construction);
-  //       }));
-  //
-  //       var line = d3.line()
-  //         .curve(d3.curveCatmullRom)
-  //         .x(function(d) {
-  //           return x(dateParse(d.date));
-  //         })
-  //         .y(function(d) {
-  //           return y(d.value);
-  //         });
-  //
-  //       var line_services = d3.line()
-  //         .curve(d3.curveCatmullRom)
-  //         .x(function(d) {
-  //           return x(dateParse(d.date));
-  //         })
-  //         .y(function(d) {
-  //           return y(d.services);
-  //         });
-  //
-  //       var line_production = d3.line()
-  //         .curve(d3.curveCatmullRom)
-  //         .x(function(d) {
-  //           return x(dateParse(d.date));
-  //         })
-  //         .y(function(d) {
-  //           return y(d.production);
-  //         });
-  //
-  //       var line_manufacturing = d3.line()
-  //         .curve(d3.curveCatmullRom)
-  //         .x(function(d) {
-  //           return x(dateParse(d.date));
-  //         })
-  //         .y(function(d) {
-  //           return y(d.manufacturing);
-  //         });
-  //
-  //       var line_construction = d3.line()
-  //         .curve(d3.curveCatmullRom)
-  //         .x(function(d) {
-  //           return x(dateParse(d.date));
-  //         })
-  //         .y(function(d) {
-  //           return y(d.construction);
-  //         });
-  //
-  //       var lines = svg.selectAll('.line')
-  //         .remove()
-  //         .exit()
-  //         .data([growth]);
-  //
-  //       var lines_s = svg.selectAll('.line_services')
-  //         .remove()
-  //         .exit()
-  //         .data([growth]);
-  //
-  //       var lines_p = svg.selectAll('.line_production')
-  //         .remove()
-  //         .exit()
-  //         .data([growth]);
-  //
-  //       var lines_m = svg.selectAll('.line_manufacturing')
-  //         .remove()
-  //         .exit()
-  //         .data([growth]);
-  //       console.log(lines_m)
-  //
-  //       var lines_c = svg.selectAll('.line_construction')
-  //         .remove()
-  //         .exit()
-  //         .data([growth]);
-  //       console.log(lines_c)
-  //
-  //       lines
-  //         .enter()
-  //         .append('path')
-  //         .attr('class', 'line')
-  //         .attr("id", "blueLine") //Toggle
-  //         .attr('fill', 'none')
-  //         .attr('d', line);
-  //
-  //       lines_s
-  //         .enter()
-  //         .append('path')
-  //         .attr('class', 'line_services')
-  //         .attr('fill', 'none')
-  //         .attr('d', line_services);
-  //
-  //       lines_p
-  //         .enter()
-  //         .append('path')
-  //         .attr('class', 'line_production')
-  //         .attr('fill', 'none')
-  //         .attr('d', line_production);
-  //
-  //       lines_m
-  //         .enter()
-  //         .append('path')
-  //         .attr('class', 'line_manufacturing')
-  //         .attr('fill', 'none')
-  //         .attr('d', line_manufacturing);
-  //
-  //       lines_c
-  //         .enter()
-  //         .append('path')
-  //         .attr('class', 'line_construction')
-  //         .attr('fill', 'none')
-  //         .attr('d', line_construction);
-  //
-  //       var points = svg.selectAll('.point')
-  //         .remove()
-  //         .exit()
-  //         .data(growth);
-  //
-  //       var points_s = svg.selectAll('.point')
-  //         .remove()
-  //         .exit()
-  //         .data(growth);
-  //
-  //       var points_p = svg.selectAll('.point')
-  //         .remove()
-  //         .exit()
-  //         .data(growth);
-  //
-  //       var points_m = svg.selectAll('.point')
-  //         .remove()
-  //         .exit()
-  //         .data(growth);
-  //
-  //       var points_c = svg.selectAll('.point')
-  //         .remove()
-  //         .exit()
-  //         .data(growth);
-  //
-  //       points
-  //         .enter()
-  //         .append('circle')
-  //         .attr('class', 'point')
-  //         .attr('r', 3)
-  //         .attr('cx', function(growth) {
-  //           return x(dateParse(growth.date));
-  //         })
-  //         .attr('cy', function(growth) {
-  //           return y(growth.value);
-  //         })
-  //         .attr('fill', 'black')
-  //         .attr('opacity', 1)
-  //         .on('mouseover', mouseOver)
-  //         .on('mousemove', mouseMove)
-  //         .on('mouseout', mouseOut);
-  //
-  //       points_s
-  //         .enter()
-  //         .append('circle')
-  //         .attr('class', 'point')
-  //         .attr('r', 3)
-  //         .attr('cx', function(growth) {
-  //           return x(dateParse(growth.date));
-  //         })
-  //         .attr('cy', function(growth) {
-  //           return y(growth.services);
-  //         })
-  //         .attr('fill', 'black')
-  //         .attr('opacity', 1)
-  //         .on('mouseover', mouseOver)
-  //         .on('mousemove', mouseMove)
-  //         .on('mouseout', mouseOut);
-  //
-  //       points_p
-  //         .enter()
-  //         .append('circle')
-  //         .attr('class', 'point')
-  //         .attr('r', 3)
-  //         .attr('cx', function(growth) {
-  //           return x(dateParse(growth.date));
-  //         })
-  //         .attr('cy', function(growth) {
-  //           return y(growth.production);
-  //         })
-  //         .attr('fill', 'black')
-  //         .attr('opacity', 1)
-  //         .on('mouseover', mouseOver)
-  //         .on('mousemove', mouseMove)
-  //         .on('mouseout', mouseOut);
-  //
-  //       points_m
-  //         .enter()
-  //         .append('circle')
-  //         .attr('class', 'point')
-  //         .attr('r', 3)
-  //         .attr('cx', function(growth) {
-  //           return x(dateParse(growth.date));
-  //         })
-  //         .attr('cy', function(growth) {
-  //           return y(growth.manufacturing);
-  //         })
-  //         .attr('fill', 'black')
-  //         .attr('opacity', 1)
-  //         .on('mouseover', mouseOver)
-  //         .on('mousemove', mouseMove)
-  //         .on('mouseout', mouseOut);
-  //
-  //       points_c
-  //         .enter()
-  //         .append('circle')
-  //         .attr('class', 'point')
-  //         .attr('r', 3)
-  //         .attr('cx', function(growth) {
-  //           return x(dateParse(growth.date));
-  //         })
-  //         .attr('cy', function(growth) {
-  //           return y(growth.construction);
-  //         })
-  //         .attr('fill', 'black')
-  //         .attr('opacity', 1)
-  //         .on('mouseover', mouseOver)
-  //         .on('mousemove', mouseMove)
-  //         .on('mouseout', mouseOut);
-  //
-  //       // svg.append("text")
-  //       //   .attr("transform", "translate("+(width+3)+","+y(growth[0].construction)+")")
-  //       //   .attr("dy", ".35em")
-  //       //   .attr("text-anchor", "start")
-  //       //   .style("fill", "black")
-  //       //   .text("Construction")
-  //       //   .exit()
-  //       //   .remove();
-  //       //
-  //       // svg.append("text")
-  //       //   .attr("transform", "translate("+(width+3)+","+y(growth[0].production)+")")
-  //       //   .attr("dy", ".35em")
-  //       //   .attr("text-anchor", "start")
-  //       //   .style("fill", "Orange")
-  //       //   .text("Production")
-  //       //   .exit()
-  //       //   .remove();
-  //
-  //
-  //       svg.select('.x.axis')
-  //         .call(x_axis)
-  //         .selectAll('text')
-  //         .attr('transform', 'rotate(30)')
-  //         .attr('y', '10')
-  //         .attr('x', '0')
-  //         .style("text-anchor", "start");
-  //
-  //       svg.select('.y.axis')
-  //         .call(y_axis)
-  //
-  //       function mouseOver(d) {
-  //         var date = dateParse(d.date);
-  //         var displayDate = tooltipFormat(date)
-  //         var value_function = d.value;
-  //
-  //         d3.select(this)
-  //           .transition()
-  //           .style('opacity', 1);
-  //
-  //         tooltip
-  //           .style('display', null)
-  //           .html('<p>UK growth was ' + value_function + ' in ' + displayDate + '</p>');
-  //       }
-  //
-  //       function mouseMove(d) {
-  //         tooltip
-  //           .style('top', (d3.event.pageY - 20) + "px")
-  //           .style('left', (d3.event.pageX + 20) + "px");
-  //       }
-  //
-  //       function mouseOut(d) {
-  //         d3.select(this)
-  //           .transition()
-  //           .style('opacity', 1);
-  //
-  //         tooltip
-  //           .style('display', 'none');
-  //
-  //       }
-  //     }
-  //   });
-  // });
-
-  // function years_or_quarter() {
-  //   var nameValue = document.getElementById("select_dropdown").value
-  //   console.log(nameValue)
-  //   if (nameValue == 211) {
-  //
-  //     svg.selectAll('#tags')
-  //       .remove()
-  //
-  //     svg.append("text")
-  //       .attr("id", "tags")
-  //       .attr("transform", "rotate(-90)")
-  //       .attr("y", 10 - margin.left)
-  //       .attr("x", 0 - (height / 2))
-  //       .attr("dy", "1em")
-  //       .style("text-anchor", "middle")
-  //       // .text("Growth Q-to-Q %");
-  //       .text("Year-to-Year Growth %")
-  //
-  //     svg.append("text")
-  //       .attr("id", "tags")
-  //       .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
-  //       .style("text-anchor", "middle")
-  //       .text("Years");
-  //
-  //   } else {
-  //
-  //     svg.selectAll('#tags')
-  //       .remove()
-  //
-  //     svg.append("text")
-  //       .attr("id", "tags")
-  //       .attr("transform", "rotate(-90)")
-  //       .attr("y", 10 - margin.left)
-  //       .attr("x", 0 - (height / 2))
-  //       .attr("dy", "1em")
-  //       .style("text-anchor", "middle")
-  //       // .text("Growth Q-to-Q %");
-  //       .text("Quarter-to-Quarter Growth %")
-  //
-  //     svg.append("text")
-  //       .attr("id", "tags")
-  //       .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
-  //       .style("text-anchor", "middle")
-  //       .text("Quarters");
-  //
-  //   }
-  // }
-  // years_or_quarter()
 </script>
 
 </html>

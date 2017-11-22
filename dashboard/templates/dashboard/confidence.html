@@ -1,0 +1,868 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="{% static 'dashboard/style/style.css' %}">
+  <script src="{% static 'dashboard/javascript/d3.js' %}"></script>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <title>Consumer Confidence and Business Investment | The Brexit Dashboard</title>
+</head>
+
+<body>
+  <div class="confidence_header">
+    <h2 class="article_title">Brexit uncertainty erodes consumer confidence</h2>
+    <img src="/static/dashboard/img/rolls_food_store.jpg" id="front_image_confidence"></div>
+  <div id="vis_confidence"></div>
+  </div>
+    <div id="auto_text"></div>
+  <div>
+    <form method="post" action="/data/confidence/" id="confidence">
+      {% csrf_token %}
+      <button class="indicator_botton" id="confidence_button" type="botton">Compare to other countries</button>
+    </form>
+    <form method="post" action="/data/business/" id="business">
+      {% csrf_token %}
+      <button class="indicator_botton" id="business_button" type="botton">Business Investment</button>
+    </form>
+  </div>
+  <article>
+    <p>After years of austerity, the fall in real income, and a weaker sterling, people in the UK have to adjust their spending, and in many cases, increase debt to keep the same living standards. Consumers have to adapt to the new economic reality of Brexit.<br><br>
+These circumstances have affected confidence to spend, which translates into a risk to the UK's economic outlook. For instance, food and drink producers are one of the industries that showed stable growth after the Brexit vote, however, they reported that consumers “switched to lower-value products as their incomes were squeezed”, according to the latest Agents’ summary of business conditions by the Bank of England.<br><br>
+The decrease of consumer confidence in the UK is another indicator that reveals the pessimism of the average consumer in the post-referendum era. Consumers in the United Kingdom have shown less trust and willingness to spend, according to the Consumer Confidence Indicator by Eurostat. This indicator has shown negative results since 2016 and most of 2017.<br><br>
+Last October, the UK reported a -6.5 in this index that provides information on consumers’ purchasing trends. In contrast, other high-income European countries such as Sweden, Finland, Netherlands, Luxembourg, Ireland, Denmark, show a healthy positive index in the double digits.<br><br>
+According to GfK, UK’s consumers’ confidence showed a dramatic decrease in their perception of the general economic situation. This index collapsed 10 points, down to -29.<br><br>
+“It’s no surprise that the Overall Index Score continues to bump along in negative territory this month (October). As concerns about the wider economic prospects for the UK economy dampen our outlook, consumers are showing no real ‘get-up-and-go’”, said in a press release, Joe Staton, head of market dynamics at GfK, the research firm that measures consumer confidence in the UK on behalf of the European Commission.<br><br>
+“Our enthusiasm for spending, as witnessed by the uptick in the Major Purchase Index, is more worrying than reassuring. Surging credit card use is fuelling spending at the expense of our appetite for saving, which is growing at the slowest rate since the start of the 2008/2009 financial crisis”, he added.<br><br>
+The UK compares less favourably with other economic regions in terms of consumer confidence. According to the latest Inflation Report by the Bank of England, consumer confidence in the Euro area and the United States is “healthy”, while the UK displays a negative trend.<br><br>
+However, Brexit is not the only culprit on the lack of consumer confidence in the UK. After years of spending cuts on social welfare and the decrease in real income since the financial crisis of 2008, people in the UK have resorted to credit to keep the same level of spending.<br><br>
+Economic conditions have not been particularly favourable for consumers in the UK, according to Joshy Easaw, professor of economics at Cardiff University.<br><br>
+“In many ways, austerity and the fall in real income explain last election results and how the government lost its majority to the rising popularity of the Labour party and Jeremy Corbyn, who highlighted inequality”, said Easaw in an interview.<br><br>
+“You can argue that also these are the reasons why people voted to leave in response to anti-globalisation rhetoric. The issue of inequality has been around for 30 years. The financial crisis and the subsequent response to austerity exacerbated those sentiments anti-globalisation. It is both the cause and the effect of Brexit.”<br><br>
+Symptoms of an increasing inequality are present in the economic data reported by the Bank of England. In their Agents’ report, while most consumers switch to lower-value food products, companies that produce luxury or niche consumer goods, such as high-tech have “reported stronger growth in demand”.<br><br>
+Easaw explained that consumer and businesses hit economic reality, marked by a high degree of uncertainty, despite the optimism expressed by the Leave campaign supporters and some UK government secretaries that trust there will be a “brilliant” future after Brexit.<br><br>
+“It’s the economic reality that will drive people’s behaviour”, Easaw said. “I wouldn’t say it’s only a lack of confidence, the problem is the high uncertainty surrounding the Brexit process; no one knows what’s going to happen. And part of the problem with not knowing what is going to happen is that there is a tendency for consumers to just being negative by default”, he explained.<br><br>
+Consumers are bracing for a negative economic outlook, as well as businesses who have their tools to forecast the economy.<br><br>
+“Before the financial crisis household debt was at an enormous height, an astronomic level. But at that time, consumers were quite optimistic because they were borrowing. Typically, what you do when you have unsecured debt, you are smoothing out consumption. Today situation is slightly different because with falling income and you don’t want to adjust your consumption down so what you need to do is to increase your debt”, said Easaw.<br><br>
+<strong class="article_sub">Risks for businesses and investment: Bank of England</strong><br><br>
+The UK lost three positions as a top prospective destination of Foreign Direct Investment (FDI). The UK went from number 4 to 7, as a top prospective host economy for 2017-2019, losing ground against emerging economies such as Brazil, Thailand and Indonesia, “possibly owing to uncertainty about Brexit”, according to the World Investment Report 2017 by the United Nations Conference on Trade and Development (UNCTAD).<br><br>
+Business investment has remained relatively healthy since the Brexit vote and the UK is still the second largest recipient of FDI –after the United States–  with $254 billion according to the UNCTAD.<br><br>
+“Despite the Brexit vote, inflows to the United Kingdom rose to an unprecedented level, owing to the completion of cross-border M&A (mergers and acquisitions) megadeals”, said the report by UNCTAD.<br><br>
+However, the Bank of England reported that investment is low when compared with the size of the capital stock, in other words, investment is not reaching its full potential, something that weighs on productivity, according to their Inflation Report.<br><br>
+The Bank of England explained that the depreciation of the sterling was a barrier to new investments. Investment in the UK relies heavily on importing goods and capital, and the uncertainty caused by the Brexit vote might be deterring investors since there is no clear picture on the future relationship with the EU, according to the Agents’ summary of business conditions.<br><br>
+Also, less household spending, consumer confidence, increasing inflation and income squeeze, slowed demand in different sectors. Services –the most crucial industry in the economy– has observed weaker investment growth, especially retail sales growth in the segment of expensive items.<br><br>
+“Retail sales growth had remained subdued in values terms, especially in non-food sectors; there were more reports of consumers trading down and focusing on essential purchases. Growth was challenged by modest rises in earnings and weakening consumer confidence”, according to the agent’s report.<br><br>
+Furthermore, lack of confidence is also reflected on the possible relocations of several financial firms to the EU from the City of London, one of the most buoyant sectors of the UK economy. Last September, the Bank of England’s Financial Policy Committee (FPC) warned about the possible disruption to financial services because of Brexit and said it is making preparations in case those risks materialise.<br><br>
+Some of those dangers are the discontinuity of contracts between the UK and the EU in some financial instruments such as insurance and derivatives, restrictions on sharing personal data, and other issues concerning cross-border banking, among others.<br><br>
+A weaker pound has decimated consumer confidence, but some industries have shown a stable growth after the Brexit vote. According to the Bank of England, firms producing luxury, niche, high-tech, aerospace and military products reported a stronger growth.<br><br>
+“Export growth was supported by the past fall in the exchange rate, and the continuing strengthening in global demand”, according to the Agent’s report. “Some exporters described the current environment as a ‘sweet spot’, but noted future risks around market access and supply chains following the United Kingdom’s departure from the European Union”.<br><br>
+Despite this risks to investment, the UNCTAD explained in its report that for now Brexit would have a limited impact on FDI “until the terms of the departure become clear”. Before the referendum, the expectation was that the UK was going to remain in the UK, and many transactions in 2016, were planned before the Brexit vote.<br><br>
+“Any potential change in FDI plans caused by Brexit would take a few years to translate into actual flows”, according to UNCTAD.<br><br>
+    </p>
+  </article>
+</body>
+<script src="{% static 'dashboard/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<script>
+  var confidence = {{ confidence_json | safe }}
+  console.log(confidence)
+
+  document.getElementById("auto_text").innerText = confidence[12]['text']
+
+
+  var margin = {
+    top: 50,
+    left: 60,
+    right: 30,
+    bottom: 60,
+  };
+
+  var width = 500;
+  var height = 400;
+
+  var svg = d3.select('#vis_confidence')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height)
+    .append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+  svg.append("linearGradient")
+    .attr("id", "line-gradient")
+    .attr("gradientUnits", "userSpaceOnUse")
+    .attr("x1", 0).attr("y1", "0%")
+    .attr("x2", 0).attr("y2", "100%")
+    .selectAll("stop")
+    .data([{
+        offset: "0%",
+        color: "lime"
+      },
+      {
+        offset: "10%",
+        color: "grey"
+      },
+      {
+        offset: "100%",
+        color: "red"
+      }
+    ])
+    .enter().append("stop")
+    .attr("offset", function(d) {
+      return d.offset;
+    })
+    .attr("stop-color", function(d) {
+      return d.color;
+    });
+
+  svg.append("linearGradient")
+    .attr("id", "line-gradient-business")
+    .attr("gradientUnits", "userSpaceOnUse")
+    .attr("x1", 0).attr("y1", "0%")
+    .attr("x2", 0).attr("y2", "100%")
+    .selectAll("stop")
+    .data([{
+        offset: "0%",
+        color: "lime"
+      },
+      {
+        offset: "40%",
+        color: "grey"
+      },
+      {
+        offset: "100%",
+        color: "red"
+      }
+    ])
+    .enter().append("stop")
+    .attr("offset", function(d) {
+      return d.offset;
+    })
+    .attr("stop-color", function(d) {
+      return d.color;
+    });
+
+  var tooltip = d3.select('body')
+    .append('div')
+    .attr('class', 'tooltip');
+
+  width = width - margin.left - margin.right;
+  height = height - margin.top - margin.bottom;
+
+  var dateParse = d3.timeParse('%Y %b');
+  var tooltipFormat = d3.timeFormat('%b %Y');
+
+  var x = d3.scaleTime()
+    .range([0, width]);
+
+  var y = d3.scaleLinear()
+    .domain(d3.extent(confidence, function(d) {
+      return d['United Kingdom'];
+    }))
+    .range([height, 0]);
+
+  var x_axis = d3.axisBottom(x)
+  var y_axis = d3.axisLeft(y)
+
+  // x label
+  svg.append('g')
+    .attr('transform', 'translate(0,' + height + ')')
+    .attr('class', 'x axis');
+
+  // y label
+  svg.append('g')
+    .attr('class', 'y axis')
+  //
+  svg.selectAll('#tags')
+    .remove()
+  //
+
+  svg.append("text")
+    .attr("id", "tags")
+    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 0) + ")")
+    .style("text-anchor", "middle")
+    .text("Months");
+
+  svg.append("text")
+    .attr("id", "tags")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 10 - margin.left)
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("Consumer Confidence Index");
+  //
+  svg.append("text")
+    .attr("x", (width / 2))
+    .attr("id", "tags")
+    .attr("y", 0 - (margin.top / 2))
+    .attr("text-anchor", "middle")
+    .style("font-size", "18px")
+    .text("UK's consumer confidence fell in 2017");
+  //
+  function make_x_gridlines() {
+    return d3.axisBottom(x)
+      .ticks(0);
+  }
+  //
+  function make_y_gridlines() {
+    return d3.axisLeft(y)
+      .ticks(10);
+  }
+  //
+  // // add the X gridlines
+  svg.append("g")
+    .attr("class", "grid")
+    .attr("transform", "translate(0," + height + ")")
+    .call(make_x_gridlines()
+      .tickSize(-height)
+      .tickFormat("")
+    );
+  // // add the Y gridlines
+  svg.append("g")
+    .attr("class", "grid")
+    .call(make_y_gridlines()
+      .tickSize(-width)
+      .tickFormat("")
+    );
+  //
+  x.domain(d3.extent(confidence, function(d) {
+    return dateParse(d.date);
+  }));
+
+  y.domain(d3.extent(confidence, function(d) {
+    return d['United Kingdom'];
+  }));
+  //
+  var line = d3.line()
+    .curve(d3.curveCatmullRom)
+    .x(function(d) {
+      return x(dateParse(d.date));
+    })
+    .y(function(d) {
+      return y(d['United Kingdom']);
+    });
+  //
+  var lines = svg.selectAll('.line')
+    .remove()
+    .exit()
+    .data([confidence]);
+  console.log(lines)
+  //
+  lines
+    .enter()
+    .append('path')
+    .attr('class', 'line')
+    .attr("id", "tags")
+    .attr('fill', 'none')
+    .attr('d', line);
+
+  svg.selectAll('.line')
+    .transition()
+    .duration(1000)
+
+  var points = svg.selectAll('.point')
+    .remove()
+    .exit()
+    .data(confidence);
+
+  points
+    .enter()
+    .append('circle')
+    .attr('class', 'point')
+    .attr('r', 2.5)
+    .attr('cx', function(confidence) {
+      return x(dateParse(confidence.date));
+    })
+    .attr('cy', function(confidence) {
+      return y(confidence['United Kingdom']);
+    })
+    .attr('fill', 'black')
+    .attr('opacity', 1)
+    .on('mouseover', mouseOver)
+    .on('mousemove', mouseMove)
+    .on('mouseout', mouseOut);
+  //
+  svg.select('.x.axis')
+    .call(x_axis)
+    .selectAll('text')
+    .attr('transform', 'rotate(30)')
+    .attr('y', '10')
+    .attr('x', '0')
+    .style("text-anchor", "start");
+
+  svg.select('.y.axis')
+    .call(y_axis)
+
+  function mouseOver(d) {
+    var date = dateParse(d.date);
+    var displayDate = tooltipFormat(date)
+    var value_function = d['United Kingdom'];
+
+    d3.select(this)
+      .transition()
+      .style('opacity', 1);
+
+    tooltip
+      .style('display', null)
+      .html('<p>UK confidence was ' + value_function + ' in ' + displayDate + '<br/>Source: Eurostat' + '</p>');
+  }
+
+  function mouseMove(d) {
+    tooltip
+      .style('top', (d3.event.pageY - 20) + "px")
+      .style('left', (d3.event.pageX + 20) + "px");
+  }
+
+  function mouseOut(d) {
+    d3.select(this)
+      .transition()
+      .style('opacity', 1);
+
+    tooltip
+      .style('display', 'none');
+
+  }
+
+
+  $(document).on('submit', '#confidence', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: "/data/confidence/",
+      type: "POST", // or "get"
+      data: {
+        years: $('#select_dropdown').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function confidence(confidence) {
+
+        svg.selectAll('#tags')
+          .remove()
+
+        svg.append("text")
+          .attr("x", (width / 2))
+          .attr("id", "tags")
+          .attr("y", 0 - (margin.top / 2))
+          .attr("text-anchor", "middle")
+          .style("font-size", "18px")
+          .text("Low consumer confidence after Brexit");
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 10 - margin.left)
+          .attr("x", 0 - (height / 2))
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .text("Consumer Confidence Index")
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + -2) + ")")
+          .style("text-anchor", "middle")
+          .text("Months");
+
+        var dateParse = d3.timeParse('%Y %b');
+        var tooltipFormat = d3.timeFormat('%b %Y');
+
+        x.domain(d3.extent(confidence, function(d) {
+          return dateParse(d.date);
+        }));
+
+        y.domain(d3.extent(
+          [].concat(confidence.map(function(d) {
+            return parseFloat(d["Denmark"]);
+          }), confidence.map(function(d) {
+            return parseFloat(d["Finland"]);
+          }), confidence.map(function(d) {
+            return parseFloat(d["Luxembourg"]);
+          }), confidence.map(function(d) {
+            return parseFloat(d["Netherlands"]);
+          }), confidence.map(function(d) {
+            return parseFloat(d["Sweden"]);
+          }), confidence.map(function(d) {
+            return parseFloat(d["United Kingdom"]);
+          }))));
+
+        var line_Denmark = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d["Denmark"]);
+          });
+
+        var line_Finland = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d["Finland"]);
+          });
+
+        var line_Luxembourg = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d["Luxembourg"]);
+          });
+        //
+        var line_Netherlands = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d["Netherlands"]);
+          });
+
+        var line_Sweden = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d["Sweden"]);
+          });
+
+        var line_United_Kingdom = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d["United Kingdom"]);
+          });
+
+        var lines_s = svg.selectAll('.line_Denmark')
+          .remove()
+          .exit()
+          .data([confidence]);
+        console.log(lines_s)
+
+        var lines_p = svg.selectAll('.line_Finland')
+          .remove()
+          .exit()
+          .data([confidence]);
+        //
+        var lines_m = svg.selectAll('.line_Luxembourg')
+          .remove()
+          .exit()
+          .data([confidence]);
+        //
+        var lines_c = svg.selectAll('.line_Netherlands')
+          .remove()
+          .exit()
+          .data([confidence]);
+
+        var lines_n = svg.selectAll('.line_Sweden')
+          .remove()
+          .exit()
+          .data([confidence]);
+
+        var lines_u = svg.selectAll('.line_United_Kingdom')
+          .remove()
+          .exit()
+          .data([confidence]);
+
+        lines_s
+          .enter()
+          .append('path')
+          .attr('class', 'line_Denmark')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_Denmark);
+
+        console.log(lines_s)
+
+        lines_p
+          .enter()
+          .append('path')
+          .attr('class', 'line_Finland')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_Finland);
+        //
+        lines_m
+          .enter()
+          .append('path')
+          .attr('class', 'line_Luxembourg')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_Luxembourg);
+        //
+        lines_c
+          .enter()
+          .append('path')
+          .attr('class', 'line_Netherlands')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_Netherlands);
+
+
+        lines_n
+          .enter()
+          .append('path')
+          .attr('class', 'line_Sweden')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_Sweden);
+
+        lines_u
+          .enter()
+          .append('path')
+          .attr('class', 'line_United_Kingdom')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_United_Kingdom);
+
+        var points = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(confidence);
+
+        var points_s = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(confidence);
+
+        var points_p = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(confidence);
+        //
+        var points_m = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(confidence);
+        //
+        var points_c = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(confidence);
+
+
+        var points_n = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(confidence);
+        //
+        var points_u = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(confidence);
+
+        points_s
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr("id", "tags")
+          .attr('r', 2.5)
+          .attr('cx', function(confidence) {
+            return x(dateParse(confidence.date));
+          })
+          .attr('cy', function(confidence) {
+            return y(confidence["Denmark"]);
+          })
+          .attr('fill', 'red')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_p
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr("id", "tags")
+          .attr('r', 2.5)
+          .attr('cx', function(confidence) {
+            return x(dateParse(confidence.date));
+          })
+          .attr('cy', function(confidence) {
+            return y(confidence["Finland"]);
+          })
+          .attr('fill', 'orange')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_m
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr("id", "tags")
+          .attr('r', 2.5)
+          .attr('cx', function(confidence) {
+            return x(dateParse(confidence.date));
+          })
+          .attr('cy', function(confidence) {
+            return y(confidence["Luxembourg"]);
+          })
+          .attr('fill', 'green')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+        //
+        points_c
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr("id", "tags")
+          .attr('r', 2.5)
+          .attr('cx', function(confidence) {
+            return x(dateParse(confidence.date));
+          })
+          .attr('cy', function(confidence) {
+            return y(confidence["Netherlands"]);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_n
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr("id", "tags")
+          .attr('r', 2.5)
+          .attr('cx', function(confidence) {
+            return x(dateParse(confidence.date));
+          })
+          .attr('cy', function(confidence) {
+            return y(confidence["Sweden"]);
+          })
+          .attr('fill', 'purple')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_c
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr("id", "tags")
+          .attr('r', 2.5)
+          .attr('cx', function(confidence) {
+            return x(dateParse(confidence.date));
+          })
+          .attr('cy', function(confidence) {
+            return y(confidence["United Kingdom"]);
+          })
+          .attr('fill', 'blue')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        svg.select('.x.axis')
+          .call(x_axis)
+          .selectAll('text')
+          .attr('transform', 'rotate(30)')
+          .attr('y', '10')
+          .attr('x', '0')
+          .style("text-anchor", "start");
+
+        svg.select('.y.axis')
+          .call(y_axis)
+
+        function mouseOver(d) {
+          var date = dateParse(d.date);
+          var displayDate = tooltipFormat(date)
+          var Denmark = d['Denmark'];
+          var Finland = d['Finland'];
+          var Luxembourg = d["Luxembourg"];
+          var Netherlands = d["Netherlands"];
+          var Sweden = d["Sweden"];
+          var United_Kingdom = d["United Kingdom"];
+          // var G7 = d.G7;
+
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', null)
+            .html('<p><strong id="UK">Denmark:</strong> ' + Denmark + ' in ' + displayDate + '</br><strong id="Finland">Finland:</strong> ' + Finland + ' in ' + displayDate + '</br><strong id="Luxembourg">Luxembourg:</strong> ' + Luxembourg + ' in ' + displayDate + '</br><strong id="Netherlands">Netherlands:</strong> ' + Netherlands + ' in ' + displayDate + '</br><strong id="Sweden">Sweden:</strong> ' + Sweden + ' in ' + displayDate + '</br><strong id="United_Kingdom">United Kingdom:</strong> ' + United_Kingdom + ' in ' + displayDate + '<br/>Source: Eurostat');
+        }
+
+        function mouseMove(d) {
+          tooltip
+            .style('top', (d3.event.pageY - 20) + "px")
+            .style('left', (d3.event.pageX + 20) + "px");
+        }
+
+        function mouseOut(d) {
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', 'none');
+
+        }
+      }
+    });
+  });
+  //
+  //
+  // business
+  $(document).on('submit', '#business', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: "/data/business/",
+      type: "POST", // or "get"
+      data: {
+        years: $('#select_dropdown').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function business(business) {
+
+        svg.selectAll('#tags')
+          .remove()
+
+        svg.append("text")
+          .attr("x", (width / 2))
+          .attr("id", "tags")
+          .attr("y", 0 - (margin.top / 2))
+          .attr("text-anchor", "middle")
+          .style("font-size", "18px")
+          .text("Investment growth after Brexit vote");
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 10 - margin.left)
+          .attr("x", 0 - (height / 2))
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .text("Quarterly Y-to-Y growth")
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 7) + ")")
+          .style("text-anchor", "middle")
+          .text("Quarters");
+
+        var dateParse = d3.timeParse('%Y %b');
+        var tooltipFormat = d3.timeFormat('%b %Y');
+
+        x.domain(d3.extent(business, function(d) {
+          return dateParse(d.date);
+        }));
+
+        y.domain(d3.extent(business, function(d) {
+          return parseFloat(d.growth);
+        }));
+
+        var line_business = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.growth);
+          });
+
+        var lines_s = svg.selectAll('.line_business')
+          .remove()
+          .exit()
+          .data([business]);
+        console.log(lines_s)
+
+        lines_s
+          .enter()
+          .append('path')
+          .attr('class', 'line_business')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_business);
+
+        var points = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(business);
+
+        var points_s = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(business);
+
+        points_s
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr("id", "tags")
+          .attr('r', 2.5)
+          .attr('cx', function(business) {
+            return x(dateParse(business.date));
+          })
+          .attr('cy', function(business) {
+            return y(business.growth);
+          })
+          .attr('fill', 'black')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        svg.select('.x.axis')
+          .call(x_axis)
+          .selectAll('text')
+          .attr('transform', 'rotate(30)')
+          .attr('y', '10')
+          .attr('x', '0')
+          .style("text-anchor", "start");
+
+        svg.select('.y.axis')
+          .call(y_axis)
+
+        function mouseOver(d) {
+          var date = dateParse(d.date);
+          var displayDate = tooltipFormat(date)
+          var business_growth = d.growth;
+
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', null)
+            .html('<p><strong id="business">Business Investment increased</strong> ' + business_growth + '% in ' + displayDate + '<br>Source: ONS');
+        }
+
+        function mouseMove(d) {
+          tooltip
+            .style('top', (d3.event.pageY - 20) + "px")
+            .style('left', (d3.event.pageX + 20) + "px");
+        }
+
+        function mouseOut(d) {
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', 'none');
+
+        }
+      }
+
+    });
+  });
+
+
+</script>
+
+</html>

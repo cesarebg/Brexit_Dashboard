@@ -1,10 +1,598 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h1>Trade</h1>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="{% static 'dashboard/style/style.css' %}">
+  <script src="{% static 'dashboard/javascript/d3.js' %}"></script>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <title>Trade | The Brexit Dashboard</title>
+</head>
+
+<body>
+  <div class="confidence_header">
+    <h2 class="article_title">Exports pick up, but trade deficit grows</h2>
+    <img src="/static/dashboard/img/dover.jpg" id="front_image_confidence"></div>
+  <div id="vis_trade"></div>
+  </div>
+  <div id="auto_text"></div>
+  <div>
+    <form method="post" action="/data/imports/" id="imports">
+      {% csrf_token %}
+      <button class="indicator_botton" id="confidence_button" type="botton">Imports and Exports</button>
+    </form>
+    <form method="post" action="/data/services/" id="services">
+      {% csrf_token %}
+      <button class="indicator_botton" id="business_button" type="botton">Services</button>
+    </form>
+  </div>
+  <article>
+    <p>The UK has a trade deficit. Imports have been higher than exports in the last few years. Even if Brexit is aimed to protect UK’s domestic industries, there is not a clear strategy to boost exports –especially in manufacturing– in the case of a no-deal scenario with the EU.<br><br>
+“As noted, the UK has yet to say what trading relationship it wants with the EU", according to a recent paper by the National Institute of Economic and Social Research (NIESR) about Brexit and the Automotive Industry. "Brexiteers didn’t spell out what they wanted and may not agree, and it is not clear how the EU will in turn respond.”<br><br>
+In the third trimester of 2017, the total UK's trade deficit increased £3 billion, according to the ONS. Primarily because of an increase in imports of machinery, fuels and other goods, while exports to non-EU countries fell by £1.7 billion, offsetting the exports increase to the EU of £900 million.<br><br>
+“Between the three months to June 2017 and the three months to September 2017, total trade exports decreased by 0.2% (£0.3 billion), while total trade imports increased by 1.6% (£2.6 billion)”, the ONS explained.<br><br>
+The trade deficit is one of the causes of the current account deficit, which may cause several distortions in the economy, such as an indication of less competitiveness and therefore it should be addressed when the UK leaves the EU.<br><br>
+According to the IMF: “when countries run large deficits, businesses, trade unions, and parliamentarians are often quick to point accusing fingers at trading partners and make charges about unfair practices.”<br><br>
+“I think little attention was paid in the last few years to addressing the overall current account deficit which is partly caused by exports being other less than imports”, said in a telephone interview. Malcolm Sawyer, academic from the University of Leeds. “At the same time, over the years the UK has been borrowing abroad accumulating liabilities overseas, which is making the current account deficit tends to grow.”<br><br>
+Sawyer explained that one of the explanations of the trade deficit is that the UK has lost most of its manufacturing capacity, relying more on the services sector, such as finance, “leaving exports on a less competitive position when compared with economies such as Germany.”<br><br>
+According to a report by the Sheffield Political Economy Research Institute (SPERI), the UK manufacturing industry is entering in a new and different type of decline, in which despite more people are working in this sector, these are low-skilled jobs, that are not improving productivity. Their data also shows that high-tech industries in the UK are falling behind their counterparts.<br><br>
+SPERI data shows that even when manufacturing jobs in the UK reported a 5% present growth between 2011 and 2016 –reversing the double-digit historical decline that began in the eighties– the output of high-tech industries increased only 1.37% in the same period. Computers fell 1%, and Pharmaceuticals output decreased 7%. The only two sectors that reported growth were Chemical with almost 2%, and Transport with 31%.<br><br>
+Although supporters of Brexit underline the importance of “taking back control” of the laws that apply in the UK, there is no clear strategy on many economic fronts.<br> <br>
+ “While we could reasonably say that industrial policy initiatives may only bear fruit over the long term, the UK’s withdrawal from the European Union will prove to be a significant challenge to the manufacturing sector in the years ahead, given the possibility of trade barriers between the UK manufacturing and its key trading partners, lower levels of investment from European manufacturing firms, and a more challenging research environment for UK universities”, according to the SPERI report.<br><br>
+The SPERI also argues that the current government has not offered a plan capable of addressing the problems of the manufacturing industry, despite promising a new focus on industrial policy and having Brexit just around the corner.<br><br>
+This scenario brings new risks to sectors that have performed well over the years, such as the automotive industry.<br><br>
+“The UK’s automotive industry has been one of the ‘star performers’ of the UK economy in recent years – unlike most other manufacturing sectors”, according to the NIESR. “Output has increased by over 60 percent since 2010, and there has been over £8 billion worth of investment in the industry in the past five years.”<br><br>
+“The industry supports some 800,000 jobs in the UK. It is seen as having benefitted from EU membership”, the NIESR added.<br><br>
+Taking the automotive industry as an example of how Brexit may affect manufacturing, the possible improvement of car exports due to a weaker pound, maybe offset by a decrease of domestic car sales in case of an economic slowdown, especially if credit becomes more expensive now that the Bank of England may continue increasing their interest rate. Also, brands that do not assemble in the UK and import cars could be affected by a weaker sterling, since their vehicles will be more expensive to buy in the UK.<br><br>
+“Uncertainty has the potential to impact on foreign investment in the UK auto sector, especially when auto firms are looking to replace models. While Nissan has made a decision to build the next generation Qashqai and XTrail models at Sunderland, this will be reviewed by Nissan once the terms of Brexit are clearer”, wrote the NIESR.<br><br>
+The NIESR, argue that the government needs a new industrial strategy that addresses Brexit uncertainty and stimulates investment in new technology to improve exports.<br><br>
+However, some say that uncertainty and a no-deal scenario, are some of the negotiation strategies of the UK government.<br><br>
+“The political rhetoric is there more for a practical reason if we say any deal is better than a no-deal we will never be able to get a good deal”, said in a recent podcast, Swati Dhingra, a professor at the London School of Economics. “But there is even a more important element to it which is the purely practical point: are we going to be able to negotiate all those laws with the EU?”<br><br>
+Therefore, one of the leading problems will be to conjugate a sophisticated industrial strategy for the medium and long-term, that also deals with the complexity of trade agreements with the rest of the world, once the UK is not part of the EU.<br><br>
+The problem is that research institutions such as NIESR and SPERI criticise the lack of a clear strategy from the UK government to improve manufacturing exports and other researchers consider that after Brexit, it will be substantially more difficult for the UK to pursue its agenda on international trade without the backing of the EU. According to research by Silke Trommer, academic from the University of Manchester, after Brexit, the UK will become just a middle power without the support of the EU, facing WTO negotiating deadlocks, institutional strain resulting from parallel country-by-country negotiations, and a fair amount of regulatory conflicts in the existing network of free trade agreements.<br><br>
+Trommer criticises both the government and supporters of Brexit, their apparent lack of understanding of modern international trade. The promise of “ambitious” trade agreements around the world seems to correspond to an ideological understanding of free trade rather than expertise in the field, since negotiations are focused on delivering improved market access, investment protection and regulatory harmonisation clauses, rather than just free exchange of products.<br><br>
+Also, the UK outside the EU will become a smaller player in global trade, “since GDP and export figures are today dwarfed by those of the US, the EU and China", Trommer explains in her paper. "Regarding economic weight alone, the UK finds itself in the position of a middle power, along with countries such as Canada and Japan, but also India and Brazil, which it comfortably outperformed by significant margins in the 1960s.”<br><br>
+“With the global trade regime currently shifting back towards more power-based forms of international interactions, regaining trade policy autonomy post-Brexit may turn out to be a pyrrhic victory for the new trade middle power Britain”, according to the research by Trommer. “Whether the new middle power Britain will be able to live up to its global free trade fantasies in a contested world trade regime may be more questionable than Brexiteers like to concede”.<br><br>
+    </p>
+  </article>
+</body>
+<script src="{% static 'dashboard/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<script>
+
+  var trade = {{ trade_json | safe }}
+  console.log(trade)
+
+  document.getElementById("auto_text").innerText = trade[6]['text']
+
+  var margin = {
+      top: 40,
+      right: 20,
+      bottom: 50,
+      left: 80
+    },
+    width = 500 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+  // var parseDate = d3.timeParse("%Y %b");
+
+  var svg = d3.select("#vis_trade").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+      "translate(" + margin.left + "," + margin.top + ")")
+
+  var tooltip = d3.select('body')
+    .append('div')
+    .attr('class', 'tooltip');
+
+  var dateParse = d3.timeParse('%Y');
+  var tooltipFormat = d3.timeFormat('%Y');
+
+  var x = d3.scaleTime()
+    .range([0, width]);
+
+  var y = d3.scaleLinear()
+    .range([height, 0]);
+
+  var x_axis = d3.axisBottom(x)
+  var y_axis = d3.axisLeft(y)
+
+  svg.append('g')
+    .attr('transform', 'translate(0,' + height + ')')
+    .attr('class', 'x axis');
+
+  svg.append('g')
+    .attr('class', 'y axis')
+
+  svg.selectAll('#tags')
+    .remove()
+
+  svg.append("text")
+  .attr("id", "tags")
+  .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 5) + ")")
+  .style("text-anchor", "middle")
+  .text("Years");
+
+  svg.append("text")
+    .attr("id", "tags")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 5 - margin.left)
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("Millions of £");
+
+  svg.append("text")
+    .attr("x", (width / 2))
+    .attr("id", "tags")
+    .attr("y", 0 - (margin.top / 2))
+    .attr("text-anchor", "middle")
+    .style("font-size", "18px")
+    .text("Trade deficit is increasing");
+
+  //
+  function make_y_gridlines() {
+    return d3.axisLeft(y)
+    .ticks(10);
+  }
+  // // add the Y gridlines
+  svg.append("g")
+    .attr("class", "grid")
+    .attr("id", "tags")
+    .call(make_y_gridlines()
+      .tickSize(-width)
+      .tickFormat("")
+    );
+
+  x.domain(d3.extent(trade, function(d) {
+    return dateParse(d.date);
+  }));
+
+  y.domain(d3.extent(trade, function(d) {
+    return parseInt(d.balance);
+  }));
+
+
+
+  var line_balance = d3.line()
+    .curve(d3.curveCatmullRom)
+    .x(function(d) {
+      return x(dateParse(d.date));
+    })
+    .y(function(d) {
+      return y(d.balance);
+    });
+
+    var lines_b = svg.selectAll('.line_balance')
+      .remove()
+      .exit()
+      .data([trade]);
+
+    lines_b
+      .enter()
+      .append('path')
+      .attr('class', 'line_balance')
+      .attr("id", "tags")
+      .attr('fill', 'none')
+      .attr('d', line_balance);
+
+    var points_b = svg.selectAll('.point')
+      .remove()
+      .exit()
+      .data(trade);
+
+    points_b
+      .enter()
+      .append('circle')
+      .attr('class', 'point')
+      .attr("id", "tags")
+      .attr('r', 2.5)
+      .attr('cx', function(trade) {
+        return x(dateParse(trade.date));
+      })
+      .attr('cy', function(trade) {
+        return y(trade.balance);
+      })
+      .attr('fill', 'blue')
+      .attr('opacity', 1)
+      .on('mouseover', mouseOver)
+      .on('mousemove', mouseMove)
+      .on('mouseout', mouseOut);
+
+    svg.select('.x.axis')
+      .attr("id", "tags")
+      .call(x_axis)
+      .selectAll('text')
+      .attr('transform', 'rotate(30)')
+      .attr('y', '10')
+      .attr('x', '0')
+      .style("text-anchor", "start");
+
+    svg.select('.y.axis')
+      .attr("id", "tags")
+      .call(y_axis)
+
+    function mouseOver(d) {
+      var date = dateParse(d.date);
+      var displayDate = tooltipFormat(date)
+      var balance_function = d.balance;
+
+      d3.select(this)
+        .transition()
+        .style('opacity', 1);
+
+      tooltip
+        .style('display', null)
+        .html('<p><strong id="balance">Balance:</strong> £' + balance_function + ' million in ' + displayDate + '<br/>Source: ONS');
+    }
+
+    function mouseMove(d) {
+      tooltip
+        .style('top', (d3.event.pageY - 20) + "px")
+        .style('left', (d3.event.pageX + 20) + "px");
+    }
+
+    function mouseOut(d) {
+      d3.select(this)
+        .transition()
+        .style('opacity', 1);
+
+      tooltip
+        .style('display', 'none');
+
+    }
+
+  $(document).on('submit', '#imports', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: "/data/imports/",
+      type: "POST", // or "get"
+      data: {
+        years: $('#select_dropdown').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function trade(trade) {
+
+        svg.selectAll('#tags')
+            .remove()
+
+        svg.append('g')
+          .attr('transform', 'translate(0,' + height + ')')
+          .attr('class', 'x axis');
+
+        svg.append('g')
+          .attr('class', 'y axis')
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 5) + ")")
+          .style("text-anchor", "middle")
+          .text("Years");
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 3 - margin.left)
+          .attr("x", 0 - (height / 2))
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .text("Millions of £");
+
+        svg.append("text")
+          .attr("x", (width / 2))
+          .attr("id", "tags")
+          .attr("y", 0 - (margin.top / 2))
+          .attr("text-anchor", "middle")
+          .style("font-size", "18px")
+          .text("Exports pick up, but deficit remains");
+
+        function make_y_gridlines() {
+          return d3.axisLeft(y)
+          .ticks(10);
+        }
+
+        svg.append("g")
+          .attr("class", "grid")
+          .attr("id", "tags")
+          .call(make_y_gridlines()
+            .tickSize(-width)
+            .tickFormat("")
+          );
+
+        x.domain(d3.extent(trade, function(d) {
+          return dateParse(d.date);
+        }));
+
+        y.domain(d3.extent(
+          [].concat(trade.map(function(d) {
+            return parseInt(d.imports);
+          }), trade.map(function(d) {
+            return parseInt(d.exports);
+          }))));
+
+        var line_imports = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.imports);
+          });
+
+        var line_exports = d3.line()
+          .curve(d3.curveCatmullRom)
+          .x(function(d) {
+            return x(dateParse(d.date));
+          })
+          .y(function(d) {
+            return y(d.exports);
+          });
+
+        var lines_i = svg.selectAll('.line_imports')
+          .remove()
+          .exit()
+          .data([trade]);
+
+
+        var lines_e = svg.selectAll('.line_exports')
+          .remove()
+          .exit()
+          .data([trade]);
+
+        lines_i
+          .enter()
+          .append('path')
+          .attr('class', 'line_imports')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_imports);
+
+        lines_e
+          .enter()
+          .append('path')
+          .attr('class', 'line_exports')
+          .attr("id", "tags")
+          .attr('fill', 'none')
+          .attr('d', line_exports);
+
+        var points_i = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(trade);
+
+        var points_e = svg.selectAll('.point')
+          .remove()
+          .exit()
+          .data(trade);
+
+        points_i
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr("id", "tags")
+          .attr('r', 2.5)
+          .attr('cx', function(trade) {
+            return x(dateParse(trade.date));
+          })
+          .attr('cy', function(trade) {
+            return y(trade.imports);
+          })
+          .attr('fill', 'orange')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        points_e
+          .enter()
+          .append('circle')
+          .attr('class', 'point')
+          .attr("id", "tags")
+          .attr('r', 2.5)
+          .attr('cx', function(trade) {
+            return x(dateParse(trade.date));
+          })
+          .attr('cy', function(trade) {
+            return y(trade.exports);
+          })
+          .attr('fill', 'red')
+          .attr('opacity', 1)
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        svg.select('.x.axis')
+          .attr("id", "tags")
+          .call(x_axis)
+          .selectAll('text')
+          .attr('transform', 'rotate(30)')
+          .attr('y', '10')
+          .attr('x', '0')
+          .style("text-anchor", "start");
+
+        svg.select('.y.axis')
+          .attr("id", "tags")
+          .call(y_axis)
+
+        function mouseOver(d) {
+          var date = dateParse(d.date);
+          var displayDate = tooltipFormat(date)
+          var imports_balance = d.imports;
+          var exports_balance = d.exports;
+
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', null)
+            .html('<p><strong id="imports">Imports:</strong> £' + imports_balance + ' million in ' + displayDate +
+              '<br><strong id="exports">Exports:</strong> £' + exports_balance + ' million in ' + displayDate + '<br/>Source: ONS');
+        }
+
+        function mouseMove(d) {
+          tooltip
+            .style('top', (d3.event.pageY - 20) + "px")
+            .style('left', (d3.event.pageX + 20) + "px");
+        }
+
+        function mouseOut(d) {
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', 'none');
+
+        }
+
+      }
+    })
+  });
+
+  $(document).on('submit', '#services', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: "/data/services/",
+      type: "POST",
+      data: {
+        years: $('#select_dropdown').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function data(data) {
+        console.log(data)
+
+        svg.selectAll('#tags')
+          .remove()
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("x", (width / 2))
+          .attr("y", 0 - (margin.top / 2))
+          .attr("text-anchor", "middle")
+          .style("font-size", "18px")
+          .text("Services have a positive balance");
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 10 - margin.left)
+          .attr("x", 0 - (height / 2))
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .text("Million of £");
+
+        svg.append("text")
+          .attr("id", "tags")
+          .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 5) + ")")
+          .style("text-anchor", "middle")
+          .text("Years");
+
+        // Y gridlines
+        svg.append("g")
+          .attr("id", "tags")
+          .attr("class", "grid")
+          .call(make_y_gridlines()
+            .tickSize(-width)
+            .tickFormat("")
+          );
+
+        var dateParse = d3.timeParse('%Y');
+        var tooltipFormat = d3.timeFormat('%Y');
+
+        var x = d3.scaleBand()
+          .range([0, width])
+          .padding(0.1);
+
+        var y = d3.scaleLinear()
+          .range([height, 0]);
+
+        x.domain(data.map(function(d) {
+          return d.date;
+        }));
+
+        y.domain([0, d3.max(data, function(d) {
+          return parseFloat(d.value);
+        })]);
+
+        svg.selectAll(".bar")
+          .data(data)
+          .enter().append("rect")
+          .attr("class", "bar")
+          .attr("id", "tags")
+          .attr("x", function(d) {
+            console.log(d.date)
+            return x(d.date);
+          })
+          .attr("width", x.bandwidth())
+          .attr("y", function(d) {
+            console.log(d.value)
+            return y(parseFloat(d.value));
+          })
+          .attr("height", function(d) {
+            console.log(d.value)
+            return height - y(parseFloat(d.value));
+          })
+          .on('mouseover', mouseOver)
+          .on('mousemove', mouseMove)
+          .on('mouseout', mouseOut);
+
+        // x Axis
+        svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .attr("id", "tags")
+          .call(d3.axisBottom(x))
+          .selectAll('text')
+          .attr('transform', 'rotate(30)')
+          .attr('y', '6')
+          .attr('x', '30');
+
+        // y Axis
+        svg.append("g")
+          .attr("id", "tags")
+          .call(d3.axisLeft(y));
+
+        function mouseOver(d) {
+          var date = dateParse(d.date);
+          var displayDate = tooltipFormat(date)
+          var value_function = d.value;
+
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', null)
+            .html('<p>Trade in service balance: £' + value_function + ' million in ' + displayDate + '</p>');
+        }
+
+        function mouseMove(d) {
+          tooltip
+            .style('top', (d3.event.pageY - 20) + "px")
+            .style('left', (d3.event.pageX + 20) + "px");
+        }
+
+        function mouseOut(d) {
+          d3.select(this)
+            .transition()
+            .style('opacity', 1);
+
+          tooltip
+            .style('display', 'none');
+
+        }
+      }
+    });
+  });
+
+
+
+
+</script>
+
 </html>
