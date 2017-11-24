@@ -13,30 +13,56 @@
 
 <body>
   <header>
-    <a href="javascript:void(0)" onclick="openNav()"><div id="menu_icon" class="menu_icon">
-      <div id="stripe"></div>
-      <div id="stripe"></div>
-      <div id="stripe"></div>
-    </div></a>
+    <a href="javascript:void(0)" onclick="openNav()">
+      <div id="menu_icon" class="menu_icon">
+        <div id="stripe"></div>
+        <div id="stripe"></div>
+        <div id="stripe"></div>
+      </div>
+    </a>
     <h1 class="title"><a href="{% url 'dashboard:index' %}">The Brexit Dashboard</a></h1>
   </header>
   <nav id="navigation">
     <!-- <a class="nav-link" href="javascript:void(0)" onclick="closeNav()" id="close_menu"><</a> -->
-    <a class="nav-link" href="#" id="loader_story">UK Economy</a>
+    <a class="nav-link" href="#" id="loader_story">Automated Report</a>
     <a class="nav-link" href="#" id="loader_growth">Growth</a>
     <a class="nav-link" href="#" id="loader_inflation">Inflation</a>
     <a class="nav-link" href="#" id="loader_confidence">Confidence</a>
     <a class="nav-link" href="#" id="loader_trade">Trade</a>
     <a class="nav-link" href="#" id="loader_debt">Debt</a>
+    <a class="nav-link" href="#" id="loader_story">Automated Report</a>
 
   </nav>
-  <section class="container" id="container"></section>
-  <footer></footer>
+  <section class="container" id="container">
+    <div class="inflation_header">
+      <h2 class="article_title">Consumer, the most affected by the Brexit vote</h2>
+      <img src="/static/dashboard/img/brexit_divide.jpg" id="front_image_growth"></img>
+      <div id="vis_growth"></div>
+    </div>
+    <!-- <div id="auto_text"></div> -->
+    <article>
+      <p>Brexit has affected consumers more than any other group. Big companies have not reported significant damage after the referendum while the UK’s population is switching to low-end food brands to meet their needs. The data analysis done by this project
+        offered an insight of the disparity on how different segments of the UK economy are facing the uncertainty caused by the Brexit process.<br><br> The effect on the consumer’s purchasing power is evident when reviewing consumer prices’ data. However,
+        all other indicators reviewed by this project show the same pattern: the average consumer is the most affected after the Brexit vote, while banks, government and big companies are showing more resilience to what it is expected to one of the biggest
+        economic shocks in UK’s history.<br><br> Real income is in negative territory, productivity is stagnant, and the skills of new workers are equal or worse than those of the preceding generation. These circumstances affect the capacity of the average
+        consumer to compete for better wages. Although some of these problems have their origin before the Brexit referendum, economic indicators are not showing or promising sharp improvement in the short term.<br><br> For instance, credit rating agencies
+        such as S&P are aware of the risk arisen by the rapid accumulation of consumer debt. On the one hand, the agency says there are only long-term risks for financial institutions, and in the other, they explain how many people are struggling right
+        now to pay off accumulated debts. It appears that banks have more resilience to confront the impact of Brexit, than the average consumer who in many cases is captive of costly financial schemes.<br><br> Data also reveals this type of contrasts
+        regarding consumer confidence and business investment. Consumer confidence in the UK is low, especially if it is compared with other high-income countries, but business investment and Foreign Direct Investment have not been substantially affected.
+        The resilience of businesses in the UK is without doubt very positive for the economy, especially during the Brexit negotiations. However, the average consumer does not share the callous optimism so characteristic of the “Leave” campaign.<br><br>        Another problem for consumers is the government’s capacity to conduct the economy through the Brexit’s complicated process. Credit rating agencies such as Moody’s showed concern after the UK government announced increasing spending policies after
+        the Brexit vote. Even if the government increase spending, it is unclear if there will be enough investment to improve living standards and working skills.<br><br> It is also unclear what type of deal the UK is going to negotiate with the EU.
+        Although there is mutual interest in achieving a comprehensive agreement that at least gives a period of transition to businesses in the UK, some MPs are pushing for a no-deal scenario that might increase prices and generate other economic distortions
+        if the UK has to trade under WTO rules after Brexit.<br><br> UK’s big companies and financial institutions may have the resources to relocate in a more convenient location, however, small businesses and consumers maybe the most affected with an
+        uncomprehensive deal, that does not facilitate commerce under the current world trade reality.<br><br></p>
+      <p id="img-credit-report">Image by <a href="https://www.flickr.com/photos/welshphotographs/38529036132/in/photolist-21GFo7q-Hz78j5-Hv7kcN-YXfS34-HB4G7U-YADzMh-Jji9Aw-JkVXEc-JChVDb-U9PdqL-T8wT8J-JsTUk2-T8wTid-S8sgbR-Hxi3Qp-Jow5jL-YKFobz-XdPiZV-JjQHNb-JtsuP8-K34M6L-S1gdPG-XejKM9-TqY5RV-Qj4QzJ-RGuYvm-HXpyqw-T8wTtU-TaVvA6-T8wTeW-S8sg8K-JvbNHw-JhZZ43-JmTa1Z-VnuFzY-Jjccfm-HQmL8N-J45EQU-VMp8vX-JMP3Q1-S1gfgQ-PNrCKw-MCbuzF-S1gggq-Jv9j1o-J2RZMV-JsqpvQ-HxDSjT-ZQjhE4-JLeDo2" target="_blank">Welsh photographs<a></p>
+        </article></section>
+  <!-- <footer></footer> -->
   <script src="{% static 'dashboard/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
   <script>
     function openNav() {
       if (document.getElementById("navigation").style.width == "") {
         document.getElementById("navigation").style.width = "25%";
+        document.getElementById("navigation").style.width = "225px";
         document.getElementById("menu_icon").style["background-color"] = "rgb(251, 15, 0)";
         document.getElementById("container").style.width = "75%";
     } else {

@@ -134,6 +134,11 @@ nav #close_menu:hover {
   background-color: rgb(255, 0, 0);
 }
 
+#container {
+  position: absolute;
+  z-index: -1;
+}
+
 /* FORMS */
 
 .form-signin {
@@ -177,13 +182,38 @@ section {
   z-index: -1;
 }
 
+#img-credit-report {
+  margin: 30px 0px 0px 30px;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+}
+
+#img-credit-BoE {
+  margin: 30px 0px 0px 30px;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+}
+
+#img-credit-loco-steve, #img-credit-Treasury {
+  margin: 30px 0px 0px 30px;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+}
+
+#img-credit-dover {
+  margin: 30px 0px 0px 30px;
+  font-family: 'Roboto Mono';
+  font-size: 14px;
+}
+
 #select_dropdown {
   display: inline-block;
   font-family: 'Roboto Mono';
   font-size: 14px;
   padding: 10px;
-  margin: 20px 0px 20px 100px;
+  margin: 20px 0px 20px 30px;
   width: 300px;
+  z-index: -1;
 }
 
 form {

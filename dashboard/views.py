@@ -1005,7 +1005,7 @@ def income(request):
         income_datasets = {}
         income_data = requests.get('https://www.ons.gov.uk/economy/grossdomesticproductgdp/timeseries/crsf/ukea/data')
         income_json = json.loads(income_data.content)
-        growthData = {}
+        incomeData = {}
         data_input = 'quarters'
         # year_input_int = 48
         year_input_int = 76
@@ -1021,9 +1021,9 @@ def income(request):
                 data['date'] = (data['date'][0:4] + ' ' + 'Sep')
             elif data['date'][5:7] == 'Q4':
                 data['date'] = (data['date'][0:4] + ' ' + 'Dec')
-            growthData['date'] = data['date']
-            growthData['value'] = int(data['value'])
-            parsedData.append(growthData.copy())
+            incomeData['date'] = data['date']
+            incomeData['value'] = int(data['value'])
+            parsedData.append(incomeData.copy())
 
         pandas_data = pd.DataFrame(parsedData)
         pandas_data['growth'] = ((pandas_data['value'].pct_change(4))*100).round(1)
@@ -1032,7 +1032,7 @@ def income(request):
     return JsonResponse(final_json[4:], safe=False)
 
 
-# 5.- CONFIDENCE AND INVESTMENT
+# 5.- CONSUMER CONFIDENCE AND INVESTMENT
 
 def confidence(request):
     parsedData = []
@@ -1214,15 +1214,12 @@ def trade(request):
 
     for data_s in range(len(imports_json[data_input])):
             balance_json[data_input][data_s]['balance'] = balance_json[data_input][data_s]['value']
-            balance_json[data_input][data_s]['alt-date'] = balance_json[data_input][data_s]['date']
 
     for data_s in range(len(imports_json[data_input])):
             balance_json[data_input][data_s]['imports'] = imports_json[data_input][data_s]['value']
-            balance_json[data_input][data_s]['alt-date-s'] = imports_json[data_input][data_s]['date']
 
     for data_p in range(len(exports_json[data_input])):
             balance_json[data_input][data_p]['exports'] = exports_json[data_input][data_p]['value']
-            balance_json[data_input][data_p]['alt-date-p'] = exports_json[data_input][data_p]['date']
 
     for data in balance_json[data_input][input_int:]:
             tradeData['date'] = data['date']

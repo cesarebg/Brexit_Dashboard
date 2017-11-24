@@ -13,8 +13,8 @@
 
 <body>
   <div class="inflation_header">
-    <h2 class="article_title">Brexit vote increased prices; purchasing power at risk</h2>
-    <img src="/static/dashboard/img/Carney_medium.jpg" id="front_image_inflation"></div>
+    <h2 class="article_title">Brexit vote increased prices; productivity and income in decline</h2>
+    <img src="/static/dashboard/img/Carney_medium.jpg" id="front_image_inflation"></img>
   <div id="vis_inflation"></div>
   </div>
   <div id="auto_text"></div>
@@ -41,6 +41,7 @@ Although not all prices went up because of the effects of the Brexit vote, a wea
 “The depreciation of sterling, which, since the EU referendum, has remained 15%–20% below its peak in November 2015”, according to the Inflation Report.<br><br>
 The central bank explained that the prices of some commodities, such as oil and metals spiked in recent months. “The cost of oil accounts for around one-third of the cost of retail fuel and tends to be passed on to fuel prices relatively quickly”.<br><br>
 The consumer prices' increase was an after-shock of the Brexit vote, an event that triggered a weaker pound. “Sterling non-energy import prices increased by 10% between 2015 Q4 and 2017 Q2, and are expected to rise further over 2018”, according to the central bank.<br><br>
+
 <strong class="article_sub">Productivity, the culprit of lower living standards</strong><br><br>
 Inflation is only one of two channels that are affecting purchasing power in the UK, after the Brexit referendum and what prompted the negative impact on private consumption of early 2017.<br><br>
 According to the OECD, another channel is productivity underperformance, its impact on wages and living standards.<br><br>
@@ -55,6 +56,7 @@ Also, many industries are not catching up with new technologies, and that preven
 “The problem is that right now, industries other than high tech industries have not been very successful in adopting new technology”, he added.<br><br>
 Real disposable income in the UK has sharply decreased since the third quarter of 2015, and continue declining after the Brexit vote according to the ONS.<br><br>
 “As their real earnings and real incomes have come to a standstill notably with higher consumer price inflation and weak productivity growth, households have reduced the amount they are saving and increased indebtedness”, according to the UK Economic Survey by the OECD.<br><br>
+
 <strong class="article_sub">Consumer debt is piling up, putting consumers at risk</strong><br><br>
 Consumer debt reached £197 billion in the third quarter of 2017, according to the Bank of England.  From that amount, £68 billion is from credit cards, and £130 billion are from other loans and advances. Although the credit rating agency S&P considers the short-term risk is low in a recent report, “the recent double-digit annual growth rate in the UK consumer credit would be unsustainable if it continued at the same pace”.<br><br>
 According to S&P, more consumers turned to unsecured personal loans in recent years, with growth accelerating up to 5% in 2015. The problem is that this type of credit –predominantly private loans and overdrafts– “weighs most heavily on households, with evidence of aggressive pricing and increasingly larger ticket loans”.<br><br>
@@ -65,7 +67,8 @@ Risks may increase in case of an economic downturn –as it may be expected with
 Neither the Bank of England or S&P anticipate a systemic risk on banking institutions or the UK economy because of the rise of consumer debt.<br><br>
 “However, increases in credit losses are usually correlated to an economic downturn, and spikes in credit losses tend to be sharp and very sudden”, according to the latest S&P report on consumer credit. “This is especially the case for consumer credit, where we expect credit losses to be proportionately more severe and flow through a bank's financial statements over a single year compared with up to three years for the other main asset classes”.<br><br>
 The UK will likely face Brexit with a high household debt approaching to 90% of the GDP, according to the latest figures by the Bank for International Settlements (BIS). And with rising inflation and stagnant wages, people in the UK may have problems to service debt “resulting in more pressure on system-wide credit losses”, according to S&P.<br><br>
-“Given consumer loan products' terms are typically under five years, we think that credit originated within the past 12 months that is further away from the end of its full payment term, is most exposed to medium-term pressures”, according to the report by S&P.<br><br></p>
+“Given consumer loan products' terms are typically under five years, we think that credit originated within the past 12 months that is further away from the end of its full payment term, is most exposed to medium-term pressures”, according to the report by S&P.<br><br></p><p id="img-credit-BoE">Image by <a href="https://www.flickr.com/photos/bankofengland/30821834846/in/album-72157675126235440/" target="_blank">The Bank of England<a></p>
+
   </article>
 </body>
 <script src="{% static 'dashboard/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
@@ -921,6 +924,7 @@ The UK will likely face Brexit with a high household debt approaching to 90% of 
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
       },
       success: function productivity(productivity) {
+        console.log(productivity)
 
         svg.selectAll('#tags')
           .remove()
