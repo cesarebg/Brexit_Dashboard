@@ -4,7 +4,7 @@ This project is submitted to the Cardiff School of Journalism, Media &amp; Cultu
 
 The Brexit Dashboard is a Django –version 1.11.6– application written with Python 3.6.2. It was tested both in macOS Sierra and Ubuntu Linux 14.04 LTS, running on a virtual environment (virtualenv). The following packages need to be installed in the virtual environment to run correctly:
   
-•	djgorestframework
+•	djangorestframework
 •	pandas
 •	numpy
 •	requests
