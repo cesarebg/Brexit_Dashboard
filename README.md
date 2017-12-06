@@ -1,4 +1,4 @@
-# Brexit_Dashoard
+# Brexit_Dashboard
 
 This project is submitted to the Cardiff School of Journalism, Media &amp; Cultural Studies, Cardiff University, in partial fulfilment of the requirements for the Degree of Master of Science in Computational and Data Journalism
 
